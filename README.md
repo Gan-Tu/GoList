@@ -18,3 +18,12 @@ To run the client code, run `npm run client`.
 To build the client code for production release, run `npm run build`.
 
 To run both server and client code for development purposes, with live-reload, run `npm run dev`.
+
+To run in production, run the following series of commands:
+
+```
+npm install
+npm test
+npm run build
+npm start
+```
