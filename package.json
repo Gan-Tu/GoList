@@ -3,9 +3,11 @@
   "version": "1.0.0",
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
-    "server": "nodemon server/bin/www",
+    "server": "nodemon ./bin/www",
     "client": "npm start --prefix client",
-    "start": "concurrently 'npm run server' 'npm run client'"
+    "dev": "concurrently 'npm run server' 'npm run client'",
+    "build": "npm run-script build --prefix client",
+    "start": "npm run build && npm run server"
   },
   "repository": {
     "type": "git",
