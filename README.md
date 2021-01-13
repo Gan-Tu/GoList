@@ -1,1 +1,19 @@
 # GoList
+
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
+Quickly browse a list of links and files with one simple URL!
+
+View it live at https://goli.st
+
+## Development Commands
+
+To install necessary packages, make sure you have NodeJS installed, and then run `npm install`.
+
+To run the server code, run `npm run server`.
+
+To run the client code, run `npm run client`.
+
+To build the client code for production release, run `npm run build`.
+
+To run both server and client code for development purposes, with live-reload, run `npm run dev`.
