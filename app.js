@@ -7,7 +7,6 @@ var cors = require("cors");
 
 var usersRouter = require("./routes/users");
 var testApiRouter = require("./routes/testApi");
-
 var app = express();
 
 // view engine setup
@@ -26,6 +25,12 @@ app.use("/users", usersRouter);
 app.use("/testApi", testApiRouter);
 
 // Show webapp for all other routes. This is a catch all
+app.get("/message/:id", function (req, res, next) {
+  res.json({
+    message: `Hi, ${req.params.id}!`,
+  });
+});
+
 app.get("/*", function (req, res, next) {
   res.sendFile(path.join(__dirname, "client/build/index.html"));
 });

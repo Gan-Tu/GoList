@@ -1,32 +1,18 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Message from './Message'
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { apiResponse: "" };
-  }
-
-  callAPI() {
-    fetch("/testApi")
-      .then((res) => res.text())
-      .then((res) => this.setState({ apiResponse: res }));
-  }
-
-  componentWillMount() {
-    this.callAPI();
-  }
-
   render() {
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <p className="App-intro">{this.state.apiResponse}</p>
+          <Router>
+            <Route path="/:id" component={Message}/>
+          </Router>
           <a
             className="App-link"
             href="https://reactjs.org"
