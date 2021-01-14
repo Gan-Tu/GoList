@@ -9,7 +9,7 @@
     "dev": "concurrently 'npm run server' 'npm run client'",
     "build": "npm run-script build --prefix client",
     "deploy": "npm run build && gcloud app deploy",
-    "test": "CI=true npm run test --prefix=client"
+    "test": "cd client && CI=true npm run test"
   },
   "repository": {
     "type": "git",
