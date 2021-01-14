@@ -27,3 +27,10 @@ npm test
 npm run build
 npm start
 ```
+
+Alternatively, you can run it in Docker:
+
+```
+docker build . -t golist
+docker run -it --rm -p 8080:8080 golist
+```
