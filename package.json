@@ -5,6 +5,7 @@
   "scripts": {
     "server": "nodemon ./bin/www",
     "client": "npm start --prefix client",
+    "prestart": "npm run build",
     "start": "PORT=8080 node ./bin/www",
     "dev": "concurrently 'npm run server' 'npm run client'",
     "build": "npm run-script build --prefix client",

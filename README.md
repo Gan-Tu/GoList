@@ -25,7 +25,6 @@ To run in production, run the following series of commands:
 ```
 npm install
 npm test
-npm run build
 npm start
 ```
 
