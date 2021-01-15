@@ -37,7 +37,11 @@ class UrlForm extends Component {
       .then((res) => res.json())
       .then((json) => {
         console.log(json);
-        alert("Response: " + JSON.stringify(json));
+        if (json.err) {
+          alert("See err: " + json.err);
+        } else {
+          alert(`Visit at goli.st/${this.state.short_url}`)
+        }
       });
     event.preventDefault();
   }
