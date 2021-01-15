@@ -4,7 +4,7 @@ class UrlTextInput extends Component {
   render() {
     return (
       <label>
-        URL #{this.props.n} {": "}
+        Long URL #{this.props.n+1} {": "}
         <input required
           type="text"
           value={this.props.url}

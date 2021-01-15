@@ -2,11 +2,11 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+var bodyParser = require("body-parser");
 var logger = require("morgan");
 var cors = require("cors");
 
-var usersRouter = require("./routes/users");
-var testApiRouter = require("./routes/testApi");
+var apiRouter = require("./routes/api");
 var app = express();
 
 // view engine setup
@@ -15,14 +15,15 @@ app.set("view engine", "jade");
 
 app.use(cors());
 app.use(logger("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "client/build")));
 
-app.use("/users", usersRouter);
-app.use("/testApi", testApiRouter);
+app.use("/api", apiRouter);
 
 // Show webapp for all other routes. This is a catch all
 app.get("/message/:id", function (req, res, next) {

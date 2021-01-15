@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/Michael-Tu/GoList#readme",
   "dependencies": {
+    "@google-cloud/datastore": "^6.3.1",
+    "body-parser": "^1.19.0",
     "client": "file:./client",
     "concurrently": "^5.3.0",
     "cookie-parser": "~1.4.4",
