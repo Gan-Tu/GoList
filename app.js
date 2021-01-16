@@ -4,6 +4,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
+var rateLimit = require("express-rate-limit");
 
 var apiRouter = require("./routes/api");
 var app = express();
@@ -21,6 +22,11 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.static(path.join(__dirname, "client/build")));
 
+app.use("/api", rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 20,
+  message: "Too many requests. Max 20 requests allowed per minute"
+}));
 app.use("/api", apiRouter);
 
 app.get("/*", function (req, res, next) {
