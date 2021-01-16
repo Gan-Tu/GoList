@@ -1,5 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen } from "../../test-utils";
 import UrlTextInput from "./UrlTextInput";
+
 
 test("renders a input link", () => {
   render(<UrlTextInput n={0} url="hello" />);
