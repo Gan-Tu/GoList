@@ -1,59 +1,33 @@
 import React, { Component } from "react";
 import UrlTextInput from "./UrlTextInput";
+import { connect } from "react-redux";
+import {
+  setShortUrl,
+  appendLongUrl,
+  removeLongUrlByIndex,
+  submitUrlMapping,
+} from "../../redux/actions/UrlActions";
 
 class UrlForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      short_url: "",
-      long_urls: [],
-    };
-
-    this.handleShortUrlChange = this.handleShortUrlChange.bind(this);
-    this.handleLongUrlChange = this.handleLongUrlChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleAddUrlInputBox = this.handleAddUrlInputBox.bind(this);
-    this.handleRemoveUrlInputBox = this.handleRemoveUrlInputBox.bind(this);
+    this.handleAddBox = this.handleAddBox.bind(this);
+    this.handleRemoveBox = this.handleRemoveBox.bind(this);
   }
 
-  handleShortUrlChange(event) {
-    this.setState({ ...this.state, short_url: event.target.value });
-  }
-
-  handleLongUrlChange(event, idx) {
-    let new_urls = this.state.long_urls.slice();
-    new_urls[idx] = event.target.value;
-    this.setState({ long_urls: new_urls });
-  }
-
-  handleSubmit(event, idx) {
-    fetch(`/api/urls/save/${this.state.short_url}`, {
-      method: "POST",
-      body: JSON.stringify({
-        long_urls: this.state.long_urls,
-      }),
-      headers: { "Content-Type": "application/json" },
-    })
-      .then((res) => res.json())
-      .then((json) => {
-        console.log(json);
-        if (json.err) {
-          alert("See err: " + json.err);
-        } else {
-          alert(`Visit at goli.st/${this.state.short_url}`)
-        }
-      });
+  handleSubmit(event) {
+    this.props.submitUrlMapping(this.props.short_url, this.props.long_urls);
     event.preventDefault();
   }
 
-  handleAddUrlInputBox() {
-    this.setState({ long_urls: [...this.state.long_urls, ""] });
+  handleAddBox(event) {
+    this.props.appendLongUrl("");
+    event.preventDefault();
   }
 
-  handleRemoveUrlInputBox(event, idx) {
-    let new_urls = this.state.long_urls.slice();
-    new_urls.splice(idx, 1);
-    this.setState({ long_urls: new_urls });
+  handleRemoveBox(event, idx) {
+    this.props.removeLongUrlByIndex(idx);
     event.preventDefault();
   }
 
@@ -64,26 +38,20 @@ class UrlForm extends Component {
           <dl>
             <dt key="short_url">
               <label>
-                Short URL: {" "}
+                Short URL:{" "}
                 <input
                   required
                   type="text"
-                  onChange={this.handleShortUrlChange}
+                  onChange={(e) => this.props.setShortUrl(e.target.value)}
                 />
               </label>
             </dt>
-            {this.state.long_urls.length === 0
+            {this.props.long_urls.length === 0
               ? "You have no Long URLs yet"
-              : this.state.long_urls.map((url, idx) => (
+              : this.props.long_urls.map((url, idx) => (
                   <dt key={`url_${idx}`}>
-                    <UrlTextInput
-                      n={idx}
-                      url={url}
-                      handleUrlInput={this.handleLongUrlChange}
-                    />
-                    <button
-                      onClick={(e) => this.handleRemoveUrlInputBox(e, idx)}
-                    >
+                    <UrlTextInput n={idx} url={url} />
+                    <button onClick={(e) => this.handleRemoveBox(e, idx)}>
                       Remove
                     </button>
                   </dt>
@@ -92,12 +60,24 @@ class UrlForm extends Component {
           <input type="submit" value="Submit" />
         </form>
         <br />
-        <button onClick={() => this.handleAddUrlInputBox()}>
-          Add URL Input box
-        </button>
+        <button onClick={this.handleAddBox}>Add URL Input box </button>
       </div>
     );
   }
 }
 
-export default UrlForm;
+const mapStateToProps = (state) => {
+  return {
+    short_url: state.urls.short_url,
+    long_urls: state.urls.long_urls,
+  };
+};
+
+const mapDispatchToProps = {
+  setShortUrl,
+  appendLongUrl,
+  removeLongUrlByIndex,
+  submitUrlMapping,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UrlForm);
