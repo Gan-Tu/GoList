@@ -4,6 +4,6 @@ import UrlTextInput from "./UrlTextInput";
 
 test("renders a input link", () => {
   render(<UrlTextInput n={0} url="hello" />);
-  const inputElement = screen.getByLabelText(/URL #1/i);
+  const inputElement = screen.getByLabelText(/Long URL/i);
   expect(inputElement).toBeInTheDocument();
 });
