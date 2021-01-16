@@ -3,6 +3,7 @@ var router = express.Router();
 
 const { Datastore } = require("@google-cloud/datastore");
 const datastore = new Datastore();
+const urlMetadata = require("url-metadata");
 
 router.get("/", function (req, res, next) {
   res.send("API is working properly");
@@ -28,17 +29,31 @@ router.post("/urls/save/:short_url", function (req, res, next) {
       .status(400)
       .send({ err: "At least one url must be sent in 'long_urls'" });
   }
-  datastore.save({
-    key: datastore.key(["Urls", req.params.short_url]),
-    data: {
-      long_urls: req.body.long_urls,
+  datastore.save(
+    {
+      key: datastore.key(["Urls", req.params.short_url]),
+      data: {
+        long_urls: req.body.long_urls,
+      },
     },
-  }, function(err, apiResponse) {
-    if (err) {
-      return next(err);
+    function (err, apiResponse) {
+      if (err) {
+        return next(err);
+      }
+      return res.json({ err: null, apiResponse });
     }
-    return res.json({err:null, apiResponse});
-  });
+  );
+});
+
+router.get("/urls/fetchMetadata/:url", function (req, res, next) {
+  urlMetadata(req.params.url).then(
+    function (metadata) {
+      res.json(metadata);
+    },
+    function (error) {
+      next(error);
+    }
+  );
 });
 
 module.exports = router;
