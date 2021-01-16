@@ -18,7 +18,7 @@ class Listing extends Component {
       });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.callAPI();
   }
 
