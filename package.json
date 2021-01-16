@@ -10,6 +10,7 @@
     "dev": "concurrently 'npm run server' 'npm run client'",
     "build": "npm run-script build --prefix client",
     "deploy": "npm run build && gcloud app deploy",
+    "deploy-staging": "npm run build && gcloud app deploy --no-promote",
     "test": "CI=true npm run test --prefix client",
     "postinstall": "npm install --prefix client"
   },
