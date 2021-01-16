@@ -84,7 +84,6 @@ class UrlForm extends Component {
                 />
               ))
             )}
-
             <Button variant="secondary" onClick={this.handleAddBox} block>
               Add Long URL
             </Button>
@@ -92,34 +91,6 @@ class UrlForm extends Component {
               Submit
             </Button>
           </Form>
-
-          {/* <form onSubmit={this.handleSubmit}>
-          <dl>
-            <dt key="short_url">
-              <label>
-                Short URL:{" "}
-                <input
-                  required
-                  type="text"
-                  onChange={(e) => this.props.setShortUrl(e.target.value)}
-                />
-              </label>
-            </dt>
-            {this.props.long_urls.length === 0
-              ? "You have no Long URLs yet"
-              : this.props.long_urls.map((url, idx) => (
-                  <dt key={`url_${idx}`}>
-                    <UrlTextInput n={idx} url={url} />
-                      Remove
-                    </button>
-                  </dt>
-                ))}
-          </dl>
-          <Button variant="success">Submit</Button>
-          <input type="submit" value="Submit" />
-        </form>
-        <br />
-        <button onClick={this.handleAddBox}>Add URL Input box </button> */}
         </Row>
       </Container>
     );
