@@ -34,3 +34,9 @@ Alternatively, you can run it in Docker:
 docker build . -t golist
 docker run -it --rm -p 8080:8080 golist
 ```
+
+## Authentication
+
+We use Google Cloud Platform (GCP) for this project. For the servers to work, you will need to have a valid GCP service account credential in your environment, and have its path pointed by an environment variable `GOOGLE_APPLICATION_CREDENTIALS`.
+
+For more, learn at Google Developers ["Quickstart: Using Client Libraries"](https://developers.google.com/analytics/devguides/config/admin/v1/quickstart-client-libraries) page.
