@@ -22,16 +22,16 @@ class UrlForm extends Component {
   }
 
   validateSubmitInput(urls) {
-    if (!this.props.short_url || this.props.short_url.length === 0) {
+    if (!this.props.short_url?.length) {
       alert("short URL cannot be empty!");
       return false;
-    } else if (!this.props.long_urls || this.props.long_urls.length === 0) {
+    } else if (!this.props.long_urls?.length) {
       alert("at least one long URL should be supplied!");
       return false;
     }
     for (let i = 0; i < this.props.long_urls.length; i++) {
-      if (this.props.long_urls[i].length === 0) {
-        alert(`long URL ${i+1} cannot be empty`);
+      if (!this.props.long_urls[i].length) {
+        alert(`long URL ${i + 1} cannot be empty`);
         return false;
       }
     }
@@ -73,9 +73,7 @@ class UrlForm extends Component {
             </Form.Group>
 
             {/* Long URLs */}
-            {this.props.long_urls.length === 0 ? (
-              <p>You have no long URLs yet</p>
-            ) : (
+            {this.props.long_urls?.length ? (
               this.props.long_urls.map((url, idx) => (
                 <UrlTextInput
                   key={`formUrlTextInput-${idx}`}
@@ -83,6 +81,8 @@ class UrlForm extends Component {
                   url={url}
                 />
               ))
+            ) : (
+              <p>You have no long URLs yet</p>
             )}
             <Button variant="secondary" onClick={this.handleAddBox} block>
               Add Long URL
