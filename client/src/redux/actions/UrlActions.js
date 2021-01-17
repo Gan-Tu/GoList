@@ -1,7 +1,7 @@
 import {
   SET_SHORT_URL,
   SET_LONG_URL_BY_INDEX,
-  APPEND_LONG_URL,
+  APPEND_LONG_URLS,
   REMOVE_LONG_URL_BY_INDEX,
   SAVE_URL_METADATA,
 } from "./ActionTypes";
@@ -22,8 +22,15 @@ export const setLongUrlByIndex = (idx, url) => (dispatch) => {
 
 export const appendLongUrl = (url) => (dispatch) => {
   dispatch({
-    type: APPEND_LONG_URL,
-    payload: { url },
+    type: APPEND_LONG_URLS,
+    payload: { urls: [url] },
+  });
+};
+
+export const appendLongUrls = (urls) => (dispatch) => {
+  dispatch({
+    type: APPEND_LONG_URLS,
+    payload: { urls },
   });
 };
 
@@ -54,9 +61,7 @@ export const submitUrlMapping = (short_url, long_urls) => (dispatch) => {
         console.error("Submit error encountered: ", res);
       }
     })
-    .catch((e) => {
-      console.error(e);
-    });
+    .catch((err) => console.error(err));
 };
 
 export const getUrlMetadata = (url) => (dispatch) => {
@@ -68,5 +73,22 @@ export const getUrlMetadata = (url) => (dispatch) => {
         payload: { url, url_metadata },
       })
     )
+    .catch((err) => console.error(err));
+};
+
+export const getLongUrlsByShortUrl = (url) => (dispatch) => {
+  fetch(`/api/urls/get/${url}`)
+    .then((res) => res.json())
+    .then((res) => {
+      if (res.err) {
+        console.error(res.err);
+        alert(res.err);
+      } else {
+        dispatch({
+          type: APPEND_LONG_URLS,
+          payload: { urls: res.long_urls },
+        });
+      }
+    })
     .catch((err) => console.error(err));
 };

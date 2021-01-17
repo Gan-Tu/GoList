@@ -1,43 +1,39 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { getLongUrlsByShortUrl } from "..//redux/actions/UrlActions";
 
 class Listing extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { long_urls: [], err: null };
-  }
-
-  callAPI() {
-    fetch(`/api/urls/get/${this.props.match.params.id}`)
-      .then((res) => res.json())
-      .then((res) => {
-        if (res.err) {
-          this.setState({ ...this.state, err: res.err });
-        } else {
-          this.setState({ err: null, long_urls: res.long_urls });
-        }
-      });
-  }
-
   componentDidMount() {
-    this.callAPI();
+    this.short_url = this.props.match.params.id;
+    this.props.getLongUrlsByShortUrl(this.short_url);
   }
 
   render() {
     return (
       <div>
-        <p>Short URL: goli.st/{this.props.match.params.id}</p>
+        <p>Short URL: goli.st/{this.short_url}</p>
         <ul>
-          {this.state.err
-            ? `Error: ${this.state.err}`
-            : this.state.long_urls.map((url) => (
-                <dt>
-                  <a href={url} target="_blank" rel="noreferrer">{url}</a>
-                </dt>
-              ))}
+          {this.props.long_urls.map((url) => (
+            <dt>
+              <a href={url} target="_blank" rel="noreferrer">
+                {url}
+              </a>
+            </dt>
+          ))}
         </ul>
       </div>
     );
   }
 }
 
-export default Listing;
+const mapStateToProps = (state) => {
+  return {
+    long_urls: state.urls.long_urls,
+  };
+};
+
+const mapDispatchToProps = {
+  getLongUrlsByShortUrl,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Listing);
