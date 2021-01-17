@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getLongUrlsByShortUrl } from "..//redux/actions/UrlActions";
+import { getLongUrlsByShortUrl } from "../redux/actions/UrlActions";
+
+import UrlCard from "./UrlCard";
+
+import Container from "react-bootstrap/Container";
+import Row from "react-bootstrap/Row";
 
 class Listing extends Component {
   componentDidMount() {
@@ -10,18 +15,14 @@ class Listing extends Component {
 
   render() {
     return (
-      <div>
+      <Container fluid style={{ padding: 20 }}>
         <p>Short URL: goli.st/{this.short_url}</p>
-        <ul>
+        <Row className="justify-content-center">
           {this.props.long_urls.map((url) => (
-            <dt>
-              <a href={url} target="_blank" rel="noreferrer">
-                {url}
-              </a>
-            </dt>
+            <UrlCard key={url} url={url} />
           ))}
-        </ul>
-      </div>
+        </Row>
+      </Container>
     );
   }
 }
