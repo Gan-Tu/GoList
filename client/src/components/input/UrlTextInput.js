@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   setLongUrlByIndex,
   removeLongUrlByIndex,
+  getUrlMetadata,
 } from "../../redux/actions/UrlActions";
 
 import Row from "react-bootstrap/Row";
@@ -14,10 +15,6 @@ import Form from "react-bootstrap/Form";
 class UrlTextInput extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      title: "",
-      description: "",
-    };
     this.metadataFetchTimeOut = 0;
     this.handleRemoveBox = this.handleRemoveBox.bind(this);
     this.handleUserInput = this.handleUserInput.bind(this);
@@ -32,38 +29,31 @@ class UrlTextInput extends Component {
     if (this.metadataFetchTimeOut) {
       clearTimeout(this.metadataFetchTimeOut);
     }
-    this.metadataFetchTimeOut = setTimeout(() => {
-      fetch(`/api/urls/fetchMetadata/${encodeURIComponent(event.target.value)}`)
-        .then((res) => res.json())
-        .then((json) =>
-          this.setState({
-            ...this.state,
-            title: json.title,
-            description: json.description,
-          })
-        );
-    }, 1500);
     this.props.setLongUrlByIndex(this.props.n, event.target.value);
+    this.metadataFetchTimeOut = setTimeout(() => {
+      this.props.getUrlMetadata(event.target.value);
+    }, 1000);
   }
 
   render() {
     let urlTitle, urlDescription;
-    if (this.state.title.length) {
+    let metadata = this.props.url_metadata[this.props.url];
+    if (metadata?.title?.length) {
       urlTitle = (
         <Row style={{ textAlign: "left" }}>
           <Form.Text id="title" muted>
             <b>Title: </b>
-            {this.state.title}
+            {metadata.title}
           </Form.Text>
         </Row>
       );
     }
-    if (this.state.description.length) {
+    if (metadata?.description?.length) {
       urlDescription = (
         <Row style={{ textAlign: "left" }}>
           <Form.Text id="description" muted>
             <b>Description: </b>
-            {this.state.description}
+            {metadata.description}
           </Form.Text>
         </Row>
       );
@@ -105,9 +95,16 @@ class UrlTextInput extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    url_metadata: state.urls.url_metadata,
+  };
+};
+
 const mapDispatchToProps = {
   setLongUrlByIndex,
   removeLongUrlByIndex,
+  getUrlMetadata,
 };
 
-export default connect(null, mapDispatchToProps)(UrlTextInput);
+export default connect(mapStateToProps, mapDispatchToProps)(UrlTextInput);

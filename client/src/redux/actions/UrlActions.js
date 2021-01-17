@@ -3,6 +3,7 @@ import {
   SET_LONG_URL_BY_INDEX,
   APPEND_LONG_URL,
   REMOVE_LONG_URL_BY_INDEX,
+  SAVE_URL_METADATA,
 } from "./ActionTypes";
 
 export const setShortUrl = (short_url) => (dispatch) => {
@@ -54,6 +55,18 @@ export const submitUrlMapping = (short_url, long_urls) => (dispatch) => {
       }
     })
     .catch((e) => {
-      console.log(e);
+      console.error(e);
     });
+};
+
+export const getUrlMetadata = (url) => (dispatch) => {
+  fetch(`/api/urls/fetchMetadata/${encodeURIComponent(url)}`)
+    .then((res) => res.json())
+    .then((url_metadata) =>
+      dispatch({
+        type: SAVE_URL_METADATA,
+        payload: { url, url_metadata },
+      })
+    )
+    .catch((err) => console.error(err));
 };
