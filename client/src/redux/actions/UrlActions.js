@@ -65,7 +65,7 @@ export const submitUrlMapping = (short_url, long_urls) => (dispatch) => {
 };
 
 export const getUrlMetadata = (url) => (dispatch) => {
-  fetch(`/api/urls/fetchMetadata/${encodeURIComponent(url)}`)
+  fetch(`/api/urls/fetchMetadata/${encodeURIComponent(url).replace(/https?/g, "http")}`)
     .then((res) => res.json())
     .then((url_metadata) =>
       dispatch({
