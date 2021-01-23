@@ -11,6 +11,7 @@ class Listing extends Component {
   componentDidMount() {
     this.short_url = this.props.match.params.id;
     this.props.getLongUrlsByShortUrl(this.short_url);
+    document.title = `GoList - goli.st/${this.short_url}`
   }
 
   render() {
