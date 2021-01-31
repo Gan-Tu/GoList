@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
 
+// This is firebase configs, and API keys are meant to be public
 const firebaseConfig = {
   apiKey: "AIzaSyC2dB2eriEnfGtvkzLzrmEzm6d6sudzvK8",
   authDomain: "golist-c3dce.firebaseapp.com",
