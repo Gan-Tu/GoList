@@ -174,7 +174,7 @@ const LogIn = (props) => {
                     </div>
                   </FormGroup>
                   <div className="form-group mb-0">
-                    <div className="checkbox ml-3">
+                    {/* <div className="checkbox ml-3">
                       <Input id="checkbox1" type="checkbox" />
                       <Label className="text-muted" for="checkbox1">
                         {RememberPassword}
@@ -182,7 +182,7 @@ const LogIn = (props) => {
                     </div>
                     <a className="link" href="#javascript">
                       {ForgotPassword}
-                    </a>
+                    </a> */}
                     <Button
                       color="primary"
                       className="btn-block"
