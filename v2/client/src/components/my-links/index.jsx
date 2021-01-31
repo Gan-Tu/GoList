@@ -5,7 +5,7 @@ import { Container, Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 const Sample = (props) => {
   return (
     <Fragment>
-      <Breadcrumb title="My Links" />
+      <Breadcrumb title="My Links" show_title />
       <Container fluid={true}>
         <Row>
           <Col sm="12">

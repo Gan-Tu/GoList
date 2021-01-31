@@ -18,6 +18,8 @@ export const MENUITEMS = [
         type: "link",
         path: `${process.env.PUBLIC_URL}/my-links`,
         active: false,
+        badge: "badge badge-success",
+        badgetxt: "0"
       },
     ],
   },
