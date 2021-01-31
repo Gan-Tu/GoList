@@ -43,7 +43,7 @@ const ProfileWidget = (props) => {
         </div>
       </div>
       <ul className="profile-dropdown onhover-show-div">
-        <li>
+        <li className="onhover-dropdown">
           <LogIn />
           <span onClick={LogOutUser}>{props.t(LogOut)}</span>
         </li>
