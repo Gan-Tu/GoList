@@ -1,0 +1,41 @@
+{
+  "name": "golist",
+  "version": "2.0.0",
+  "description": "Quickly browse a list of links and files with one simple URL",
+  "scripts": {
+    "server": "nodemon ./bin/www",
+    "client": "npm start --prefix client",
+    "prestart": "npm run build",
+    "start": "PORT=8080 node ./bin/www",
+    "dev": "concurrently 'npm run server' 'npm run client'",
+    "build": "npm run-script build --prefix client",
+    "deploy": "npm run build && gcloud app deploy",
+    "deploy-staging": "npm run build && gcloud app deploy --no-promote",
+    "test": "CI=true npm run test --prefix client",
+    "postinstall": "npm install --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Michael-Tu/GoList.git"
+  },
+  "author": "Gan Tu",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Michael-Tu/GoList/issues"
+  },
+  "homepage": "https://github.com/Michael-Tu/GoList#readme",
+  "dependencies": {
+    "@google-cloud/datastore": "^6.3.1",
+    "body-parser": "^1.19.0",
+    "client": "file:./client",
+    "concurrently": "^5.3.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "express-rate-limit": "^5.2.3",
+    "http-errors": "~1.6.3",
+    "jade": "~1.11.0",
+    "morgan": "~1.9.1",
+    "nodemon": "^2.0.7"
+  }
+}
