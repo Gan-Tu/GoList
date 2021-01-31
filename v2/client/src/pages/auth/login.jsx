@@ -19,9 +19,14 @@ import {
 
 import {
   firebase_app,
-  googleProvider,
   firebaseLocalPersistence,
+  googleProvider,
+  twitterProvider,
+  githubProvider,
+  facebookProvider,
 } from "../../data/config";
+
+import { Twitter, GitHub, Facebook } from "react-feather";
 
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -85,14 +90,14 @@ const LogIn = (props) => {
       });
   };
 
-  const googleAuth = async () => {
+  const authWith3rdPartyProvider = async (provider) => {
     firebase_app
       .auth()
       .setPersistence(firebaseLocalPersistence)
       .then(() => {
         firebase_app
           .auth()
-          .signInWithPopup(googleProvider)
+          .signInWithPopup(provider)
           .then((result) => {
             setTimeout(() => {
               props.history.push(`${process.env.PUBLIC_URL}/home`);
@@ -102,7 +107,7 @@ const LogIn = (props) => {
             console.error(error);
             setTimeout(() => {
               toast.error(
-                "Oppss.. Something went wrong with Google authentication"
+                "Oppss.. Something went wrong with 3rd party authentication"
               );
             }, 200);
           });
@@ -190,8 +195,25 @@ const LogIn = (props) => {
                   <h6 className="text-muted mt-4 or">{"Or Sign in with"}</h6>
                   <div className="social mt-4">
                     <div className="btn-showcase">
-                      <Button color="light" onClick={googleAuth}>
+                      <Button
+                        color="light"
+                        onClick={() => authWith3rdPartyProvider(googleProvider)}
+                      >
                         <i className="icon-social-google txt-googleplus"></i>
+                      </Button>
+                      <Button
+                        color="light"
+                        onClick={() =>
+                          authWith3rdPartyProvider(twitterProvider)
+                        }
+                      >
+                        <Twitter className="txt-twitter" />
+                      </Button>
+                      <Button
+                        color="light"
+                        onClick={() => authWith3rdPartyProvider(githubProvider)}
+                      >
+                        <GitHub />
                       </Button>
                     </div>
                   </div>

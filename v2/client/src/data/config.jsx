@@ -14,6 +14,8 @@ const firebaseConfig = {
 };
 
 export const firebase_app = firebase.initializeApp(firebaseConfig);
+export const firebaseLocalPersistence = firebase.auth.Auth.Persistence.LOCAL;
+
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
-export const firebaseLocalPersistence =
-  firebase.auth.Auth.Persistence.LOCAL;
+export const twitterProvider = new firebase.auth.TwitterAuthProvider();
+export const githubProvider = new firebase.auth.GithubAuthProvider();

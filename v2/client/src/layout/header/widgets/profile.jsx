@@ -7,7 +7,7 @@ import { useHistory } from "react-router-dom";
 
 import { firebase_app } from "../../../data/config";
 
-const LoginWidget = (props) => {
+const ProfileWidget = (props) => {
   const history = useHistory();
   const [photoUrl, setPhotoUrl] = useState("");
   const [name, setName] = useState("Unknown");
@@ -52,4 +52,4 @@ const LoginWidget = (props) => {
     </Fragment>
   );
 };
-export default translate(LoginWidget);
+export default translate(ProfileWidget);

@@ -3,7 +3,7 @@ import React from "react";
 import LanguageDropdown from "./widgets/language";
 import MoonLight from "./widgets/moonlight";
 import NotificationWidget from "./widgets/notification";
-import LoginWidget from "./widgets/login";
+import ProfileWidget from "./widgets/profile";
 
 const Rightbar = (props) => {
   return (
@@ -19,7 +19,7 @@ const Rightbar = (props) => {
           <MoonLight />
         </li>
         <li className="profile-nav onhover-dropdown p-0">
-          <LoginWidget />
+          <ProfileWidget />
         </li>
       </ul>
     </div>
