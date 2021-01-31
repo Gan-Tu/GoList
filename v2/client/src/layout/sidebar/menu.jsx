@@ -1,4 +1,4 @@
-import { Home, Edit} from "react-feather";
+import { Home, List} from "react-feather";
 export const MENUITEMS = [
   {
     menutitle: null,
@@ -14,7 +14,7 @@ export const MENUITEMS = [
       },
       {
         title: "My Links",
-        icon: Edit,
+        icon: List,
         type: "link",
         path: `${process.env.PUBLIC_URL}/my-links`,
         active: false,
