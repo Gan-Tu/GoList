@@ -8,7 +8,7 @@ import {
   setLanguage,
 } from "react-switch-lang";
 
-import { English, More, 简体中文 } from "../../../constant";
+import { English, 简体中文 } from "../../../constant";
 
 import en from "../../../assets/i18n/en.json";
 import cn from "../../../assets/i18n/cn.json";

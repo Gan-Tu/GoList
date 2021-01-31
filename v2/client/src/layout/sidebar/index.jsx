@@ -171,7 +171,7 @@ const Sidebar = (props) => {
     <Fragment>
       <div className="sidebar-wrapper">
         <div className="logo-wrapper">
-          <Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
+          <Link to={`${process.env.PUBLIC_URL}/home`}>
             <img
               className="img-fluid for-light"
               src={require("../../assets/images/logo/logo.png")}
