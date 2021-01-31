@@ -35,7 +35,6 @@ const ProfileWidget = (props) => {
     <Fragment>
       <div className="media profile-media">
         <img className="b-r-10" src={photoUrl || man} alt="avatar" />
-        {/* TODO(tugan): change this to profile name fetched by user */}
         <div className="media-body">
           <span>{props.t(name || "Unknown")}</span>
           <p className="mb-0 font-roboto">
@@ -44,7 +43,6 @@ const ProfileWidget = (props) => {
         </div>
       </div>
       <ul className="profile-dropdown onhover-show-div">
-        {/* TODO(tugan): connect to logout */}
         <li>
           <LogIn />
           <span onClick={LogOutUser}>{props.t(LogOut)}</span>
