@@ -142,7 +142,10 @@ const LogIn = (props) => {
                 </a>
               </div>
               <div className="login-main login-tab">
-                <Form className="theme-form">
+                <Form
+                  className="theme-form"
+                  onSubmit={(e) => emailPasswordAuth(e)}
+                >
                   <h4>Sign In</h4>
                   <p>{"Enter your email & password to login"}</p>
                   <FormGroup>
@@ -150,7 +153,7 @@ const LogIn = (props) => {
                     <Input
                       className="form-control"
                       type="email"
-                      required=""
+                      required
                       placeholder="test@gmail.com"
                       onChange={(e) => setEmail(e.target.value)}
                     />
@@ -163,7 +166,7 @@ const LogIn = (props) => {
                       name="login[password]"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      required=""
+                      required
                       placeholder="*********"
                     />
                     <div
@@ -187,7 +190,6 @@ const LogIn = (props) => {
                       color="primary"
                       className="btn-block"
                       disabled={loading}
-                      onClick={(e) => emailPasswordAuth(e)}
                     >
                       {loading ? "LOADING..." : SignIn}
                     </Button>

@@ -23,11 +23,12 @@ const ProfileWidget = (props) => {
   };
 
   useEffect(() => {
-    firebase_app.auth().onAuthStateChanged(function (user) {
+    const cleanup = firebase_app.auth().onAuthStateChanged(function (user) {
       if (user) {
         saveUserMetadata(user);
       }
     });
+    return cleanup;
   }, []);
 
   return (

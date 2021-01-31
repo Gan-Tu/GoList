@@ -15,7 +15,7 @@ const Breadcrumbs = (props) => {
             <Col xs="6">
               <Breadcrumb>
                 <BreadcrumbItem>
-                  <Link>
+                  <Link to="#">
                     <Home />
                   </Link>
                 </BreadcrumbItem>

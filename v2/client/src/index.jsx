@@ -28,7 +28,6 @@ const Root = (props) => {
     return function cleanup() {
       abortController.abort();
     };
-    // eslint-disable-next-line
   }, []);
 
   return (
@@ -59,7 +58,7 @@ const Root = (props) => {
                     {({ match }) => (
                       <CSSTransition
                         in={match != null}
-                        // timeout={100}
+                        timeout={100}
                         classNames={anim}
                         unmountOnExit
                       >
