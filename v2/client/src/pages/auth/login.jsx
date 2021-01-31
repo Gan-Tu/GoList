@@ -13,8 +13,6 @@ import {
   Password,
   SignIn,
   EmailAddress,
-  RememberPassword,
-  ForgotPassword,
 } from "../../constant";
 
 import {
@@ -23,10 +21,9 @@ import {
   googleProvider,
   twitterProvider,
   githubProvider,
-  facebookProvider,
 } from "../../data/config";
 
-import { Twitter, GitHub, Facebook } from "react-feather";
+import { Twitter, GitHub } from "react-feather";
 
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -48,7 +45,7 @@ const LogIn = (props) => {
         history.push(`${process.env.PUBLIC_URL}/home`);
       }
     });
-  }, []);
+  }, [history]);
 
   const hideShowPassword = (tPassword) => {
     setTogglePassword(!tPassword);

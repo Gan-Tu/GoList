@@ -28,7 +28,7 @@ const Root = (props) => {
     return function cleanup() {
       abortController.abort();
     };
-  }, []);
+  }, [animation, abortController]);
 
   return (
     <Fragment>

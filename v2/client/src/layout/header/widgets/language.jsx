@@ -37,10 +37,10 @@ const LanguageDropdown = (props) => {
 
   useEffect(() => {
     let currentLang = getLanguage();
-    if (currentLang != selected) {
+    if (currentLang !== selected) {
       setSelectedLanguage(currentLang);
     }
-  });
+  }, [selected]);
 
   return (
     <div className={`translate_wrapper ${langdropdown ? "active" : ""}`}>

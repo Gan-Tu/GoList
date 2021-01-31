@@ -34,7 +34,7 @@ const ProfileWidget = (props) => {
   return (
     <Fragment>
       <div className="media profile-media">
-        <img className="b-r-10" src={photoUrl || man} />
+        <img className="b-r-10" src={photoUrl || man} alt="avatar" />
         {/* TODO(tugan): change this to profile name fetched by user */}
         <div className="media-body">
           <span>{props.t(name || "Unknown")}</span>
