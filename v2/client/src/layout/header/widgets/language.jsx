@@ -1,11 +1,12 @@
 // For more, see https://www.npmjs.com/package/react-switch-lang
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   setTranslations,
   setDefaultLanguage,
   setLanguageCookie,
   setLanguage,
+  getLanguage,
 } from "react-switch-lang";
 
 import { English, 简体中文 } from "../../../constant";
@@ -33,6 +34,13 @@ const LanguageDropdown = (props) => {
       setLangDropdown(!languageDropdownOpened);
     }
   };
+
+  useEffect(() => {
+    let currentLang = getLanguage();
+    if (currentLang != selected) {
+      setSelectedLanguage(currentLang);
+    }
+  });
 
   return (
     <div className={`translate_wrapper ${langdropdown ? "active" : ""}`}>
