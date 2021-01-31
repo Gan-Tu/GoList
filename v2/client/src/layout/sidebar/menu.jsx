@@ -13,10 +13,10 @@ export const MENUITEMS = [
         active: true,
       },
       {
-        title: "Edit",
+        title: "My Links",
         icon: Edit,
         type: "link",
-        path: `${process.env.PUBLIC_URL}/edit`,
+        path: `${process.env.PUBLIC_URL}/my-links`,
         active: false,
       },
     ],

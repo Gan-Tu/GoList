@@ -5,22 +5,17 @@ import { Container, Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 const Sample = (props) => {
   return (
     <Fragment>
-      <Breadcrumb title="Home" />
+      <Breadcrumb title="My Links" />
       <Container fluid={true}>
         <Row>
           <Col sm="12">
             <Card>
               <CardHeader>
-                <h5>Welcome to GoList!</h5>
-                <span>
-                  Here, you can quickly edit and browse a list of links and
-                  files with one simple URL
-                </span>
+                <h5>My Links</h5>
               </CardHeader>
               <CardBody>
                 <p>
-                  Currently, you have 0 lists configured. Start by visiting "My
-                  Links" tab on the right.
+                  Here is so empty.
                 </p>
               </CardBody>
             </Card>
