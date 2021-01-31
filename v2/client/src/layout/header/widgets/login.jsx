@@ -18,8 +18,8 @@ const LoginWidget = (props) => {
   };
 
   const saveUserMetadata = (user) => {
-    setName(user.displayName);
-    setPhotoUrl(user.photoURL);
+    setName(user?.displayName || user?.email);
+    setPhotoUrl(user?.photoURL);
   };
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const LoginWidget = (props) => {
         <img className="b-r-10" src={photoUrl || man} />
         {/* TODO(tugan): change this to profile name fetched by user */}
         <div className="media-body">
-          <span>{props.t(name)}</span>
+          <span>{props.t(name || "Unknown")}</span>
           <p className="mb-0 font-roboto">
             {props.t(Admin)} <i className="middle fa fa-angle-down"></i>
           </p>
