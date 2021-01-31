@@ -35,6 +35,9 @@ const LogIn = (props) => {
   const [email, setEmail] = useState("");
 
   useEffect(() => {
+    // always disable moonlight/dark-mode in login page
+    document.body.className = "light";
+
     firebase_app.auth().onAuthStateChanged(function (user) {
       if (user) {
         history.push(`${process.env.PUBLIC_URL}/home`);
