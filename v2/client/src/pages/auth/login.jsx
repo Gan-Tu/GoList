@@ -9,15 +9,10 @@ import {
   Label,
   Button,
 } from "reactstrap";
-import {
-  Password,
-  SignIn,
-  EmailAddress,
-} from "../../constant";
+import { Password, SignIn, EmailAddress } from "../../constant";
 
 import {
   firebase_app,
-  firebaseLocalPersistence,
   googleProvider,
   twitterProvider,
   githubProvider,
@@ -51,71 +46,36 @@ const LogIn = (props) => {
     setTogglePassword(!tPassword);
   };
 
+  const redirectToHome = () => {
+    setTimeout(() => {
+      props.history.push(`${process.env.PUBLIC_URL}/home`);
+    }, 200);
+  };
+
+  const showLoginError = (error) => {
+    console.error(error);
+    setTimeout(() => {
+      toast.error("Oppss.. The password is invalid or the user doesn't exist.");
+    }, 200);
+    setLoading(false);
+  };
+
   const emailPasswordAuth = async (e) => {
     e.preventDefault();
     setLoading(true);
-
     firebase_app
       .auth()
-      .setPersistence(firebaseLocalPersistence)
-      .then(() => {
-        firebase_app
-          .auth()
-          .signInWithEmailAndPassword(email, password)
-          .then(() => {
-            setTimeout(() => {
-              props.history.push(`${process.env.PUBLIC_URL}/home`);
-            }, 200);
-            setLoading(false);
-          })
-          .catch((error) => {
-            console.error(error);
-            setTimeout(() => {
-              toast.error(
-                "Oppss.. The password is invalid or the user doesn't exist."
-              );
-            }, 200);
-            setLoading(false);
-          });
-      })
-      .catch((error) => {
-        console.error(error);
-        setTimeout(() => {
-          toast.error("Oppss.. Someething went wrong.");
-        }, 200);
-        setLoading(false);
-      });
+      .signInWithEmailAndPassword(email, password)
+      .then(redirectToHome)
+      .catch(showLoginError);
   };
 
   const authWith3rdPartyProvider = async (provider) => {
     firebase_app
       .auth()
-      .setPersistence(firebaseLocalPersistence)
-      .then(() => {
-        firebase_app
-          .auth()
-          .signInWithPopup(provider)
-          .then((result) => {
-            setTimeout(() => {
-              props.history.push(`${process.env.PUBLIC_URL}/home`);
-            }, 200);
-          })
-          .catch((error) => {
-            console.error(error);
-            setTimeout(() => {
-              toast.error(
-                "Oppss.. Something went wrong with 3rd party authentication"
-              );
-            }, 200);
-          });
-      })
-      .catch((error) => {
-        console.error(error);
-        setTimeout(() => {
-          toast.error("Oppss.. Someething went wrong.");
-        }, 200);
-        setLoading(false);
-      });
+      .signInWithPopup(provider)
+      .then(redirectToHome)
+      .catch(showLoginError);
   };
 
   return (

@@ -14,7 +14,10 @@ const firebaseConfig = {
 };
 
 export const firebase_app = firebase.initializeApp(firebaseConfig);
-export const firebaseLocalPersistence = firebase.auth.Auth.Persistence.LOCAL;
+firebase_app
+  .auth()
+  .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+  .catch((err) => console.error(err));
 
 export const googleProvider = new firebase.auth.GoogleAuthProvider();
 export const twitterProvider = new firebase.auth.TwitterAuthProvider();
