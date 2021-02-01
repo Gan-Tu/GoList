@@ -25,13 +25,13 @@ const Sample = (props) => {
 
   return (
     <Fragment>
-      <Breadcrumb title="My Links" show_title />
+      <Breadcrumb title="My Lists" show_title />
       <Container fluid={true}>
         {/* <Row>
           <Col sm="12">
             <Card>
               <CardHeader>
-                <h5>My Links</h5>
+                <h5>My Lists</h5>
               </CardHeader>
               <CardBody>
                 <p>Here is so empty.</p>

@@ -13,10 +13,10 @@ export const MENUITEMS = [
         active: true,
       },
       {
-        title: "My Links",
+        title: "My Lists",
         icon: List,
         type: "link",
-        path: `${process.env.PUBLIC_URL}/my-links`,
+        path: `${process.env.PUBLIC_URL}/my-lists`,
         active: false,
         badge: "badge badge-success",
         badgetxt: "0"
