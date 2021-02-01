@@ -21,12 +21,12 @@ const Root = (props) => {
 
   useEffect(() => {
     setAnim(animation);
-    const cleanup_fb = firebase_app.auth().onAuthStateChanged(setCurrentUser);
+    const unsubscribe = firebase_app.auth().onAuthStateChanged(setCurrentUser);
     console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
     console.disableYellowBox = true;
     return function cleanup() {
       abortController.abort();
-      cleanup_fb();
+      unsubscribe();
     };
   }, [animation, abortController, currentUser]);
 
