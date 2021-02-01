@@ -20,7 +20,7 @@ const Sample = (props) => {
               <CardBody>
                 <p>
                   Currently, you have 0 lists configured. Start by visiting "My
-                  Lists" tab on the right.
+                  Lists" tab on the left.
                 </p>
               </CardBody>
             </Card>
