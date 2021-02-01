@@ -1,19 +1,14 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
 import { MENUITEMS } from "./menu";
 import { ArrowRight, ArrowLeft, Grid } from "react-feather";
 import { Link } from "react-router-dom";
 import { translate } from "react-switch-lang";
-import configDB from "../../data/customizer/config";
 
 const Sidebar = (props) => {
   const [mainmenu, setMainMenu] = useState(MENUITEMS);
   const [margin, setMargin] = useState(0);
   const [width, setWidth] = useState(0);
   const [sidebartoogle, setSidebartoogle] = useState(true);
-  const wrapper =
-    useSelector((content) => content.Customizer.sidebar_types.type) ||
-    configDB.data.settings.sidebar.type;
 
   useEffect(() => {
     document.querySelector(".left-arrow").classList.add("d-none");
@@ -194,7 +189,7 @@ const Sidebar = (props) => {
           </div>
         </div>
         <div className="logo-icon-wrapper">
-          <Link to={`${process.env.PUBLIC_URL}/dashboard/default`}>
+          <Link to={`${process.env.PUBLIC_URL}/home`}>
             <img
               className="img-fluid"
               src={require("../../assets/images/logo/logo-icon.png")}
@@ -206,14 +201,7 @@ const Sidebar = (props) => {
           <div className="left-arrow" onClick={scrollToLeft}>
             <ArrowLeft />
           </div>
-          <div
-            id="sidebar-menu"
-            style={
-              wrapper === "horizontal-wrapper"
-                ? { marginLeft: margin + "px" }
-                : { margin: "0px" }
-            }
-          >
+          <div id="sidebar-menu" style={{ margin: "0px" }}>
             <ul className="sidebar-links custom-scrollbar">
               <li className="back-btn">
                 <div className="mobile-back text-right">

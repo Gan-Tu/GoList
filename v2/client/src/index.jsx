@@ -8,17 +8,13 @@ import store from "./store";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { routes } from "./route";
-import ConfigDB from "./data/customizer/config";
 import LogIn from "./pages/auth/login";
 import { ToastContainer } from "react-toastify";
 
 const Root = (props) => {
   const [anim, setAnim] = useState("");
   // Get animation setting from local storage, if any
-  const animation =
-    localStorage.getItem("animation") ||
-    ConfigDB.data.router_animation ||
-    "fade";
+  const animation = "fade";
   const abortController = new AbortController();
 
   useEffect(() => {
