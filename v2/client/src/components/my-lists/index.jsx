@@ -4,10 +4,6 @@ import {
   Container,
   Row,
   Col,
-  Card,
-  CardHeader,
-  CardBody,
-  Media,
 } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { FETCH_LISTS } from "../../redux/actionTypes";
@@ -30,9 +26,8 @@ const Sample = (props) => {
       <Container fluid={true}>
         <Row>
           {lists.map((list, idx) => (
-            <Col sm="4">
+            <Col sm="4" key={`ListCard-${idx}`}>
               <ListCard
-                key={`ListCard-${idx}`}
                 icon_url={require("../../assets/images/other-images/job-search-1.jpg")}
                 title={list.title}
                 subtitle={list.subtitle}
