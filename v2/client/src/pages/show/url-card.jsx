@@ -4,7 +4,7 @@ import { Card, Media } from "reactstrap";
 const UrlCard = (props) => {
   // TODO(tugan): fix formatting issues with different title length, or description lengths
   return (
-    <Card>
+    <Card className='hover:shadow-xl'>
       <div className="blog-box blog-grid text-center">
         {props.metadata.image ? (
           <Media
