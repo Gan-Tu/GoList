@@ -7,7 +7,7 @@ const MoonLight = (props) => {
     if (localStorage.getItem("layout_version") === "dark-only") {
       setMoonlight(true);
     }
-  }, [moonlight]);
+  }, []);
 
   const toggleMoonlight = (light) => {
     if (light) {

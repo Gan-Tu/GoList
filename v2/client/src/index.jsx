@@ -23,13 +23,13 @@ const Root = (props) => {
     console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
     console.disableYellowBox = true;
     return abortController.abort();
-  }, [animation, abortController]);
+  }, [abortController]);
 
   // check current logged in user from firebase
   const [currentUser, setCurrentUser] = useState(false);
   useEffect(() => {
     return firebase_app.auth().onAuthStateChanged(setCurrentUser);
-  }, [currentUser]);
+  }, []);
 
   // delay redirect to login page, to allow firebase to get current user
   const [redirectToLogin, setRedirectToLogin] = useState(false);
@@ -42,7 +42,7 @@ const Root = (props) => {
         clearTimeout(timer);
       };
     }
-  }, [currentUser, redirectToLogin]);
+  }, [currentUser]);
 
   return (
     <Fragment>
