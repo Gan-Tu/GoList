@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import placeholderImg from "../../assets/images/other-images/sidebar-bg.jpg";
 import { Container, Row, Col } from "reactstrap";
 import UrlCard from "./url-card";
-import Footer from "../../layout/footer";
 
 const IMAGE_URL_CARD_PLACEHOLDER = {
   title: "Lorem ipsum dolor sit amet, consectetur.",
@@ -46,7 +45,6 @@ const Sample = (props) => {
             </Row>
           </Container>
         </div>
-        <Footer />
       </div>
     </div>
   );
