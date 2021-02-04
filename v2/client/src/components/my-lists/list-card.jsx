@@ -1,10 +1,11 @@
 import React from "react";
 import { Card, CardBody, Media } from "reactstrap";
+import "./list-card.css";
 
 const ListCard = (props) => {
   // TODO(tugan): fix formatting issues with different title length, or description lengths
   return (
-    <Card>
+    <Card className='hover:shadow-xl'>
       <CardBody>
         <Media>
           <img
