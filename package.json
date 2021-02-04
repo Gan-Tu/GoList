@@ -12,8 +12,8 @@
     "preversion": "npm --no-git-tag-version version minor --prefix client",
     "postversion": "git push && git push --tags",
     "bump-version": "npm version minor -m 'bump version to %s for deployment'",
-    "deploy": "npm run build && gcloud app deploy",
-    "deploy-staging": "npm run build && gcloud app deploy --no-promote",
+    "deploy": "npm run bump-version && npm run build && gcloud app deploy",
+    "deploy-staging": "npm run bump-version && npm run build && gcloud app deploy --no-promote",
     "test": "npm run build && echo 'build successful'",
     "postinstall": "npm install --prefix client"
   },
