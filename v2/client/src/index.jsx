@@ -11,6 +11,7 @@ import { routes } from "./route";
 import LogIn from "./pages/auth/login";
 import { ToastContainer } from "react-toastify";
 import { firebase_app } from "./data/config";
+import Loader from "./layout/loader";
 
 const Root = (props) => {
   const [anim, setAnim] = useState("");
@@ -28,11 +29,13 @@ const Root = (props) => {
       abortController.abort();
       unsubscribe();
     };
-  }, [animation, abortController, currentUser]);
+  }, [animation, abortController]);
 
   return (
     <Fragment>
       <ToastContainer autoClose={3000} pauseOnHover={false} />
+      {/* Having a loader helps delay showing UI when fetching for login details */}
+      <Loader timeout="1000" />
       <Provider store={store}>
         <BrowserRouter basename={`/`}>
           <Switch>
