@@ -11,7 +11,7 @@ const Loader = (props) => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [show]);
+  }, [show, props.timeout]);
 
   return (
     <Fragment>

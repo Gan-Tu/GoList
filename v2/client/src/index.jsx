@@ -14,22 +14,35 @@ import { firebase_app } from "./data/config";
 import Loader from "./layout/loader";
 
 const Root = (props) => {
+  // set animation and abort controller
   const [anim, setAnim] = useState("");
-  // Get animation setting from local storage, if any
   const animation = "fade";
   const abortController = new AbortController();
-  const [currentUser, setCurrentUser] = useState(false);
-
   useEffect(() => {
     setAnim(animation);
-    const unsubscribe = firebase_app.auth().onAuthStateChanged(setCurrentUser);
     console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
     console.disableYellowBox = true;
-    return function cleanup() {
-      abortController.abort();
-      unsubscribe();
-    };
+    return abortController.abort();
   }, [animation, abortController]);
+
+  // check current logged in user from firebase
+  const [currentUser, setCurrentUser] = useState(false);
+  useEffect(() => {
+    return firebase_app.auth().onAuthStateChanged(setCurrentUser);
+  }, [currentUser]);
+
+  // delay redirect to login page, to allow firebase to get current user
+  const [redirectToLogin, setRedirectToLogin] = useState(false);
+  useEffect(() => {
+    if (!currentUser) {
+      const timer = setTimeout(() => {
+        setRedirectToLogin(true);
+      }, 1000);
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [currentUser, redirectToLogin]);
 
   return (
     <Fragment>
@@ -45,7 +58,9 @@ const Root = (props) => {
             ></Route>
 
             {!currentUser ? (
-              <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+              redirectToLogin ? (
+                <Redirect to={`${process.env.PUBLIC_URL}/login`} />
+              ) : null
             ) : (
               <App>
                 <Route
