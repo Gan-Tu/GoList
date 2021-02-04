@@ -9,6 +9,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { routes } from "./route";
 import LogIn from "./pages/auth/login";
+import Show from "./pages/show";
 import { ToastContainer } from "react-toastify";
 import { firebase_app } from "./data/config";
 import Loader from "./layout/loader";
@@ -57,6 +58,11 @@ const Root = (props) => {
               component={LogIn}
             ></Route>
 
+            <Route
+              path={`${process.env.PUBLIC_URL}/demo`}
+              component={Show}
+            ></Route>
+
             {!currentUser ? (
               redirectToLogin ? (
                 <Redirect to={`${process.env.PUBLIC_URL}/login`} />
@@ -70,6 +76,7 @@ const Root = (props) => {
                     return <Redirect to={`${process.env.PUBLIC_URL}/home`} />;
                   }}
                 />
+
                 <TransitionGroup>
                   {routes.map(({ path, Component }) => (
                     <Route
