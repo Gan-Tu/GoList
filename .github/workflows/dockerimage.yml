@@ -14,4 +14,3 @@ jobs:
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         image-name: golist
-        dockerfile-location: v1-legacy

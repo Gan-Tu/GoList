@@ -2,4 +2,3 @@ language: node_js
 node_js:
   - 14
 os: linux
-before_install: cd v1-legacy
