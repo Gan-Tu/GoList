@@ -1,6 +1,6 @@
 {
   "name": "golist",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
     "server": "nodemon ./bin/www",
