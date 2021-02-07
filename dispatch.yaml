@@ -1,0 +1,7 @@
+dispatch:
+  - url: "www.goli.st/*"
+    service: default
+  - url: "goli.st/*"
+    service: default
+  - url: "app.goli.st/*"
+    service: app

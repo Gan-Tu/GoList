@@ -1,5 +1,5 @@
 {
-  "name": "golist",
+  "name": "golist-app-service",
   "version": "2.3.0",
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
@@ -13,6 +13,7 @@
     "postversion": "git push && git push --tags",
     "bump-version": "npm version minor -m 'bump version to %s for deployment'",
     "deploy": "npm run bump-version && npm run build && gcloud app deploy",
+    "deploy-current": "npm run build && gcloud app deploy",
     "deploy-staging": "npm run bump-version && npm run build && gcloud app deploy --no-promote",
     "test": "npm run build && echo 'build successful'",
     "postinstall": "npm install --prefix client"
