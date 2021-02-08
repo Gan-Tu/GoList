@@ -6,7 +6,8 @@ var bodyParser = require("body-parser");
 var logger = require("morgan");
 var rateLimit = require("express-rate-limit");
 
-var indexRouter = require('./routes/index');
+var indexRouter = require("./routes/index");
+var goListsRouter = require("./routes/golists");
 
 var app = express();
 
@@ -15,11 +16,13 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
 // rate limit the API server to 50 RPS
-app.use(rateLimit({
-  windowMs: 60 * 1000,
-  max: 50,
-  message: "Too many requests. Max 50 requests allowed per minute"
-}));
+app.use(
+  rateLimit({
+    windowMs: 60 * 1000,
+    max: 50,
+    message: "Too many requests. Max 50 requests allowed per minute",
+  })
+);
 
 app.use(logger("dev"));
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,7 +32,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use('/', indexRouter);
+app.use("/golists", goListsRouter);
+app.use("/*", indexRouter); // catch all
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
