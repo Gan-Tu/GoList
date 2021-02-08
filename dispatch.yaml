@@ -5,3 +5,5 @@ dispatch:
     service: default
   - url: "app.goli.st/*"
     service: app
+  - url: "api.goli.st/*"
+    service: api
