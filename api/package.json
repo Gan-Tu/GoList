@@ -1,6 +1,6 @@
 {
   "name": "golist-api-service",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
     "start": "PORT=8080 node ./bin/www",
