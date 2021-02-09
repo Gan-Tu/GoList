@@ -39,7 +39,7 @@ function _saveList(name, data, method, callback) {
         name: name,
         title: data.title,
         last_modified_date: new Date(),
-        owner: data.owner || "Admin",
+        owner: data.owner,
         hits: data.hits || 0,
       },
     },
