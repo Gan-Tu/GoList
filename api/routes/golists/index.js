@@ -30,8 +30,9 @@ function validateNew(req, res, next) {
     next(new BadRequestError("Missing title in request body"));
   } else if (!req.body.owner || req.body.owner.length <= 0) {
     next(new BadRequestError("Missing owner in request body"));
+  } else {
+    next();
   }
-  next();
 }
 
 router
@@ -46,8 +47,9 @@ router
         next(new BadRequestError("Missing title in request body"));
       } else if (!req.body.owner || req.body.owner.length <= 0) {
         next(new BadRequestError("Missing owner in request body"));
+      } else {
+        next();
       }
-      next();
     },
     handleSaveList
   );
