@@ -24,30 +24,6 @@ function handleGetListByName(req, res, next) {
 }
 
 /**
- * An internal helper function to save a list entity.
- *
- * @param {string} name The name of the list to save.
- * @param {string} method Explicit method to use: 'insert', 'update', 'upsert'
- * @param {Function} callback Callback function to handle database save results
- */
-function _saveList(name, data, method, callback) {
-  datastore.save(
-    {
-      key: datastore.key(["GoLists", name]),
-      method: method,
-      data: {
-        name: name,
-        title: data.title,
-        last_modified_date: new Date(),
-        owner: data.owner,
-        hits: data.hits || 0,
-      },
-    },
-    callback
-  );
-}
-
-/**
  * Save a list entity by its name, or update it if it already exists.
  *
  * @param {Object} req Express request object
@@ -56,13 +32,25 @@ function _saveList(name, data, method, callback) {
  */
 function handleSaveList(req, res, next) {
   let name = req.params.name;
-  _saveList(name, req.body, /** method */ "upsert", function (err) {
-    if (err) {
-      next(new InternalError(err.message));
-    } else {
-      res.status(201).json({ err: null, ok: true });
+  datastore.save(
+    {
+      key: datastore.key(["GoLists", name]),
+      data: {
+        name: name,
+        title: req.body.title,
+        last_modified_date: new Date(),
+        owner: req.body.owner,
+        hits: req.body.hits || 0,
+      },
+    },
+    function (err) {
+      if (err) {
+        next(new InternalError(err.message));
+      } else {
+        res.status(201).json({ err: null, ok: true });
+      }
     }
-  });
+  );
 }
 
 /**
@@ -74,16 +62,42 @@ function handleSaveList(req, res, next) {
  */
 function handleUpdateList(req, res, next) {
   let name = req.params.name;
-  _saveList(name, req.body, /** method */ "update", function (err) {
-    if (err) {
-      if (err.code === /** google.rpc.Code.NOT_FOUND */ 5) {
-        next(new NotFoundError(`No GoLists found with name: ${name}`));
-      } else {
+  let key = datastore.key(["GoLists", name]);
+
+  const transaction = datastore.transaction();
+  // Start a transaction remotely
+  transaction.run((err) => {
+    if (err) next(new InternalError(err.message));
+    // Get the existing entity
+    transaction.get(key, (err, entity) => {
+      if (err) {
         next(new InternalError(err.message));
+      } else if (!entity) {
+        next(new NotFoundError(`No GoLists found with name: ${name}`));
       }
-    } else {
-      res.status(200).json({ err: null, ok: true });
-    }
+      let updatedEntity = {
+        key: key,
+        data: {
+          name: name,
+          title: req.body.title || entity.title,
+          last_modified_date: new Date() || entity.last_modified_date,
+          owner: req.body.owner || entity.owner,
+          hits: req.body.hits || entity.hits,
+        },
+      };
+      // Save the updated entity with UPDATE method
+      datastore.update(updatedEntity, (err) => {
+        if (err) {
+          next(new InternalError(err.message));
+        } else {
+          res.status(200).json({ err: null, ok: true });
+        }
+      });
+      // Commit transaction
+      transaction.commit((err) => {
+        if (err) next(new InternalError(err.message));
+      });
+    });
   });
 }
 

@@ -22,23 +22,33 @@ router.param("name", function (req, res, next, name) {
   }
 });
 
-function validateEntityInReqBody(req, _, next) {
+function validateNew(req, res, next) {
   if (!req.body) {
     next(new BadRequestError("Missing request body"));
   } else if (!req.body.title || req.body.title.length <= 0) {
     next(new BadRequestError("Missing title in request body"));
   } else if (!req.body.owner || req.body.owner.length <= 0) {
     next(new BadRequestError("Missing owner in request body"));
-  } else {
-    next();
   }
+  next();
 }
 
 router
   .route("/:name")
   .get(handleGetListByName)
-  .put(validateEntityInReqBody, handleUpdateList)
-  .post(validateEntityInReqBody, handleSaveList);
+  .put(handleUpdateList)
+  .post(
+    // vaildates essential fields exist
+    function validateBody(req, res, next) {
+      if (!req.body.title || req.body.title.length <= 0) {
+        next(new BadRequestError("Missing title in request body"));
+      } else if (!req.body.owner || req.body.owner.length <= 0) {
+        next(new BadRequestError("Missing owner in request body"));
+      }
+      next();
+    },
+    handleSaveList
+  );
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
