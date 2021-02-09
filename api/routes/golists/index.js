@@ -1,14 +1,22 @@
 var express = require("express");
 var router = express.Router();
-var { handleGetListByName, handleSaveList, handleUpdateList } = require("./db");
+
+const {
+  handleGetListByName,
+  handleSaveList,
+  handleUpdateList,
+} = require("./db");
+const { BadRequestError } = require("./../../utils/errors");
 
 router.param("name", function (req, res, next, name) {
   if (!name || name.length <= 0) {
-    return res.status(400).json({ err: "GoList name cannot be empty" });
+    next(new BadRequestError("GoList name cannot be empty"));
   } else if (!name.match(/^[a-zA-Z0-9]+[a-zA-Z0-9-]*$/)) {
-    return res.status(400).json({
-      err: "GoList name can only be alphanumeric, with non-leading dashes",
-    });
+    next(
+      new BadRequestError(
+        "GoList name can only contain alphanumeric, or non-leading dash letters"
+      )
+    );
   } else {
     next();
   }

@@ -1,6 +1,8 @@
 const { Datastore } = require("@google-cloud/datastore");
 const datastore = new Datastore();
 
+const { InternalError, NotFoundError } = require("./../../utils/errors");
+
 /**
  * Get a list entity by its name
  *
@@ -13,11 +15,9 @@ function handleGetListByName(req, res, next) {
   let name = req.params.name;
   datastore.get(datastore.key(["GoLists", name]), (err, entity) => {
     if (err) {
-      next(
-        `Encountered error when fetching GoLists with name: ${name}. ${err}`
-      );
+      next(new InternalError(err.message));
     } else if (!entity) {
-      res.status(400).json({ err: `No GoLists found with name: ${name}` });
+      next(new NotFoundError(`No GoLists found with name: ${name}`));
     } else {
       res.json(entity);
     }
@@ -60,7 +60,7 @@ function handleSaveList(req, res, next) {
   let name = req.params.name;
   _saveList(name, req.body, /** method */ "upsert", function (err) {
     if (err) {
-      res.status(500).json({ err: `error: ${err.message}`, ok: false });
+      next(new InternalError(err.message));
     } else {
       res.status(201).json({ err: null, ok: true });
     }
@@ -77,13 +77,12 @@ function handleSaveList(req, res, next) {
 function handleUpdateList(req, res, next) {
   let name = req.params.name;
   _saveList(name, req.body, /** method */ "update", function (err) {
-    if (err && err.code === /** NOT_FOUND */ 5) {
-      res.status(404).json({
-        err: `GoLists with name does not exists: ${name}`,
-        ok: false,
-      });
-    } else if (err) {
-      res.status(500).json({ err: `error: ${err.message}`, ok: false });
+    if (err) {
+      if (err.code === /** google.rpc.Code.NOT_FOUND */ 5) {
+        next(new NotFoundError(`No GoLists found with name: ${name}`));
+      } else {
+        next(new InternalError(err.message));
+      }
     } else {
       res.status(200).json({ err: null, ok: true });
     }
