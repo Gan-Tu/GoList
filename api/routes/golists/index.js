@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-var { handleGetListByName } = require("./db");
+var { handleGetListByName, handleSaveList, handleUpdateList } = require("./db");
 
 router.param("name", function (req, res, next, name) {
   if (!name || name.length <= 0) {
@@ -14,7 +14,11 @@ router.param("name", function (req, res, next, name) {
   }
 });
 
-router.route("/:name").get(handleGetListByName);
+router
+  .route("/:name")
+  .get(handleGetListByName)
+  .put(handleUpdateList)
+  .post(handleSaveList);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
