@@ -7,8 +7,7 @@ const SEED_DATA = [
     data: {
       name: "tugan",
       title: "Gan is the best",
-      create_date: new Date("29 March 1997"),
-      last_modified_date: new Date(),
+      last_modified_date: new Date("29 March 1997"),
       owner: "Admin",
       hits: 100,
     },
@@ -18,8 +17,7 @@ const SEED_DATA = [
     data: {
       name: "demo",
       title: "Lorem ipsum dolor sit amet, consectetur.",
-      create_date: new Date("9 April 2019"),
-      last_modified_date: new Date(),
+      last_modified_date: new Date("9 April 2019"),
       owner: "Admin",
       hits: 100,
     },
