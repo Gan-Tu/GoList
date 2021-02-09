@@ -101,4 +101,27 @@ function handleUpdateList(req, res, next) {
   });
 }
 
-module.exports = { handleGetListByName, handleSaveList, handleUpdateList };
+/**
+ * Delete a list entity by its name
+ *
+ * @param {Object} req Express request object
+ * @param {Object} res Express response object
+ * @param {Function} next Express next middleware function
+ */
+function handleDeleteListByName(req, res, next) {
+  let name = req.params.name;
+  datastore.delete(datastore.key(["GoLists", name]), (err) => {
+    if (err) {
+      next(new InternalError(err.message));
+    } else {
+      res.status(202).json({ err: null, ok: true });
+    }
+  });
+}
+
+module.exports = {
+  handleGetListByName,
+  handleSaveList,
+  handleUpdateList,
+  handleDeleteListByName,
+};

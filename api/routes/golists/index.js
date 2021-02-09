@@ -5,6 +5,7 @@ const {
   handleGetListByName,
   handleSaveList,
   handleUpdateList,
+  handleDeleteListByName,
 } = require("./db");
 const { BadRequestError } = require("./../../utils/errors");
 
@@ -36,6 +37,7 @@ function validateNew(req, res, next) {
 router
   .route("/:name")
   .get(handleGetListByName)
+  .delete(handleDeleteListByName)
   .put(handleUpdateList)
   .post(
     // vaildates essential fields exist
