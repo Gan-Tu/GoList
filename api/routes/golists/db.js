@@ -67,15 +67,16 @@ function handleUpdateList(req, res, next) {
   const transaction = datastore.transaction();
   // Start a transaction remotely
   transaction.run((err) => {
-    if (err) next(new InternalError(err.message));
+    if (err) return next(new InternalError(err.message));
     // Get the existing entity
     transaction.get(key, (err, entity) => {
       if (err) {
-        next(new InternalError(err.message));
+        return next(new InternalError(err.message));
       } else if (!entity) {
-        next(new NotFoundError(`No GoLists found with name: ${name}`));
+        return next(new NotFoundError(`No GoLists found with name: ${name}`));
       }
-      let updatedEntity = {
+      // Save the updated entity with UPDATE method
+      transaction.update({
         key: key,
         data: {
           name: name,
@@ -84,18 +85,14 @@ function handleUpdateList(req, res, next) {
           owner: req.body.owner || entity.owner,
           hits: req.body.hits || entity.hits,
         },
-      };
-      // Save the updated entity with UPDATE method
-      datastore.update(updatedEntity, (err) => {
+      });
+      // Commit transaction
+      transaction.commit((err) => {
         if (err) {
           next(new InternalError(err.message));
         } else {
           res.status(200).json({ err: null, ok: true });
         }
-      });
-      // Commit transaction
-      transaction.commit((err) => {
-        if (err) next(new InternalError(err.message));
       });
     });
   });
