@@ -19,20 +19,16 @@ router.param("name", function (req, res, next, name) {
 });
 
 router.route("/:name").get(function (req, res, next) {
-  let query = datastore
-    .createQuery("GoLists")
-    .filter("name", "=", req.params.name);
-  datastore.runQuery(query, (err, entities) => {
+  let name = req.params.name;
+  datastore.get(datastore.key(["GoLists", name]), (err, entity) => {
     if (err) {
       next(
-        `Encountered error when fetching Key(GoLists, name="${req.params.name}"): ${err}`
+        `Encountered error when fetching GoLists with name: ${name}. ${err}`
       );
-    } else if (!entities.length) {
-      res
-        .status(404)
-        .json({ err: `No GoLists with name found: ${req.params.name}` });
+    } else if (!entity) {
+      return res.status(400).json({ err: `No GoLists found with name: ${name}` });
     } else {
-      res.json({ data: entities });
+      res.json(entity);
     }
   });
 });

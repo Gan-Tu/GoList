@@ -3,7 +3,7 @@ const datastore = new Datastore();
 
 const SEED_DATA = [
   {
-    key: datastore.key(["GoLists", "test"]),
+    key: datastore.key(["GoLists", "tugan"]),
     data: {
       name: "tugan",
       title: "Gan is the best",
@@ -13,7 +13,7 @@ const SEED_DATA = [
     },
   },
   {
-    key: datastore.key(["GoLists"]),
+    key: datastore.key(["GoLists", "demo"]),
     data: {
       name: "demo",
       title: "Lorem ipsum dolor sit amet, consectetur.",
@@ -24,13 +24,13 @@ const SEED_DATA = [
   },
 ];
 
-datastore.insert(SEED_DATA, function (err, apiResponse) {
-  console.log(SEED_DATA); 
-  if (err.code === /* ALREADY_EXISTS */ 6) {
+datastore.save(SEED_DATA, function (err, apiResponse) {
+  if (err && err.code === /* ALREADY_EXISTS */ 6) {
     console.log("already exists");
   } else if (err) {
     console.log(`error: ${err.message}`);
   } else {
+    console.log(SEED_DATA);
     console.log(apiResponse);
   }
 });
