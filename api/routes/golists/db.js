@@ -9,7 +9,6 @@ const { InternalError, NotFoundError } = require("./../../utils/errors");
  * @param {Object} req Express request object
  * @param {Object} res Express response object
  * @param {Function} next Express next middleware function
- * @param {string} name The name of the new list
  */
 function handleGetListByName(req, res, next) {
   let name = req.params.name;
