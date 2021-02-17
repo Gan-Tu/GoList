@@ -10,7 +10,6 @@
     "dev": "concurrently 'npm run server' 'npm run client'",
     "build": "npm run-script build --prefix client",
     "preversion": "npm --no-git-tag-version version minor --prefix client",
-    "postversion": "git push && git push --tags",
     "bump-version": "npm version minor -m 'bump version to %s for deployment'",
     "deploy": "npm run bump-version && npm run build && gcloud app deploy",
     "deploy-current": "npm run build && gcloud app deploy",
