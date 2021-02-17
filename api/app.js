@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(
   cors({
     origin: [
-      /\.goli\.st$/,
+      /goli\.st$/,
       /golist\.wl\.r\.appspot\.com$/,
       /localhost:\d+$/
     ],
