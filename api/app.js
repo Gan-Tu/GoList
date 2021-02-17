@@ -1,5 +1,6 @@
 var createError = require("http-errors");
 var express = require("express");
+var cors = require("cors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
@@ -31,6 +32,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+
+// Allow CORS from our own domain
+app.use(
+  cors({
+    origin: [
+      /\.goli\.st$/,
+      /golist\.wl\.r\.appspot\.com$/,
+      /localhost:\d+$/
+    ],
+    // some legacy browsers (IE11, various SmartTVs) choke on 204
+    optionsSuccessStatus: 200,
+  })
+);
 
 app.use("/golists", goListsRouter);
 app.use("/*", indexRouter); // catch all

@@ -1,6 +1,6 @@
 {
   "name": "golist-api-service",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
     "start": "PORT=8080 node ./bin/www",
@@ -24,6 +24,7 @@
     "@google-cloud/datastore": "^6.3.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
     "debug": "^2.6.9",
     "express": "^4.16.1",
     "express-rate-limit": "^5.2.3",
