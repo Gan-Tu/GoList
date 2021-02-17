@@ -6,8 +6,8 @@
     "bump-version": "npm version minor -m 'bump version to %s for deployment'",
     "deploy-routing": "gcloud app deploy dispatch.yaml",
     "api": "npm start --prefix api",
-    "app": "npm start --prefix app",
-    "root": "npm start --prefix root",
+    "admin-app": "npm start --prefix admin-app",
+    "client-app": "npm start --prefix client-app",
     "test": "echo 'no tests yet'"
   },
   "repository": {
