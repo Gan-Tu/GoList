@@ -1,4 +1,4 @@
-service: app
+service: admin-app
 env: standard
 runtime: nodejs14
 handlers:

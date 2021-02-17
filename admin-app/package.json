@@ -1,5 +1,5 @@
 {
-  "name": "golist-app-service",
+  "name": "golist-admin-app-service",
   "version": "2.3.0",
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
