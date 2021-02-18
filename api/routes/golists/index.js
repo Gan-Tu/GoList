@@ -7,6 +7,7 @@ const {
   handleSaveList,
   handleUpdateList,
   handleDeleteListByName,
+  handleGetListItemsByName,
 } = require("./db");
 
 router.param("name", function (req, res, next, name) {
@@ -23,18 +24,6 @@ router.param("name", function (req, res, next, name) {
     next();
   }
 });
-
-function validateNew(req, res, next) {
-  if (!req.body) {
-    next(createError(400, "Missing request body"));
-  } else if (!req.body.title || req.body.title.length <= 0) {
-    next(createError(400, "Missing title in request body"));
-  } else if (!req.body.owner || req.body.owner.length <= 0) {
-    next(createError(400, "Missing owner in request body"));
-  } else {
-    next();
-  }
-}
 
 router
   .route("/:name")
@@ -54,6 +43,8 @@ router
     },
     handleSaveList
   );
+
+router.route("/:name/items").get(handleGetListItemsByName);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

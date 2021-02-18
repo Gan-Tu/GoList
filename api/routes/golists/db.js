@@ -115,9 +115,31 @@ function handleDeleteListByName(req, res, next) {
   });
 }
 
+/**
+ * Get all items under a list entity by its list name
+ *
+ * @param {Object} req Express request object
+ * @param {Object} res Express response object
+ * @param {Function} next Express next middleware function
+ */
+function handleGetListItemsByName(req, res, next) {
+  let name = req.params.name;
+  let query = datastore
+    .createQuery("GoListItems")
+    .hasAncestor(datastore.key(["GoLists", name]));
+  datastore.runQuery(query, (err, entities) => {
+    if (err) {
+      next(createError(500, err.message));
+    } else {
+      res.status(202).json({ err: null, ok: true, entities });
+    }
+  });
+}
+
 module.exports = {
   handleGetListByName,
   handleSaveList,
   handleUpdateList,
   handleDeleteListByName,
+  handleGetListItemsByName,
 };
