@@ -7,7 +7,14 @@ function getEntityByKey(paths, callback) {
     if (err) {
       callback(createError(500, err.message));
     } else if (!entity) {
-      callback(createError(404, `No GoLists found with name: ${name}`));
+      callback(
+        createError(
+          404,
+          `No GoLists found with name: ${
+            paths && paths.length > 1 ? paths[paths.length - 1] : paths
+          }`
+        )
+      );
     } else {
       callback(null, entity);
     }
