@@ -1,30 +1,10 @@
 import React from "react";
-import Head from "next/head";
-import { useGoList } from "../actions/golists";
+import List from "../components/List";
 
-const GoList = (props) => {
-  const { data, isLoading, error } = useGoList(props.name || "demo");
-  let content = "";
-  let header = "GoList";
-  if (error) {
-    content = `Error...${error.message}`;
-  } else if (isLoading) {
-    content = "Loading...";
-  } else {
-    if (data.name) {
-      header = `${header} | ${data.name}`;
-    }
-    content = `data: ${JSON.stringify(data)}`;
-  }
-
+const GoListPage = (props) => {
   return (
-    <div>
-      <Head>
-        <title>{header}</title>
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-
-      <div>{content}</div>
+    <div id="golist-page">
+      <List listName={props.name}/>
     </div>
   );
 };
@@ -37,4 +17,4 @@ export async function getServerSideProps({ params }) {
   };
 }
 
-export default GoList;
+export default GoListPage;
