@@ -5,60 +5,123 @@ const SEED_DATA = [
   {
     key: datastore.key(["GoLists", "tugan"]),
     data: {
-      name: "tugan",
-      title: "Gan is the best",
-      last_modified_date: new Date("29 March 1997"),
-      owner: "Admin",
-      hits: 100,
+      listName: "tugan",
+      created_by: "Gan",
+      title: "Learn about Gan",
+      description: "A curated social media list to learn more about Gan",
+      update_date: new Date(),
     },
   },
   {
     key: datastore.key(["GoLists", "demo"]),
     data: {
-      name: "demo",
-      title: "Lorem ipsum dolor sit amet, consectetur.",
-      last_modified_date: new Date("9 April 2019"),
-      owner: "Admin",
-      hits: 100,
+      listName: "demo",
+      created_by: "GoList Team",
+      title: "Demo List",
+      description: "A curated demo by GoList team",
+      update_date: new Date(),
     },
   },
   {
-    key: datastore.key(["GoLists", "demo", "nested", "01"]),
+    key: datastore.key(["GoLists", "tugan", "GoListItems", "github"]),
     data: {
-      name: "demo-nested-01",
-      title: "Lorem ipsum dolor sit amet, consectetur.",
-      last_modified_date: new Date("9 April 2019"),
-      owner: "Admin",
-      hits: 100,
+      title: "GitHub",
+      description: "A repo of my software developments",
+      link: "https://github.com/Michael-Tu",
+      tags: ["Coding", "Social Media"],
+      image_url:
+        "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+      update_date: new Date(),
     },
   },
   {
-    key: datastore.key(["GoLists", "demo", "nested", "02"]),
+    key: datastore.key(["GoLists", "tugan", "GoListItems", "linkedin"]),
     data: {
-      name: "demo-nested-02",
-      title: "Lorem ipsum dolor sit amet, consectetur.",
-      last_modified_date: new Date("9 April 2019"),
-      owner: "Admin",
-      hits: 100,
+      title: "LinkedIn",
+      description: "My Professional Journey",
+      link: "https://www.linkedin.com/in/gantu/",
+      tags: ["Career", "Social Media"],
+      image_url:
+        "http://www.freelogovectors.net/wp-content/uploads/2020/01/linkedin-logo.png",
+      update_date: new Date(),
     },
   },
   {
-    key: datastore.key(["nested", "03"]),
+    key: datastore.key(["GoLists", "tugan", "GoListItems", "youtube"]),
     data: {
-      name: "nested-03",
-      title: "Lorem ipsum dolor sit amet, consectetur.",
-      last_modified_date: new Date("9 April 2019"),
-      owner: "Admin",
-      hits: 100,
+      title: "YouTube",
+      description: "Don't forget to subscribe!",
+      link: "https://www.youtube.com/channel/UC6iqsCyBrY79kv84B0HWojw",
+      tags: [],
+      image_url:
+        "https://i.pinimg.com/originals/de/b4/93/deb493608dae9e533ef6b6894095b797.png",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-01"]),
+    data: {
+      title: "Lorem ipsum dolor sit amet",
+      description:
+        "Consectetur adipiscing elit. Etiam quis dolor et ex feugiat scelerisque convallis et dolor.",
+      link: "",
+      tags: [],
+      image_url: "",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-02"]),
+    data: {
+      title: "Etiam congue est a bibendum ultrices.",
+      description:
+        "Nulla consequat libero non velit accumsan interdum. Curabitur malesuada ante suscipit cursus posuere.",
+      link: "",
+      tags: [],
+      image_url: "",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-03"]),
+    data: {
+      title: "In quis lectus ullamcorper",
+      description:
+        "Vivamus a nisl cursus, luctus dolor vitae, sagittis nunc. Quisque et odio ut mauris tristique auctor.",
+      link: "",
+      tags: [],
+      image_url: "",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-04"]),
+    data: {
+      title: "Aliquam non leo euismod",
+      description:
+        "Praesent feugiat nulla ut rhoncus tempus. Sed scelerisque lacus ac pretium vestibulum.",
+      link: "",
+      tags: [],
+      image_url: "",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-05"]),
+    data: {
+      title: "Praesent tincidunt enim et interdum facilisis",
+      description:
+        "Quisque lobortis leo eget sodales bibendum. Duis vitae turpis tempor, convallis quam at, placerat mauris.",
+      link: "",
+      tags: [],
+      image_url: "",
+      update_date: new Date(),
     },
   },
 ];
 
-async function getData() {
-  let query = datastore
-    .createQuery("nested")
-    .hasAncestor(datastore.key(["GoLists", "demo"]));
-  // .filter("date", "<", new Date("29 March 2000"));
+async function getData(kind, parent_key) {
+  let query = datastore.createQuery(kind).hasAncestor(parent_key);
   try {
     const [tasks] = await datastore.runQuery(query);
     console.log("Tasks:");
@@ -67,7 +130,6 @@ async function getData() {
     console.error(err);
   }
 }
-
 
 datastore.save(SEED_DATA, function (err, apiResponse) {
   if (err && err.code === /* ALREADY_EXISTS */ 6) {
@@ -78,5 +140,24 @@ datastore.save(SEED_DATA, function (err, apiResponse) {
     console.log(SEED_DATA);
     console.log(apiResponse);
   }
-  getData();
+  // getData("Urls", datastore.key(["GoLists", "tugan"]));
 });
+
+async function purgeAllDate(kind) {
+  let query = datastore.createQuery(kind);
+  try {
+    const [tasks] = await datastore.runQuery(query);
+    const keys = tasks.map((task) => task[datastore.KEY]);
+    datastore.delete(keys, (err, apiResponse) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(apiResponse);
+      }
+    });
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// purgeAllDate("GoListItems");
