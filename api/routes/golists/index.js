@@ -35,7 +35,7 @@ router
     function validateBody(req, res, next) {
       if (!req.body.title || req.body.title.length <= 0) {
         next(createError(400, "Missing title in request body"));
-      } else if (!req.body.owner || req.body.owner.length <= 0) {
+      } else if (!req.body.created_by || req.body.created_by.length <= 0) {
         next(createError(400, "Missing owner in request body"));
       } else {
         next();

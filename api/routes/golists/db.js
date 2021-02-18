@@ -35,11 +35,11 @@ function handleSaveList(req, res, next) {
     {
       key: datastore.key(["GoLists", name]),
       data: {
-        name: name,
+        listName: name,
+        created_by: req.body.created_by,
         title: req.body.title,
-        last_modified_date: new Date(),
-        owner: req.body.owner,
-        hits: req.body.hits || 0,
+        description: req.body.description,
+        update_date: new Date(),
       },
     },
     function (err) {
@@ -78,11 +78,11 @@ function handleUpdateList(req, res, next) {
       transaction.update({
         key: key,
         data: {
-          name: name,
+          listName: name,
           title: req.body.title || entity.title,
-          last_modified_date: new Date() || entity.last_modified_date,
-          owner: req.body.owner || entity.owner,
-          hits: req.body.hits || entity.hits,
+          update_date: new Date() || entity.update_date,
+          created_by: req.body.created_by || entity.created_by,
+          description: req.body.description || entity.description,
         },
       });
       // Commit transaction
