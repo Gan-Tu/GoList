@@ -54,7 +54,7 @@ const List = (props) => {
             description={item.description}
             image_url={item.image_url}
             link={item.link}
-            tags={[...item.tags, `goli.st/${props.listName}`].slice(0, 2)}
+            tags={[...item.tags, `goli.st/${props.listName}`].slice(0, 1)}
           />
         ))}
       </section>
