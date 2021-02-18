@@ -22,8 +22,9 @@ const List = (props) => {
       <GoListCard
         date={data.last_modified_date}
         title={data.title}
-        author={data.owner}
-        tags={[`hits: ${data.hits || 0}`, `${data.owner || ""}`]}
+        author={data.created_by}
+        description={data.description}
+        tags={[`hits: ${data.hits || 0}`]}
       />
     );
   }
@@ -36,7 +37,6 @@ const List = (props) => {
       </Head>
       <p>{content}</p>
       <section className="card-list">
-        {card}
         {card}
       </section>
     </Container>
