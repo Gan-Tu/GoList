@@ -36,7 +36,7 @@ router
       if (!req.body.title || req.body.title.length <= 0) {
         next(createError(400, "Missing title in request body"));
       } else if (!req.body.created_by || req.body.created_by.length <= 0) {
-        next(createError(400, "Missing owner in request body"));
+        next(createError(400, "Missing created_by in request body"));
       } else {
         next();
       }
