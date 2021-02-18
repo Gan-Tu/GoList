@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "rm -rf ./build && NODE_ENV=production next build",
+    "prestart": "npm run build",
     "start": "next start -p 8080",
     "bump-version": "npm version minor -m 'bump version to %s for deployment'",
     "deploy": "npm run build && gcloud app deploy"
