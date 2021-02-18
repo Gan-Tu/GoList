@@ -13,7 +13,6 @@ export default function Home() {
         <p>Welcome to GoList</p>
         <p>
           Visit our admin app at{" "}
-          <a href="https://app.goli.st">https://app.goli.st</a>
         </p>
       </main>
 
@@ -21,6 +20,7 @@ export default function Home() {
         main {
           padding: 50px;
           font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+          color: black;
         }
 
         a {

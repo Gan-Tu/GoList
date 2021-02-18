@@ -2,30 +2,40 @@ import React from "react";
 import Head from "next/head";
 import { Container } from "react-bootstrap";
 import GoListCard from "./GoListCard";
-import { useGoList } from "../actions/golists";
+import { useGoListItems } from "../actions/golists";
 
 const List = (props) => {
-  const { data, isLoading, error } = useGoList(props.listName || "demo");
-  let content = "";
-  let card = null;
-  let header = "GoList";
+  const { data, isLoading, error } = useGoListItems(props.listName || "demo");
+  let header = `GoList - ${props.listName}`;
   if (error) {
-    content = `Error...${error.message}`;
+    return (
+      <Container fluid={true}>
+        <Head>
+          <title>{header}</title>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
+        <p>Error...{error.message}</p>
+      </Container>
+    );
   } else if (isLoading) {
-    content = "Loading...";
-  } else {
-    if (data.name) {
-      header = `${header} | ${data.name}`;
-    }
-    content = `data: ${JSON.stringify(data)}`;
-    card = (
-      <GoListCard
-        date={data.last_modified_date}
-        title={data.title}
-        author={data.created_by}
-        description={data.description}
-        tags={[`hits: ${data.hits || 0}`]}
-      />
+    return (
+      <Container fluid={true}>
+        <Head>
+          <title>{header}</title>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
+        <p>Loading...</p>
+      </Container>
+    );
+  } else if (data?.entities.length === 0) {
+    return (
+      <Container fluid={true}>
+        <Head>
+          <title>{header}</title>
+          <link rel="icon" href="/favicon.png" />
+        </Head>
+        <h1>No items in this GoList, or the list doesn't exist.</h1>
+      </Container>
     );
   }
 
@@ -35,9 +45,18 @@ const List = (props) => {
         <title>{header}</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
-      <p>{content}</p>
       <section className="card-list">
-        {card}
+        {data.entities.map((item, idx) => (
+          <GoListCard key={`GoListCard-${idx}`}
+            date={item.last_modified_date}
+            title={item.title}
+            author={item.created_by}
+            description={item.description}
+            image_url={item.image_url}
+            link={item.link}
+            tags={[...item.tags, `goli.st/${props.listName}`].slice(0, 2)}
+          />
+        ))}
       </section>
     </Container>
   );

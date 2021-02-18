@@ -2455,79 +2455,6 @@ video {
   }
 }
 
-@keyframes bounce {
-  0%,
-  to {
-    transform: translateY(-25%);
-    -webkit-animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
-  }
-
-  50% {
-    transform: none;
-    -webkit-animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
-  }
-}
-
-@font-face {
-  font-family: maax-rounded;
-  src: url(/static/global/fonts/maax-rounded/MaaxRounded-Regular.eot);
-  src: url(/static/global/fonts/maax-rounded/MaaxRounded-Regular.eot?#iefix)
-      format("embedded-opentype"),
-    url(/static/global/fonts/maax-rounded/MaaxRounded-Regular.woff2)
-      format("woff2"),
-    url(/static/global/fonts/maax-rounded/MaaxRounded-Regular.woff)
-      format("woff"),
-    url(/static/global/fonts/maax-rounded/MaaxRounded-Regular.ttf)
-      format("truetype");
-  font-weight: 400;
-  font-style: 400;
-}
-
-@font-face {
-  font-family: Plex;
-  font-weight: 400;
-  src: url(/static/global/fonts/inter/Inter-Regular.woff2) format("woff2"),
-    url(/static/global/fonts/inter/Inter-Regular.woff) format("woff"),
-    url(/static/global/fonts/inter/Inter-Regular.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Plex;
-  font-weight: 500;
-  src: url(/static/global/fonts/inter/Inter-Medium.woff2) format("woff2"),
-    url(/static/global/fonts/inter/Inter-Medium.woff) format("woff"),
-    url(/static/global/fonts/inter/Inter-Medium.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Plex;
-  font-weight: 700;
-  src: url(/static/global/fonts/inter/Inter-Medium.woff2) format("woff2"),
-    url(/static/global/fonts/inter/Inter-Medium.woff) format("woff"),
-    url(/static/global/fonts/inter/Inter-Medium.ttf) format("truetype");
-}
-
-@font-face {
-  font-family: Plex;
-  font-style: italic;
-  src: url(/static/global/fonts/inter/Inter-Italic.woff2) format("woff2"),
-    url(/static/global/fonts/inter/Inter-Italic.woff) format("woff");
-}
-
-@font-face {
-  font-family: Plex Mono;
-  src: url(/static/global/fonts/plex-mono/IBMPlexMono-Regular.eot?#iefix);
-  src: url(/static/global/fonts/plex-mono/IBMPlexMono-Regular.eot?#iefix)
-      format("eot"),
-    url(https://fonts.gstatic.com/s/ibmplexmono/v4/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2)
-      format("woff2"),
-    url(/static/global/fonts/plex-mono/IBMPlexMono-Regular.woff) format("woff"),
-    url(/static/global/fonts/plex-mono/IBMPlexMono-Regular.ttf)
-      format("truetype");
-}
-
 body {
   color: #586371;
   font-size: 16px;
@@ -3888,7 +3815,8 @@ button {
 }
 
 .card-author {
-  margin: 3rem 0 0;
+  /* margin: 3rem 0 0; */
+  /* margin:auto; */
   display: grid;
   grid-template-columns: 75px 1fr;
   align-items: center;
@@ -3906,7 +3834,7 @@ button {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  filter: grayscale(100%);
+  /* filter: grayscale(100%); */
   display: block;
   overflow: hidden;
   margin: 16px 10px;
@@ -3937,7 +3865,7 @@ button {
 }
 
 .tags {
-  margin: 1rem 0 2rem;
+  /* margin: 1rem 0 2rem; */
   padding: 0.5rem 0 1rem;
   line-height: 2;
   margin-bottom: 0;

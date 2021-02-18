@@ -27,6 +27,7 @@ const SEED_DATA = [
     data: {
       title: "GitHub",
       description: "A repo of my software developments",
+      created_by: "Gan",
       link: "https://github.com/Michael-Tu",
       tags: ["Coding", "Social Media"],
       image_url:
@@ -39,6 +40,7 @@ const SEED_DATA = [
     data: {
       title: "LinkedIn",
       description: "My Professional Journey",
+      created_by: "Gan",
       link: "https://www.linkedin.com/in/gantu/",
       tags: ["Career", "Social Media"],
       image_url:
@@ -51,6 +53,7 @@ const SEED_DATA = [
     data: {
       title: "YouTube",
       description: "Don't forget to subscribe!",
+      created_by: "Gan",
       link: "https://www.youtube.com/channel/UC6iqsCyBrY79kv84B0HWojw",
       tags: [],
       image_url:
@@ -64,6 +67,7 @@ const SEED_DATA = [
       title: "Lorem ipsum dolor sit amet",
       description:
         "Consectetur adipiscing elit. Etiam quis dolor et ex feugiat scelerisque convallis et dolor.",
+      created_by: "Gan",
       link: "",
       tags: [],
       image_url: "",
@@ -76,6 +80,7 @@ const SEED_DATA = [
       title: "Etiam congue est a bibendum ultrices.",
       description:
         "Nulla consequat libero non velit accumsan interdum. Curabitur malesuada ante suscipit cursus posuere.",
+      created_by: "Gan",
       link: "",
       tags: [],
       image_url: "",
@@ -88,6 +93,7 @@ const SEED_DATA = [
       title: "In quis lectus ullamcorper",
       description:
         "Vivamus a nisl cursus, luctus dolor vitae, sagittis nunc. Quisque et odio ut mauris tristique auctor.",
+      created_by: "Gan",
       link: "",
       tags: [],
       image_url: "",
@@ -100,6 +106,7 @@ const SEED_DATA = [
       title: "Aliquam non leo euismod",
       description:
         "Praesent feugiat nulla ut rhoncus tempus. Sed scelerisque lacus ac pretium vestibulum.",
+      created_by: "Gan",
       link: "",
       tags: [],
       image_url: "",
@@ -112,6 +119,7 @@ const SEED_DATA = [
       title: "Praesent tincidunt enim et interdum facilisis",
       description:
         "Quisque lobortis leo eget sodales bibendum. Duis vitae turpis tempor, convallis quam at, placerat mauris.",
+      created_by: "Gan",
       link: "",
       tags: [],
       image_url: "",

@@ -16,3 +16,16 @@ export function useGoList(name) {
     isLoading: !error && !data,
   };
 }
+
+export function useGoListItems(name) {
+  const { data, error } = useSWR(
+    `${GOLIST_API_ROOT}/golists/${name}/items`,
+    fetcher,
+    options
+  );
+  return {
+    data,
+    error,
+    isLoading: !error && !data,
+  };
+}
