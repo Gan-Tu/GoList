@@ -64,9 +64,9 @@ const SEED_DATA = [
   {
     key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-01"]),
     data: {
-      title: "Lorem ipsum dolor sit amet",
+      title: "Praesent tincidunt enim et interdum facilisis",
       description:
-        "Consectetur adipiscing elit. Etiam quis dolor et ex feugiat scelerisque convallis et dolor.",
+        "Quisque lobortis leo eget sodales bibendum. Duis vitae turpis tempor, convallis quam at, placerat mauris.",
       created_by: "Gan",
       link: "",
       tags: [],
@@ -80,10 +80,11 @@ const SEED_DATA = [
       title: "Etiam congue est a bibendum ultrices.",
       description:
         "Nulla consequat libero non velit accumsan interdum. Curabitur malesuada ante suscipit cursus posuere.",
-      created_by: "Gan",
-      link: "",
-      tags: [],
-      image_url: "",
+      created_by: "Bot",
+      link: "https://www.lipsum.com",
+      tags: ["Coding"],
+      image_url:
+        "https://media-exp1.licdn.com/dms/image/C4D0BAQFdm87slb1cgQ/company-logo_200_200/0/1531055417022?e=2159024400&v=beta&t=2IDEiHkI_DZ2jCK5XKjD2frSnmpoFgV1qYWT65y0ktI",
       update_date: new Date(),
     },
   },
@@ -116,13 +117,13 @@ const SEED_DATA = [
   {
     key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-05"]),
     data: {
-      title: "Praesent tincidunt enim et interdum facilisis",
-      description:
-        "Quisque lobortis leo eget sodales bibendum. Duis vitae turpis tempor, convallis quam at, placerat mauris.",
-      created_by: "Gan",
-      link: "",
-      tags: [],
-      image_url: "",
+      title: "Google",
+      description: "The greatest search engine of all time",
+      created_by: "Bot",
+      link: "https://www.google.com",
+      tags: ["Productivity"],
+      image_url:
+        "https://www.dtl.coventry.domains/wp-content/uploads/2020/07/Google-Logo.png",
       update_date: new Date(),
     },
   },
