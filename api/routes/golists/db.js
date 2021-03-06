@@ -25,7 +25,7 @@ function handleSaveList(req, res, next) {
     /*data=*/
     {
       listName: req.params.name,
-      created_by: req.body.created_by,
+      owner_uid: req.body.owner_uid,
       title: req.body.title,
       description: req.body.description,
       update_date: new Date(),
@@ -49,7 +49,7 @@ function handleUpdateList(req, res, next) {
         listName: req.params.name,
         title: req.body.title || oldEntity.title,
         update_date: new Date() || oldEntity.update_date,
-        created_by: req.body.created_by || oldEntity.created_by,
+        owner_uid: req.body.owner_uid || oldEntity.owner_uid,
         description: req.body.description || oldEntity.description,
       };
     },

@@ -9,6 +9,7 @@ var rateLimit = require("express-rate-limit");
 
 var indexRouter = require("./routes/index");
 var goListsRouter = require("./routes/golists");
+var usersRouter = require("./routes/users");
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use(
 );
 
 app.use("/golists", goListsRouter);
+app.use("/users", usersRouter);
 app.use("/*", indexRouter); // catch all
 
 // catch 404 and forward to error handler
