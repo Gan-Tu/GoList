@@ -6,7 +6,7 @@ const SEED_DATA = [
     key: datastore.key(["GoLists", "tugan"]),
     data: {
       listName: "tugan",
-      created_by: "Gan",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       title: "Learn about Gan",
       description: "A curated social media list to learn more about Gan",
       update_date: new Date(),
@@ -16,7 +16,7 @@ const SEED_DATA = [
     key: datastore.key(["GoLists", "demo"]),
     data: {
       listName: "demo",
-      created_by: "GoList Team",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       title: "Demo List",
       description: "A curated demo by GoList team",
       update_date: new Date(),
@@ -27,7 +27,7 @@ const SEED_DATA = [
     data: {
       title: "GitHub",
       description: "A repo of my software developments",
-      created_by: "Gan",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       link: "https://github.com/Michael-Tu",
       tags: ["Coding", "Social Media"],
       image_url:
@@ -40,7 +40,7 @@ const SEED_DATA = [
     data: {
       title: "LinkedIn",
       description: "My Professional Journey",
-      created_by: "Gan",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       link: "https://www.linkedin.com/in/gantu/",
       tags: ["Career", "Social Media"],
       image_url:
@@ -53,7 +53,7 @@ const SEED_DATA = [
     data: {
       title: "YouTube",
       description: "Don't forget to subscribe!",
-      created_by: "Gan",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       link: "https://www.youtube.com/channel/UC6iqsCyBrY79kv84B0HWojw",
       tags: [],
       image_url:
@@ -67,7 +67,7 @@ const SEED_DATA = [
       title: "Praesent tincidunt enim et interdum facilisis",
       description:
         "Quisque lobortis leo eget sodales bibendum. Duis vitae turpis tempor, convallis quam at, placerat mauris.",
-      created_by: "Gan",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       link: "",
       tags: [],
       image_url: "",
@@ -80,7 +80,7 @@ const SEED_DATA = [
       title: "Etiam congue est a bibendum ultrices.",
       description:
         "Nulla consequat libero non velit accumsan interdum. Curabitur malesuada ante suscipit cursus posuere.",
-      created_by: "Bot",
+      owner_uid: "Bot",
       link: "https://www.lipsum.com",
       tags: ["Coding"],
       image_url:
@@ -94,7 +94,7 @@ const SEED_DATA = [
       title: "In quis lectus ullamcorper",
       description:
         "Vivamus a nisl cursus, luctus dolor vitae, sagittis nunc. Quisque et odio ut mauris tristique auctor.",
-      created_by: "Gan",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       link: "",
       tags: [],
       image_url: "",
@@ -107,7 +107,7 @@ const SEED_DATA = [
       title: "Aliquam non leo euismod",
       description:
         "Praesent feugiat nulla ut rhoncus tempus. Sed scelerisque lacus ac pretium vestibulum.",
-      created_by: "Gan",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       link: "",
       tags: [],
       image_url: "",
@@ -119,7 +119,7 @@ const SEED_DATA = [
     data: {
       title: "Google",
       description: "The greatest search engine of all time",
-      created_by: "Bot",
+      owner_uid: "Bot",
       link: "https://www.google.com",
       tags: ["Productivity"],
       image_url:
@@ -170,3 +170,4 @@ async function purgeAllDate(kind) {
 }
 
 // purgeAllDate("GoListItems");
+// purgeAllDate("GoLists");
