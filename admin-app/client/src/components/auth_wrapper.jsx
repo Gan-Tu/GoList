@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 
@@ -8,20 +8,20 @@ const AuthGatedWrapper = ({ children }) => {
   );
 
   // Give some buffer time for Firebase Auth to resolve authentication object
-  var redirectTimer = null;
   const [redirectToLogin, setRedirectToLogin] = useState(false);
+  var redirectTimer = useRef(null);
   useEffect(() => {
     if (!authenticated) {
       // allow max 1 second for firebase authentication time
-      redirectTimer = setTimeout(() => {
+      redirectTimer.current = setTimeout(() => {
         setRedirectToLogin(true);
       }, 1000);
-    } else if (authenticated && redirectTimer) {
-      clearTimeout(redirectTimer);
+    } else if (authenticated && redirectTimer.current) {
+      clearTimeout(redirectTimer.current);
     }
     // always cleanup timer when component unmounts
     return () => {
-      clearTimeout(redirectTimer);
+      clearTimeout(redirectTimer.current);
     };
   }, [authenticated]);
 
