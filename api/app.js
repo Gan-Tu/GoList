@@ -35,17 +35,26 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Allow CORS from our own domain
-app.use(
-  cors({
-    origin: [
-      /goli\.st$/,
-      /golist\.wl\.r\.appspot\.com$/,
-      /localhost:\d+$/
-    ],
-    // some legacy browsers (IE11, various SmartTVs) choke on 204
-    optionsSuccessStatus: 200,
-  })
-);
+if (process.env.NODE_ENV === "production") {
+  const CORS_WHITELIST = [
+    "https://goli.st",
+    "https://www.goli.st",
+    "https://app.goli.st",
+    "https://api.goli.st",
+    "https://golist.wl.r.appspot.com",
+    "https://admin-app-dot-golist.wl.r.appspot.com",
+    "https://api-golist.wl.r.appspot.com",
+  ];
+  app.use(
+    cors({
+      origin: CORS_WHITELIST,
+      // some legacy browsers (IE11, various SmartTVs) choke on 204
+      optionsSuccessStatus: 200,
+    })
+  );
+} else {
+  app.use(cors()); // allow all origins
+}
 
 app.use("/golists", goListsRouter);
 app.use("/users", usersRouter);
