@@ -1,6 +1,6 @@
 {
   "name": "golist-admin-app-service",
-  "version": "2.3.0",
+  "version": "2.4.0",
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
     "server": "nodemon ./bin/www",
