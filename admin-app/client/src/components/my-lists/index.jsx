@@ -6,7 +6,7 @@ import { FETCH_LISTS, SET_LISTS } from "../../redux/actionTypes";
 import ListCard from "./list-card";
 import { firebase_app } from "../../data/config";
 
-const Sample = (props) => {
+const MyLists = (props) => {
   const dispatch = useDispatch();
   const lists = useSelector((content) => content.ListReducer.lists);
 
@@ -48,4 +48,4 @@ const Sample = (props) => {
   );
 };
 
-export default Sample;
+export default MyLists;

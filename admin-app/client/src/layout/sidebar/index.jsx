@@ -164,12 +164,12 @@ const Sidebar = (props) => {
 
   return (
     <Fragment>
-      <div className="sidebar-wrapper">
+      <div className="sidebar-wrapper close_icon">
         <div className="logo-wrapper">
           <Link to={`${process.env.PUBLIC_URL}/home`}>
             <img
               className="img-fluid for-light"
-              src={require("../../assets/images/logo/logo.png")}
+              src={require("../../assets/images/logo/logo.jpg")}
               alt=""
             />
             <img
@@ -192,7 +192,7 @@ const Sidebar = (props) => {
           <Link to={`${process.env.PUBLIC_URL}/home`}>
             <img
               className="img-fluid"
-              src={require("../../assets/images/logo/logo-icon.png")}
+              src={require("../../assets/images/logo/logo-icon.ico")}
               alt=""
             />
           </Link>

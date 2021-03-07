@@ -1,4 +1,4 @@
-import { Home, List, Coffee } from "react-feather";
+import { Home } from "react-feather";
 export const MENUITEMS = [
   {
     menutitle: null,
@@ -12,22 +12,22 @@ export const MENUITEMS = [
         path: `${process.env.PUBLIC_URL}/home`,
         active: true,
       },
-      {
-        title: "My Lists",
-        icon: List,
-        type: "link",
-        path: `${process.env.PUBLIC_URL}/my-lists`,
-        active: false,
-        // badge: "badge badge-success",
-        // badgetxt: "0",
-      },
-      {
-        title: "Demo Page",
-        icon: Coffee,
-        type: "link",
-        path: `${process.env.PUBLIC_URL}/demo`,
-        active: false,
-      },
+      // {
+      //   title: "My Lists",
+      //   icon: List,
+      //   type: "link",
+      //   path: `${process.env.PUBLIC_URL}/my-lists`,
+      //   active: false,
+      //   // badge: "badge badge-success",
+      //   // badgetxt: "0",
+      // },
+      // {
+      //   title: "Demo Page",
+      //   icon: Coffee,
+      //   type: "link",
+      //   path: `${process.env.PUBLIC_URL}/demo`,
+      //   active: false,
+      // },
     ],
   },
 ];
