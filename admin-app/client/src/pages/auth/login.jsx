@@ -18,6 +18,8 @@ import {
   githubProvider,
 } from "../../data/config";
 
+import { useSelector } from "react-redux";
+
 import { Twitter, GitHub } from "react-feather";
 
 import { useHistory } from "react-router-dom";
@@ -25,22 +27,22 @@ import { toast } from "react-toastify";
 
 const LogIn = (props) => {
   const history = useHistory();
+  const [loading, setLoading] = useState(false);
   const [togglePassword, setTogglePassword] = useState(false);
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-
   const [email, setEmail] = useState("");
+
+  const authenticated = useSelector(
+    (store) => store.SessionReducer.authenticated
+  );
 
   useEffect(() => {
     // always disable moonlight/dark-mode in login page
     document.body.className = "light";
-    const unsubscribe = firebase_app.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        history.push(`${process.env.PUBLIC_URL}/home`);
-      }
-    });
-    return unsubscribe;
-  }, [history]);
+    if (authenticated) {
+      history.push(`${process.env.PUBLIC_URL}/home`);
+    }
+  }, [history, authenticated]);
 
   const hideShowPassword = (tPassword) => {
     setTogglePassword(!tPassword);
