@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
 import { Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Loader from "../layout/loader";
 
 const AuthGatedWrapper = ({ children }) => {
   const authenticated = useSelector(
@@ -33,6 +34,7 @@ const AuthGatedWrapper = ({ children }) => {
   } else {
     return (
       <Fragment>
+        <Loader timeout="1000" />
         <p>Checking session authentication...</p>
         <p>This page will redirect after at most 1 second...</p>
       </Fragment>
