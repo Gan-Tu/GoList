@@ -4,7 +4,7 @@ import { Card, CardBody, Media } from "reactstrap";
 const ListCard = (props) => {
   // TODO(tugan): fix formatting issues with different title length, or description lengths
   return (
-    <Card className='hover:shadow-xl'>
+    <Card className="hover:shadow-xl">
       <CardBody>
         <Media>
           <img
@@ -17,7 +17,9 @@ const ListCard = (props) => {
               <a href="#javascript">{props.title}</a>
             </h6>
             <p>
-              {props.subtitle}
+              <a href={`https://goli.st/${props.listName}`}>
+                goli.st/{props.listName}
+              </a>
               {props.badge ? (
                 <span className={`badge badge-${props.badge} pull-right`}>
                   {props.badgetxt}
