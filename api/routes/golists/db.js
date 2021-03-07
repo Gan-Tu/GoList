@@ -26,6 +26,7 @@ function handleSaveList(req, res, next) {
     {
       listName: req.params.name,
       owner_uid: req.body.owner_uid,
+      owner_display_name: req.body.owner_display_name,
       title: req.body.title,
       description: req.body.description,
       update_date: new Date(),
@@ -50,6 +51,8 @@ function handleUpdateList(req, res, next) {
         title: req.body.title || oldEntity.title,
         update_date: new Date() || oldEntity.update_date,
         owner_uid: req.body.owner_uid, // owner uid should be immutable for now
+        owner_display_name:
+          req.body.owner_display_name || oldEntity.owner_display_name,
         description: req.body.description || oldEntity.description,
       };
     },
