@@ -6,6 +6,7 @@ var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var rateLimit = require("express-rate-limit");
+var helmet = require("helmet");
 
 var indexRouter = require("./routes/index");
 var goListsRouter = require("./routes/golists");
@@ -16,6 +17,9 @@ var app = express();
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
+
+// Set common HTTP headers for better security
+app.use(helmet());
 
 // rate limit the API server to 50 RPS
 app.use(
