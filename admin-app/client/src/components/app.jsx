@@ -1,39 +1,78 @@
 import React, { useEffect } from "react";
-import Header from "../layout/header";
-import Sidebar from "../layout/sidebar";
-import Footer from "../layout/footer";
-
 import { useDispatch } from "react-redux";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+import CoreLayoutWrapper from "../layout/wrapper/core";
+import AuthGatedWrapper from "./auth_wrapper";
+import { routes } from "../route";
+
+import LogIn from "../pages/auth/login";
+import Show from "../pages/show";
+
 import { LOG_IN } from "../redux/actionTypes";
 import { firebase_app } from "../data/config";
 
-const App = ({ children }) => {
+const App = () => {
   console.warn = () => {};
+
+  // Subscribe to and update the global authentication state, at app root.
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    // reset the body layout, so it won't be affected by box-layout of SHOW page
-    document.body.className = `${
-      localStorage.getItem("layout_version") || "light"
-    }`;
-  }, []);
-
   useEffect(() => {
     return firebase_app.auth().onAuthStateChanged((user) => {
-      console.log(user);
       dispatch({ type: LOG_IN, user });
     });
   }, [dispatch]);
 
   return (
-    <div className="page-wrapper compact-wrapper" id="pageWrapper">
-      <Header />
-      <div className="page-body-wrapper sidebar-icon">
-        <Sidebar />
-        <div className="page-body">{children}</div>
-        <Footer />
-      </div>
-    </div>
+    <BrowserRouter basename={`/`}>
+      <Switch>
+        {/* Redirect root page to /home */}
+        <Route
+          exact
+          path={`${process.env.PUBLIC_URL}/`}
+          render={() => {
+            return <Redirect to={`${process.env.PUBLIC_URL}/home`} />;
+          }}
+        />
+
+        {/* Routing to Special Pages */}
+        <Route
+          path={`${process.env.PUBLIC_URL}/login`}
+          component={LogIn}
+        ></Route>
+        <Route path={`${process.env.PUBLIC_URL}/demo`} component={Show}></Route>
+
+        {/* Routing to Pages requiring users to be logged in */}
+        <AuthGatedWrapper>
+          {/* Routing to Main Admin App */}
+          <CoreLayoutWrapper>
+            <TransitionGroup>
+              {routes.map(({ path, Component }) => (
+                <Route
+                  key={path}
+                  exact
+                  path={`${process.env.PUBLIC_URL}${path}`}
+                >
+                  {({ match }) => (
+                    <CSSTransition
+                      in={match != null}
+                      timeout={100}
+                      classNames="fade"
+                      unmountOnExit
+                    >
+                      <div>
+                        <Component />
+                      </div>
+                    </CSSTransition>
+                  )}
+                </Route>
+              ))}
+            </TransitionGroup>
+          </CoreLayoutWrapper>
+        </AuthGatedWrapper>
+      </Switch>
+    </BrowserRouter>
   );
 };
 
