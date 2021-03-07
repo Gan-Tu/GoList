@@ -14,7 +14,7 @@ const Sample = (props) => {
       localStorage.getItem("layout_version") || "light"
     } box-layout`;
     dispatch({ type: FETCH_ITEMS });
-  }, [dispatch, items]);
+  }, [dispatch]);
 
   return (
     <div className="page-wrapper horizontal-wrapper" id="pageWrapper">
