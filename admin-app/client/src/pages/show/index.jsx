@@ -4,7 +4,6 @@ import UrlCard from "./url-card";
 import { useSelector, useDispatch } from "react-redux";
 import { FETCH_ITEMS } from "../../redux/actionTypes";
 
-
 const Sample = (props) => {
   const dispatch = useDispatch();
   const items = useSelector((content) => content.ItemsReducer.items);
@@ -14,6 +13,11 @@ const Sample = (props) => {
       localStorage.getItem("layout_version") || "light"
     } box-layout`;
     dispatch({ type: FETCH_ITEMS });
+    return () => {
+      // undo the box layout when component unmounts
+      document.body.className =
+        localStorage.getItem("layout_version") || "light";
+    };
   }, [dispatch]);
 
   return (
