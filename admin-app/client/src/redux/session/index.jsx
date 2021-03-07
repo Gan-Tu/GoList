@@ -3,16 +3,19 @@ import { LOG_IN, LOG_OUT, SET_AUTHENTICATED_USER } from "../actionTypes";
 import { firebase_app } from "../../data/config";
 
 function* loginAsync({ user }) {
-  console.log("Logging in the user...");
-  yield put({ type: SET_AUTHENTICATED_USER, user, authenticated: true });
-  console.log("User is now logged in.");
+  yield put({ type: SET_AUTHENTICATED_USER, user, authenticated: !!user });
+  if (!!user) {
+    console.info("[auth state] User is logged in.");
+  } else {
+    console.info("[auth state] User is logged out.");
+  }
 }
 
 function* logoutAsync() {
-  console.log("Logging out the user...");
+  console.info("Logging out the user...");
   yield firebase_app.auth().signOut();
   yield put({ type: SET_AUTHENTICATED_USER, user: null, authenticated: false });
-  console.log("User is now logged out.");
+  console.info("User is now logged out.");
 }
 
 export function* watchSessionApp() {
