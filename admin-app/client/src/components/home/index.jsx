@@ -24,7 +24,6 @@ const HomePage = (props) => {
               <CardBody>
                 <p>
                   Currently, you have <b>{listCount || 0}</b> lists configured.
-                  Start by visiting "My Lists" tab on the left.
                 </p>
               </CardBody>
             </Card>
