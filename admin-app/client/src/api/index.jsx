@@ -21,13 +21,13 @@ const _EXAMPLE_LIST_METADATA = [
   },
 ];
 
-export const fetchLists = (user) => {
-  if (!user.uid) {
+export const fetchLists = (uid) => {
+  if (!uid) {
     return { lists: _EXAMPLE_LIST_METADATA };
   }
 
-  console.info(`fetching golist metadata for user ID: ${user.uid}`);
-  return fetch(`https://api.goli.st/users/${user.uid}/lists`)
+  console.info(`fetching golist metadata for user ID: ${uid}`);
+  return fetch(`https://api.goli.st/users/${uid}/lists`)
     .then((resp) => resp.json())
     .then((result) => {
       var lists = [];
