@@ -1,20 +1,21 @@
 import { put, takeLatest } from "redux-saga/effects";
-import { LOG_IN, LOG_OUT, SET_USER } from "../actionTypes";
+import { LOG_IN, LOG_OUT, SET_AUTHENTICATED_USER } from "../actionTypes";
 import { firebase_app } from "../../data/config";
 
-function* setUserAsync({ user }) {
-  yield put({ type: SET_USER, user });
-  yield put({ type: LOG_IN });
+function* loginAsync({ user }) {
+  console.log("Logging in the user...");
+  yield put({ type: SET_AUTHENTICATED_USER, user, authenticated: true });
+  console.log("User is now logged in.");
 }
 
-function* logOutAsync() {
+function* logoutAsync() {
   console.log("Logging out the user...");
   yield firebase_app.auth().signOut();
-  yield put({ type: LOG_OUT });
+  yield put({ type: SET_AUTHENTICATED_USER, user: null, authenticated: false });
   console.log("User is now logged out.");
 }
 
 export function* watchSessionApp() {
-  yield takeLatest(SET_USER, setUserAsync);
-  yield takeLatest(LOG_OUT, logOutAsync);
+  yield takeLatest(LOG_IN, loginAsync);
+  yield takeLatest(LOG_OUT, logoutAsync);
 }

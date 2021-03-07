@@ -8,4 +8,4 @@ export const SET_ITEMS = "SET_ITEMS";
 /* SESSION */
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";
-export const SET_USER = "SET_USER";
+export const SET_AUTHENTICATED_USER = "SET_AUTHENTICATED_USER";

@@ -8,19 +8,19 @@ import ListCard from "./list-card";
 const MyLists = (props) => {
   const dispatch = useDispatch();
   const lists = useSelector((store) => store.ListReducer.lists);
-  const is_authenticated = useSelector(
-    (store) => store.SessionReducer.is_authenticated
+  const authenticated = useSelector(
+    (store) => store.SessionReducer.authenticated
   );
-  const uid = useSelector((store) => store.SessionReducer.user.uid);
+  const uid = useSelector((store) => store.SessionReducer.user?.uid);
 
   useEffect(() => {
-    if (is_authenticated) {
+    if (authenticated && uid) {
       dispatch({ type: FETCH_LISTS, uid });
       console.info(`dispatched FETCH_LISTS for user UID: ${uid}`);
     } else {
       dispatch({ type: SET_LISTS, lists: [] });
     }
-  }, [dispatch, is_authenticated, uid]);
+  }, [dispatch, authenticated, uid]);
 
   return (
     <Fragment>

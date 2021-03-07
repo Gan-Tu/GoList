@@ -12,9 +12,9 @@ const ProfileWidget = (props) => {
   const dispatch = useDispatch();
 
   const displayName = useSelector(
-    (store) => store.SessionReducer.user.displayName
+    (store) => store.SessionReducer.user?.displayName
   );
-  const photoUrl = useSelector((store) => store.SessionReducer.user.photoUrl);
+  const photoURL = useSelector((store) => store.SessionReducer.user?.photoURL);
 
   const LogOutUser = () => {
     dispatch({ type: LOG_OUT });
@@ -24,7 +24,7 @@ const ProfileWidget = (props) => {
   return (
     <Fragment>
       <div className="media profile-media">
-        <img className="b-r-10" src={photoUrl || man} alt="avatar" />
+        <img className="b-r-10" src={photoURL || man} alt="avatar" />
         <div className="media-body">
           <span>{props.t(displayName || "Unknown")}</span>
           <p className="mb-0 font-roboto">
