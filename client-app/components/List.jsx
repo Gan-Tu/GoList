@@ -50,7 +50,7 @@ const List = (props) => {
           <GoListCard key={`GoListCard-${idx}`}
             date={item.last_modified_date}
             title={item.title}
-            author={item.created_by}
+            author={item.owner_display_name}
             description={item.description}
             image_url={item.image_url}
             link={item.link}
