@@ -14,7 +14,7 @@ const ListCard = (props) => {
           />
           <Media body>
             <h6 className="f-w-600">
-              <a href="#javascript">{props.title}</a>
+              <a href={`https://goli.st/${props.listName}`}>{props.title}</a>
             </h6>
             <p>
               <a href={`https://goli.st/${props.listName}`}>
