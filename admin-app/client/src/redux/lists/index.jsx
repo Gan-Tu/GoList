@@ -1,4 +1,4 @@
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import { fetchLists } from "../../api";
 import { FETCH_LISTS, SET_LISTS } from "../actionTypes";
 
@@ -8,5 +8,5 @@ function* fetchListsAsync({uid}) {
 }
 
 export function* watchListsApp() {
-  yield takeEvery(FETCH_LISTS, fetchListsAsync);
+  yield takeLatest(FETCH_LISTS, fetchListsAsync);
 }
