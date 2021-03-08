@@ -8,7 +8,7 @@ const Sidebar = (props) => {
   const [mainmenu, setMainMenu] = useState(MENUITEMS);
   const [margin, setMargin] = useState(0);
   const [width, setWidth] = useState(0);
-  const [sidebartoogle, setSidebartoogle] = useState(true);
+  const [sidebartoogle, setSidebartoogle] = useState(false);
 
   useEffect(() => {
     document.querySelector(".left-arrow").classList.add("d-none");
