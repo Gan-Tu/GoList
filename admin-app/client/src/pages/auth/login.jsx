@@ -90,7 +90,7 @@ const LogIn = (props) => {
                 <a className="logo" href="#javascript">
                   <img
                     className="img-fluid for-light"
-                    src={require("../../assets/images/logo/logo.jpg")}
+                    src={require("../../assets/images/logo/logo.png")}
                     alt=""
                   />
                   <img

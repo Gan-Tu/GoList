@@ -12,7 +12,7 @@ const List = (props) => {
       <Container fluid={true}>
         <Head>
           <title>{header}</title>
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <p>Error...{error.message}</p>
       </Container>
@@ -22,7 +22,7 @@ const List = (props) => {
       <Container fluid={true}>
         <Head>
           <title>{header}</title>
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <p>Loading...</p>
       </Container>
@@ -32,7 +32,7 @@ const List = (props) => {
       <Container fluid={true}>
         <Head>
           <title>{header}</title>
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="/favicon.ico" />
         </Head>
         <h1>No items in this GoList, or the list doesn't exist.</h1>
       </Container>
@@ -43,7 +43,7 @@ const List = (props) => {
     <Container fluid={true}>
       <Head>
         <title>{header}</title>
-        <link rel="icon" href="/favicon.png" />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <section className="card-list">
         {data.entities.map((item, idx) => (

@@ -169,7 +169,7 @@ const Sidebar = (props) => {
           <Link to={`${process.env.PUBLIC_URL}/home`}>
             <img
               className="img-fluid for-light"
-              src={require("../../assets/images/logo/logo.jpg")}
+              src={require("../../assets/images/logo/logo.png")}
               alt=""
             />
             <img
@@ -192,7 +192,7 @@ const Sidebar = (props) => {
           <Link to={`${process.env.PUBLIC_URL}/home`}>
             <img
               className="img-fluid"
-              src={require("../../assets/images/logo/logo-icon.ico")}
+              src={require("../../assets/images/logo/logo-icon.png")}
               alt=""
             />
           </Link>
