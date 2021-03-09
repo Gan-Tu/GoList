@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Button,
   Modal,
@@ -22,8 +22,10 @@ import {
   titleValidations,
   descriptionValidations,
 } from "./validations";
+import { FETCH_LISTS } from "../../redux/actionTypes";
 
 const CreateListModal = (props) => {
+  const dispatch = useDispatch();
   const uid = useSelector((store) => store.SessionReducer.user.uid);
   const displayName = useSelector(
     (store) => store.SessionReducer.user.displayName
@@ -50,6 +52,7 @@ const CreateListModal = (props) => {
       .then(({ err, ok }) => {
         if (ok) {
           toast.success("New GoList successfully created.");
+          dispatch({ type: FETCH_LISTS, uid }); // refresh the lists
           props.toggleCreateListForm();
         } else {
           console.error(err);
