@@ -17,6 +17,8 @@ import {
   twitterProvider,
   githubProvider,
 } from "../../data/config";
+import LOGO from "../../assets/images/logo/logo.png";
+import LOGO_DARK from "../../assets/images/logo/logo_dark.png";
 
 import { useSelector } from "react-redux";
 
@@ -90,12 +92,12 @@ const LogIn = (props) => {
                 <a className="logo" href="#javascript">
                   <img
                     className="img-fluid for-light"
-                    src={require("../../assets/images/logo/logo.png")}
+                    src={LOGO}
                     alt=""
                   />
                   <img
                     className="img-fluid for-dark"
-                    src={require("../../assets/images/logo/logo_dark.png")}
+                    src={LOGO_DARK}
                     alt=""
                   />
                 </a>
@@ -136,15 +138,6 @@ const LogIn = (props) => {
                     </div>
                   </FormGroup>
                   <div className="form-group mb-0">
-                    {/* <div className="checkbox ml-3">
-                      <Input id="checkbox1" type="checkbox" />
-                      <Label className="text-muted" for="checkbox1">
-                        {RememberPassword}
-                      </Label>
-                    </div>
-                    <a className="link" href="#javascript">
-                      {ForgotPassword}
-                    </a> */}
                     <Button
                       color="primary"
                       className="btn-block"

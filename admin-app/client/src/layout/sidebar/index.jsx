@@ -3,6 +3,9 @@ import { MENUITEMS } from "./menu";
 import { ArrowRight, ArrowLeft, Grid } from "react-feather";
 import { Link } from "react-router-dom";
 import { translate } from "react-switch-lang";
+import LOGO from "../../assets/images/logo/logo.png";
+import LOGO_DARK from "../../assets/images/logo/logo_dark.png";
+import LOGO_ICON from "../../assets/images/logo/logo-icon.png";
 
 const Sidebar = (props) => {
   const [mainmenu, setMainMenu] = useState(MENUITEMS);
@@ -167,16 +170,8 @@ const Sidebar = (props) => {
       <div className="sidebar-wrapper close_icon">
         <div className="logo-wrapper">
           <Link to={`${process.env.PUBLIC_URL}/home`}>
-            <img
-              className="img-fluid for-light"
-              src={require("../../assets/images/logo/logo.png")}
-              alt=""
-            />
-            <img
-              className="img-fluid for-dark"
-              src={require("../../assets/images/logo/logo_dark.png")}
-              alt=""
-            />
+            <img className="img-fluid for-light" src={LOGO} alt="" />
+            <img className="img-fluid for-dark" src={LOGO_DARK} alt="" />
           </Link>
           <div className="back-btn" onClick={() => responsiveSidebar()}>
             <i className="fa fa-angle-left"></i>
@@ -190,11 +185,7 @@ const Sidebar = (props) => {
         </div>
         <div className="logo-icon-wrapper">
           <Link to={`${process.env.PUBLIC_URL}/home`}>
-            <img
-              className="img-fluid"
-              src={require("../../assets/images/logo/logo-icon.png")}
-              alt=""
-            />
+            <img className="img-fluid" src={LOGO_ICON} alt="" />
           </Link>
         </div>
         <nav className="sidebar-main">

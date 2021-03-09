@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { FETCH_LISTS, SET_LISTS } from "../../redux/actionTypes";
 import ListCard from "./list-card";
 import CreateListModal from "./create-list-modal";
+import ICON from "../../assets/images/other-images/job-search-1.jpg";
 
 const MyLists = (props) => {
   const dispatch = useDispatch();
@@ -58,7 +59,7 @@ const MyLists = (props) => {
               list ? (
                 <Col sm="4" key={`ListCard-${idx}`}>
                   <ListCard
-                    icon_url={require("../../assets/images/other-images/job-search-1.jpg")}
+                    icon_url={ICON}
                     title={list.title}
                     listName={list.listName}
                     body={list.body}

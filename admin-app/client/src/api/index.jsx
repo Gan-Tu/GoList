@@ -1,5 +1,7 @@
 // Fake API actions to mock out front end
 
+import ICON from "../assets/images/other-images/sidebar-bg.jpg";
+
 const _EXAMPLE_LIST_METADATA = [
   {
     title: "UI/UX IT Frontend Developer",
@@ -44,7 +46,7 @@ export const fetchLists = (uid) => {
 
 const IMAGE_URL_CARD_PLACEHOLDER = {
   title: "Lorem ipsum dolor sit amet, consectetur.",
-  image: require("../assets/images/other-images/sidebar-bg.jpg"),
+  image: ICON,
   date: "9 April 2019",
   owner: "Admin",
   hits: 100,
