@@ -18,7 +18,7 @@ const Root = (props) => {
 
   return (
     <Fragment>
-      <ToastContainer autoClose={3000} pauseOnHover={false} />
+      <ToastContainer autoClose={2000} pauseOnHover={false} />
       {/* Having a loader delays showing UI when fetching for login details */}
       <Loader timeout="1000" />
       <Provider store={store}>
