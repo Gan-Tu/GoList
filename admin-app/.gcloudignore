@@ -15,3 +15,6 @@
 
 # Node.js dependencies:
 node_modules/
+
+# Do not upload client app. We reply on build behavior and upload build folder
+client/
