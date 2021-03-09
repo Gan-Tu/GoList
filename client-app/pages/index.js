@@ -30,3 +30,12 @@ export default function Home() {
     </div>
   );
 }
+
+export const getServerSideProps = async (context) => {
+  return {
+    redirect: {
+      destination: 'https://app.goli.st',
+      permanent: false,
+    },
+  }
+}
