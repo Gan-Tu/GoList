@@ -4,7 +4,7 @@ const initial_state = {
   items: [],
 };
 
-export default function (state = initial_state, action) {
+export default function reducer(state = initial_state, action) {
   switch (action.type) {
     case SET_ITEMS:
       return { items: action.items };

@@ -5,7 +5,7 @@ const initial_state = {
   user: null, // should be firebase user
 };
 
-export default function (state = initial_state, action) {
+export default function reducer(state = initial_state, action) {
   switch (action.type) {
     case SET_AUTHENTICATED_USER:
       return {
