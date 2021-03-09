@@ -1,9 +1,10 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import Breadcrumb from "../../layout/breadcrumb";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button, ButtonGroup } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { FETCH_LISTS, SET_LISTS } from "../../redux/actionTypes";
 import ListCard from "./list-card";
+import CreateListModal from "./create-list-modal";
 
 const MyLists = (props) => {
   const dispatch = useDispatch();
@@ -22,10 +23,31 @@ const MyLists = (props) => {
     }
   }, [dispatch, authenticated, uid]);
 
+  const [showCreateListForm, setShowCreateListForm] = useState(false);
+  const toggleCreateListForm = () => setShowCreateListForm(!showCreateListForm);
   return (
     <Fragment>
       <Breadcrumb title="My Lists" show_title />
       <Container fluid={true}>
+        {/* Modal to create new GoList */}
+        <Row style={{ marginBottom: "10px" }}>
+          <Col>
+            <ButtonGroup>
+              <Button
+                className="btn-pill btn-air-success"
+                color="success"
+                onClick={toggleCreateListForm}
+              >
+                Create New List
+              </Button>
+            </ButtonGroup>
+            <CreateListModal
+              showCreateListForm={showCreateListForm}
+              toggleCreateListForm={toggleCreateListForm}
+            />
+          </Col>
+        </Row>
+        {/* The GoLists owned by the user */}
         <Row>
           {!lists || lists.length === 0 ? (
             <Col>
