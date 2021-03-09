@@ -15,6 +15,7 @@
 
 # Node.js dependencies:
 node_modules/
+package-lock.json
 
 # Do not upload client app. We reply on build behavior and upload build folder
 client/
