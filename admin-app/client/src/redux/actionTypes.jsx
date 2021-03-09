@@ -1,6 +1,7 @@
 /* LISTS */
 export const FETCH_LISTS = "FETCH_LISTS";
 export const SET_LISTS = "SET_LISTS";
+export const CREATE_LIST = "CREATE_LIST";
 /* LIST ITEMS */
 export const FETCH_ITEMS = "FETCH_ITEMS";
 export const SET_ITEMS = "SET_ITEMS";

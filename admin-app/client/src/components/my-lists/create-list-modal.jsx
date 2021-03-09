@@ -15,19 +15,18 @@ import {
   InputGroupAddon,
   InputGroupText,
 } from "reactstrap";
-import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import {
   nameValidations,
   titleValidations,
   descriptionValidations,
 } from "./validations";
-import { FETCH_LISTS } from "../../redux/actionTypes";
+import { CREATE_LIST } from "../../redux/actionTypes";
 
 const CreateListModal = (props) => {
   const dispatch = useDispatch();
   const uid = useSelector((store) => store.SessionReducer.user.uid);
-  const displayName = useSelector(
+  const userDisplayName = useSelector(
     (store) => store.SessionReducer.user.displayName
   );
 
@@ -35,34 +34,16 @@ const CreateListModal = (props) => {
   const [golistName, setGoListName] = useState("");
   const [golistTitle, setGoListTitle] = useState("");
   const [golistDescription, setGoListDescription] = useState("");
-  const onSubmit = (data) => {
-    var postBody = JSON.stringify({
-      owner_uid: uid,
-      owner_display_name: displayName,
+  const onSubmit = () => {
+    dispatch({
+      type: CREATE_LIST,
+      name: golistName,
       title: golistTitle,
       description: golistDescription,
+      uid,
+      userDisplayName,
     });
-    console.info(`Trying to create golist with ${postBody}`);
-    fetch(`https://api.goli.st/golists/${golistName}`, {
-      method: "post",
-      headers: { "Content-Type": "application/json" },
-      body: postBody,
-    })
-      .then((res) => res.json())
-      .then(({ err, ok }) => {
-        if (ok) {
-          toast.success("New GoList successfully created.");
-          dispatch({ type: FETCH_LISTS, uid }); // refresh the lists
-          props.toggleCreateListForm();
-        } else {
-          console.error(err);
-          toast.error("Failed to create the list");
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-        toast.error("We are unable to create the list right now.");
-      });
+    props.toggleCreateListForm();
   };
 
   return (
