@@ -1,17 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardBody, Media } from "reactstrap";
+import DeleteListModal from "./delete-list-modal";
 
 const ListCard = (props) => {
+  const [showDeleteListForm, setShowDeleteListForm] = useState(false);
+  const toggleDeleteListForm = () => setShowDeleteListForm(!showDeleteListForm);
+
   // TODO(tugan): fix formatting issues with different title length, or description lengths
   return (
     <Card className="hover:shadow-xl">
       <div className="multi-button">
         <button
           style={{ "font-size": "1.2rem" }}
-          onClick={() => alert("Are you sure you want to delete?")}
+          onClick={toggleDeleteListForm}
         >
           <i className="ion ion-android-delete" />
         </button>
+        <DeleteListModal
+          showDeleteListForm={showDeleteListForm}
+          toggleDeleteListForm={toggleDeleteListForm}
+          listName={props.listName}
+        />
       </div>
       <CardBody>
         <Media>
