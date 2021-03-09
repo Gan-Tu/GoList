@@ -12,7 +12,7 @@ export default function Home() {
         <h1>GoList</h1>
         <p>Welcome to GoList</p>
         <p>
-          Visit our admin app at{" "}
+          Visit our admin app at <a href="https://app.goli.st">app.goli.st</a>
         </p>
       </main>
 
