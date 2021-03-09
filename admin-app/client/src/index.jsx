@@ -14,7 +14,7 @@ const Root = (props) => {
     console.ignoredYellowBox = ["Warning: Each", "Warning: Failed"];
     console.disableYellowBox = true;
     return abortController.abort();
-  }, [abortController]);
+  });
 
   return (
     <Fragment>
