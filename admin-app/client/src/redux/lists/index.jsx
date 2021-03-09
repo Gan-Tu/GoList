@@ -1,6 +1,11 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 import { fetchLists } from "../../api";
-import { FETCH_LISTS, SET_LISTS, CREATE_LIST } from "../actionTypes";
+import {
+  FETCH_LISTS,
+  SET_LISTS,
+  CREATE_LIST,
+  DELETE_LIST,
+} from "../actionTypes";
 import { toast } from "react-toastify";
 
 function* fetchListsAsync({ uid }) {
@@ -34,7 +39,21 @@ function* createNewListAsync({
   }
 }
 
+function* deleteListAsync({ name, uid }) {
+  const { err, ok } = yield call(fetch, `https://api.goli.st/golists/${name}`, {
+    method: "delete",
+  });
+  if (ok) {
+    toast.info("GoList successfully deleted.");
+    yield put({ type: FETCH_LISTS, uid }); // refresh the lists
+  } else {
+    console.error(err);
+    toast.error("Failed to delete the list");
+  }
+}
+
 export function* watchListsApp() {
   yield takeLatest(FETCH_LISTS, fetchListsAsync);
   yield takeLatest(CREATE_LIST, createNewListAsync);
+  yield takeLatest(DELETE_LIST, deleteListAsync);
 }
