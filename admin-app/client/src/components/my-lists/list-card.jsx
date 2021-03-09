@@ -5,6 +5,14 @@ const ListCard = (props) => {
   // TODO(tugan): fix formatting issues with different title length, or description lengths
   return (
     <Card className="hover:shadow-xl">
+      <div className="multi-button">
+        <button
+          style={{ "font-size": "1.2rem" }}
+          onClick={() => alert("Are you sure you want to delete?")}
+        >
+          <i className="ion ion-android-delete" />
+        </button>
+      </div>
       <CardBody>
         <Media>
           <img
