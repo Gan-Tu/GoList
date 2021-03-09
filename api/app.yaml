@@ -1,6 +1,6 @@
 service: api
 env: standard
-runtime: nodejs14
+runtime: nodejs12
 handlers:
 - url: /.*
   script: auto
