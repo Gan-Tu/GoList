@@ -54,18 +54,20 @@ const MyLists = (props) => {
               <p>No lists found.</p>
             </Col>
           ) : (
-            lists.map((list, idx) => (
-              <Col sm="4" key={`ListCard-${idx}`}>
-                <ListCard
-                  icon_url={require("../../assets/images/other-images/job-search-1.jpg")}
-                  title={list.title}
-                  listName={list.listName}
-                  body={list.body}
-                  badge={list.badge}
-                  badgetxt={list.badgetxt}
-                />
-              </Col>
-            ))
+            lists.map((list, idx) =>
+              list ? (
+                <Col sm="4" key={`ListCard-${idx}`}>
+                  <ListCard
+                    icon_url={require("../../assets/images/other-images/job-search-1.jpg")}
+                    title={list.title}
+                    listName={list.listName}
+                    body={list.body}
+                    badge={list.badge}
+                    badgetxt={list.badgetxt}
+                  />
+                </Col>
+              ) : null
+            )
           )}
         </Row>
       </Container>
