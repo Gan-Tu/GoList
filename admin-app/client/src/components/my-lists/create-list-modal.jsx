@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import {useSelector} from "react-redux";
+import { useSelector } from "react-redux";
 import {
   Button,
   Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
+  Col,
   Form,
   FormGroup,
   Input,
@@ -15,24 +16,50 @@ import {
   InputGroupText,
 } from "reactstrap";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
+import {
+  nameValidations,
+  titleValidations,
+  descriptionValidations,
+} from "./validations";
 
 const CreateListModal = (props) => {
   const uid = useSelector((store) => store.SessionReducer.user.uid);
-  const displayName = useSelector((store) => store.SessionReducer.user.displayName);
+  const displayName = useSelector(
+    (store) => store.SessionReducer.user.displayName
+  );
+
+  const { register, handleSubmit, errors } = useForm();
   const [golistName, setGoListName] = useState("");
   const [golistTitle, setGoListTitle] = useState("");
   const [golistDescription, setGoListDescription] = useState("");
-  const handleSubmit = (data) => {
-    console.log({
-      listName: golistName,
+  const onSubmit = (data) => {
+    var postBody = JSON.stringify({
       owner_uid: uid,
       owner_display_name: displayName,
       title: golistTitle,
       description: golistDescription,
-      update_date: new Date(),
     });
-    toast.success(`A new GoList is created: goli.st/${golistName}`);
-    props.toggleCreateListForm();
+    console.info(`Trying to create golist with ${postBody}`);
+    fetch(`https://api.goli.st/golists/${golistName}`, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: postBody,
+    })
+      .then((res) => res.json())
+      .then(({ err, ok }) => {
+        if (ok) {
+          toast.success("New GoList successfully created.");
+          props.toggleCreateListForm();
+        } else {
+          console.error(err);
+          toast.error("Failed to create the list");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        toast.error("We are unable to create the list right now.");
+      });
   };
 
   return (
@@ -45,54 +72,76 @@ const CreateListModal = (props) => {
         Create a new GoList
       </ModalHeader>
       <ModalBody>
-        {/* TODO(tugan): add CSRF tokens */}
-        <Form>
-          <FormGroup className="m-form__group" aria-required>
-            <Label for="golist-name">GoList URL</Label>
-            <InputGroup>
-              <InputGroupAddon addonType="prepend">
-                <InputGroupText>goli.st/</InputGroupText>
-              </InputGroupAddon>
-              <Input
-                className="form-control"
-                type="text"
-                placeholder=""
-                onChange={(e) => setGoListName(e.target.value)}
-              />
-            </InputGroup>
-          </FormGroup>
-          <FormGroup>
-            <Label className="col-form-label" for="title">
-              Title
-            </Label>
-            <Input
-              className="form-control"
-              type="text"
-              defaultValue=""
-              onChange={(e) => setGoListTitle(e.target.value)}
-            />
-          </FormGroup>
-          <FormGroup>
-            <Label className="col-form-label" for="description">
-              Description
-            </Label>
-            <Input
-              type="textarea"
-              className="form-control"
-              id="message-text"
-              onChange={(e) => setGoListDescription(e.target.value)}
-            ></Input>
-          </FormGroup>
+        <Form
+          className="needs-validation"
+          noValidate=""
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <div className="form-row">
+            {/* TODO(tugan): add CSRF tokens */}
+            <Col md="12">
+              <FormGroup>
+                <Label for="golistName">GoList URL</Label>
+                <InputGroup>
+                  <InputGroupAddon addonType="prepend">
+                    <InputGroupText>goli.st/</InputGroupText>
+                  </InputGroupAddon>
+                  <Input
+                    className="form-control"
+                    type="text"
+                    name="golistName"
+                    onChange={(e) => setGoListName(e.target.value)}
+                    innerRef={register(nameValidations)}
+                  />
+                  <span>
+                    {errors.golistName ? errors.golistName.message : null}
+                  </span>
+                </InputGroup>
+              </FormGroup>
+            </Col>
+
+            <Col md="12">
+              <FormGroup>
+                <Label className="col-form-label" for="title">
+                  Title
+                </Label>
+                <Input
+                  className="form-control"
+                  type="text"
+                  name="title"
+                  onChange={(e) => setGoListTitle(e.target.value)}
+                  innerRef={register(titleValidations)}
+                />
+                <span>{errors.title ? errors.title.message : null}</span>
+              </FormGroup>
+            </Col>
+
+            <Col md="12">
+              <FormGroup>
+                <Label className="col-form-label" for="description">
+                  Description
+                </Label>
+                <Input
+                  className="form-control"
+                  type="text"
+                  name="description"
+                  onChange={(e) => setGoListDescription(e.target.value)}
+                  innerRef={register(descriptionValidations)}
+                />
+                <span>
+                  {errors.description ? errors.description.message : null}
+                </span>
+              </FormGroup>
+            </Col>
+          </div>
+          <ModalFooter>
+            <Button color="secondary" onClick={props.toggleCreateListForm}>
+              Close
+            </Button>
+            <Button color="primary">Create</Button>
+          </ModalFooter>
         </Form>
       </ModalBody>
-      <ModalFooter>
-        <Button color="secondary" onClick={props.toggleCreateListForm}>
-          Close
-        </Button>
-        <Button color="primary" onClick={handleSubmit}>
-          Create
-        </Button>
-      </ModalFooter>
     </Modal>
   );
 };
