@@ -107,7 +107,7 @@ const CreateListModal = (props) => {
                 </Label>
                 <Input
                   className="form-control"
-                  type="text"
+                  type="textarea"
                   name="description"
                   onChange={(e) => setGoListDescription(e.target.value)}
                   innerRef={register(descriptionValidations)}

@@ -4,7 +4,7 @@
 form {
   &.needs-validation {
     .form-row {
-      input {
+      input, textarea {
         ~ span {
           color: $danger-color;
         }
@@ -18,7 +18,7 @@ form {
     &.tooltip-validation {
       &.validateClass {
         .form-row {
-          input {
+          input, textarea {
             ~ span {
               padding: 0.25rem 0.5rem;
               margin-top: 0.1rem;
