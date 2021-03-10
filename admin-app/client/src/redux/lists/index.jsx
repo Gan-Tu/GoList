@@ -1,5 +1,4 @@
 import { call, put, takeLatest } from "redux-saga/effects";
-import { fetchLists } from "../../api";
 import {
   FETCH_LISTS,
   SET_LISTS,
@@ -9,8 +8,16 @@ import {
 import { toast } from "react-toastify";
 
 function* fetchListsAsync({ uid }) {
-  const listData = yield call(fetchLists, uid);
-  yield put({ type: SET_LISTS, lists: listData.lists });
+  const resp = yield call(fetch, `https://api.goli.st/users/${uid}/lists`);
+  var { lists } = yield resp.json();
+  if (lists) {
+    lists = lists.map((x) => ({
+      title: x.title,
+      listName: x.listName,
+      body: x.description,
+    }));
+    yield put({ type: SET_LISTS, lists });
+  }
 }
 
 function* createNewListAsync({
@@ -20,7 +27,7 @@ function* createNewListAsync({
   uid,
   userDisplayName,
 }) {
-  const { err, ok } = yield call(fetch, `https://api.goli.st/golists/${name}`, {
+  const resp = yield call(fetch, `https://api.goli.st/golists/${name}`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -30,6 +37,7 @@ function* createNewListAsync({
       description: description,
     }),
   });
+  const { err, ok } = yield resp.json();
   if (ok) {
     toast.success("New GoList successfully created.");
     yield put({ type: FETCH_LISTS, uid }); // refresh the lists
@@ -40,9 +48,10 @@ function* createNewListAsync({
 }
 
 function* deleteListAsync({ name, uid }) {
-  const { err, ok } = yield call(fetch, `https://api.goli.st/golists/${name}`, {
+  const resp = yield call(fetch, `https://api.goli.st/golists/${name}`, {
     method: "delete",
   });
+  const { err, ok } = yield resp.json();
   if (ok) {
     toast.info("GoList successfully deleted.");
     yield put({ type: FETCH_LISTS, uid }); // refresh the lists
