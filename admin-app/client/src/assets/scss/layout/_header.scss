@@ -1,7 +1,6 @@
 /*======= Page Header css Start ======= */
 /*======= Page Header css ends  ======= */
 
-
 /**======Main Header css Start ======**/
 .offcanvas,
 .offcanvas-bookmark {
@@ -47,7 +46,7 @@
       transition: all 0.3s ease;
     }
 
-    >svg {
+    > svg {
       color: var(--theme-deafult) !important;
       stroke: var(--theme-deafult) !important;
     }
@@ -60,6 +59,8 @@
 
   &:hover {
     .onhover-show-div {
+      // when dropdown is hovered, div ignores the default delay when showing
+      transition-delay: 0s;
       @extend %for-animated-hover-box;
     }
   }
@@ -71,6 +72,7 @@
   z-index: 8;
   background-color: $white;
   transition: all linear 0.3s;
+  transition-delay: 0.3s; // hover div takes time to show or disappear
   @extend %for-animated-hover;
 
   li {
@@ -86,7 +88,6 @@
     }
   }
 }
-
 
 /**======Main Header css Ends ======**/
 
@@ -138,13 +139,13 @@
           border-radius: 5px;
           transition: all 0.3s ease;
 
-          >a {
-            >span {
+          > a {
+            > span {
               color: var(--theme-deafult);
               transition: all 0.3s ease;
             }
 
-            >svg {
+            > svg {
               stroke: var(--theme-deafult);
               transition: all 0.3s ease;
             }
@@ -152,7 +153,7 @@
         }
       }
 
-      >li {
+      > li {
         position: relative;
         width: 100%;
 
@@ -179,7 +180,7 @@
           vertical-align: middle;
         }
 
-        >.header-level-sub-menu {
+        > .header-level-sub-menu {
           position: absolute;
           padding: 0.7rem 0.5rem;
           left: 173px;
@@ -235,7 +236,7 @@
     box-shadow: 0 0 20px rgba(89, 102, 122, 0.1);
 
     .link-section {
-      >div {
+      > div {
         h6 {
           margin-top: 20px;
         }
@@ -260,7 +261,7 @@
     }
 
     .mega-box {
-      &+.mega-box {
+      & + .mega-box {
         padding-left: 30px;
         border-left: 1px solid $light-semi-gray;
       }
@@ -277,7 +278,7 @@
           }
 
           &:before {
-            content: '';
+            content: "";
             position: absolute;
             top: 15px;
             height: 5px;
@@ -302,7 +303,7 @@
           }
 
           &:before {
-            content: '';
+            content: "";
             position: absolute;
             top: 16px;
             height: 2px;
@@ -335,7 +336,7 @@
       }
 
       .svg-icon {
-        &~div {
+        & ~ div {
           h6 {
             margin-top: 10px;
             margin-bottom: 5px;
@@ -403,7 +404,7 @@
   }
 
   div {
-    >div {
+    > div {
       a {
         margin-bottom: 0px;
         display: inline-block;
