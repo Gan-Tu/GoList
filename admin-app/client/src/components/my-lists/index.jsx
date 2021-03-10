@@ -57,7 +57,7 @@ const MyLists = (props) => {
           ) : (
             lists.map((list, idx) =>
               list ? (
-                <Col sm="4" key={`ListCard-${idx}`}>
+                <Col sm="12" md="6" lg="4"  key={`ListCard-${idx}`}>
                   <ListCard
                     icon_url={ICON}
                     title={list.title}
