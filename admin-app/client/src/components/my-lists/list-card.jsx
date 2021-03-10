@@ -11,7 +11,13 @@ const ListCard = (props) => {
     <Card className="hover:shadow-xl">
       <div className="multi-button">
         <button
-          style={{ "font-size": "1.2rem" }}
+          style={{ "fontSize": "1.2rem" }}
+          onClick={toggleDeleteListForm}
+        >
+          <i className="ion ion-android-delete" />
+        </button>
+        <button
+          style={{ "fontSize": "1.2rem" }}
           onClick={toggleDeleteListForm}
         >
           <i className="ion ion-android-delete" />
