@@ -4,6 +4,7 @@
 //Card css
 .card {
   margin-bottom: $card-margin-bottom;
+  margin-right: $card-margin-right;
   border: none;
   transition: all 0.3s ease;
   letter-spacing: 0.5px;
@@ -349,11 +350,11 @@
 .card {
   --background: #ffffff;
   --text: black;
-  // position: relative;
-  // height: 12rem;
+  --icon-size: 1.2rem;
+  position: relative;
   box-shadow: 0 0 2rem -1rem rgba(0, 0, 0, 0.05);
+
   .multi-button {
-    z-index: 0;
     position: absolute;
     top: 2rem;
     right: 2rem;
@@ -362,6 +363,7 @@
     height: 0rem;
     transform: translate(50%, -50%);
     transition: 0.25s cubic-bezier(0.25, 0, 0, 1);
+    font-size: 0; // initially no icons
     button {
       display: grid;
       place-items: center;
@@ -374,9 +376,10 @@
       color: var(--text);
       transform: translate(50%, -50%);
       cursor: pointer;
-      transition: 0.25s cubic-bezier(0.25, 0, 0, 1);
+      // transition: 0.25s cubic-bezier(0.25, 0, 0, 1);
       box-shadow: 0 0 0rem -0.25rem var(--background);
       &:hover {
+        font-size: var(--icon-size);
         background: var(--text);
         color: var(--background);
         box-shadow: 0 0 1rem -0.25rem var(--background);
@@ -418,7 +421,7 @@
         }
       }
       &:first-child:nth-last-child(4), //If there are 4 children, if first child is also 4th item from bottom get self, and
-          &:first-child:nth-last-child(4) ~ * {
+            &:first-child:nth-last-child(4) ~ * {
         //If there are 4 children, if first child is also 4th item from bottom get siblings
         &:nth-child(1) {
           right: 62.5%;
@@ -439,12 +442,13 @@
       }
     }
   }
-  // &:hover .multi-button,
-  // .multi-button:focus-within {
-  //   //Hover or a button inside is focused
-  //   width: 2rem;
-  //   height: 2rem;
-  // }
+  &:hover .multi-button,
+  .multi-button:focus-within {
+    //Hover or a button inside is focused
+    font-size: var(--icon-size); // show icon won hover
+    width: 10rem;
+    height: 10rem;
+  }
 }
 /**=====================
     03. Card CSS End
