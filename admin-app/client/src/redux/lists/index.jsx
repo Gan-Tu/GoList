@@ -20,13 +20,8 @@ function* fetchListsAsync({ uid }) {
   }
 }
 
-function* createNewListAsync({
-  name,
-  title,
-  description,
-  uid,
-  userDisplayName,
-}) {
+function* createNewListAsync(action) {
+  const { name, title, description, uid, userDisplayName } = action;
   const resp = yield call(fetch, `https://api.goli.st/golists/${name}`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
