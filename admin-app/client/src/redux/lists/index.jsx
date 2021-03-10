@@ -11,11 +11,6 @@ function* fetchListsAsync({ uid }) {
   const resp = yield call(fetch, `https://api.goli.st/users/${uid}/lists`);
   var { lists } = yield resp.json();
   if (lists) {
-    lists = lists.map((x) => ({
-      title: x.title,
-      listName: x.listName,
-      body: x.description,
-    }));
     yield put({ type: SET_LISTS, lists });
   }
 }

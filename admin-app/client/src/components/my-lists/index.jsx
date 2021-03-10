@@ -62,7 +62,7 @@ const MyLists = (props) => {
                     icon_url={ICON}
                     title={list.title}
                     listName={list.listName}
-                    body={list.body}
+                    body={list.description}
                     badge={list.badge}
                     badgetxt={list.badgetxt}
                   />
