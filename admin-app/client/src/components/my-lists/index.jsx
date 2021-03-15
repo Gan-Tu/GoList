@@ -1,11 +1,10 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Breadcrumb from "../../layout/breadcrumb";
 import { Container, Row, Col, Button, ButtonGroup } from "reactstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { FETCH_LISTS, SET_LISTS } from "../../redux/actionTypes";
 import ListCard from "./list-card";
 import CreateListModal from "./create-list-modal";
-import ICON from "../../assets/images/other-images/job-search-1.jpg";
+import ICON from "../../assets/images/other-images/list.svg";
 
 const MyLists = (props) => {
   const dispatch = useDispatch();
@@ -28,7 +27,6 @@ const MyLists = (props) => {
   const toggleCreateListForm = () => setShowCreateListForm(!showCreateListForm);
   return (
     <Fragment>
-      <Breadcrumb title="My Lists" show_title />
       <Container fluid={true}>
         {/* Modal to create new GoList */}
         <Row style={{ marginBottom: "10px" }}>

@@ -1,17 +1,12 @@
 import React, { Fragment } from "react";
-import Breadcrumb from "../../layout/breadcrumb";
-import { useSelector } from "react-redux";
-import { Container, Row, Col, Card, CardHeader, CardBody } from "reactstrap";
+import { Container, Row, Col, Card, CardHeader } from "reactstrap";
 import MyLists from "../my-lists";
 
-const HomePage = (props) => {
-  const listCount = useSelector((content) => content.ListReducer.lists.length);
-
+const HomePage = () => {
   return (
     <Fragment>
-      <Breadcrumb title="Home" />
       <Container fluid={true}>
-        <Row className="appointment-sec">
+        <Row className="page-title">
           <Col sm="12">
             <Card>
               <CardHeader>
@@ -21,14 +16,9 @@ const HomePage = (props) => {
                   files with one simple URL
                 </span>
               </CardHeader>
-              <CardBody>
-                <p>
-                  Currently, you have <b>{listCount || 0}</b> lists configured.
-                </p>
-              </CardBody>
             </Card>
+            <MyLists />
           </Col>
-          <MyLists />
         </Row>
       </Container>
     </Fragment>
