@@ -69,71 +69,86 @@ const SEED_DATA = [
   {
     key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-01"]),
     data: {
-      title: "Praesent tincidunt enim et interdum facilisis",
-      description:
-        "Quisque lobortis leo eget sodales bibendum. Duis vitae turpis tempor, convallis quam at, placerat mauris.",
+      title: "Admin Template",
+      link: "http://admin.pixelstrap.com/Xolo/ltr/landing-page.html",
       owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       owner_display_name: "Gan Tu",
-      link: "",
-      tags: [],
-      image_url: "",
+      tags: ["Example"],
+      description:
+        "Xolo is beautifully crafted, clean and modern designed admin theme with 6 different demos and light - dark versions.",
       update_date: new Date(),
     },
   },
   {
     key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-02"]),
     data: {
-      title: "Etiam congue est a bibendum ultrices.",
-      description:
-        "Nulla consequat libero non velit accumsan interdum. Curabitur malesuada ante suscipit cursus posuere.",
-      owner_uid: "Bot",
-      owner_display_name: "Bot",
-      link: "https://www.lipsum.com",
-      tags: ["Coding"],
+      title: "Universal Template",
+      link: "https://angular.pixelstrap.com/universal/landing",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
+      owner_display_name: "Gan Tu",
+      tags: ["Example"],
       image_url:
-        "https://media-exp1.licdn.com/dms/image/C4D0BAQFdm87slb1cgQ/company-logo_200_200/0/1531055417022?e=2159024400&v=beta&t=2IDEiHkI_DZ2jCK5XKjD2frSnmpoFgV1qYWT65y0ktI",
+        "https://react.pixelstrap.com/cuba/static/media/02.4305442c.jpg",
+      description:
+        "Universal is beautifully crafted, clean and modern designed admin theme",
       update_date: new Date(),
     },
   },
   {
     key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-03"]),
     data: {
-      title: "In quis lectus ullamcorper",
-      description:
-        "Vivamus a nisl cursus, luctus dolor vitae, sagittis nunc. Quisque et odio ut mauris tristique auctor.",
+      title: "Angular Theme",
+      link: "https://angular.pixelstrap.com/Xolo/landing",
       owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       owner_display_name: "Gan Tu",
-      link: "",
-      tags: [],
-      image_url: "",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/03.db84143c.jpg",
+      description:
+        "Xolo is beautifully crafted, clean and modern designed admin theme",
       update_date: new Date(),
     },
   },
   {
     key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-04"]),
     data: {
-      title: "Aliquam non leo euismod",
-      description:
-        "Praesent feugiat nulla ut rhoncus tempus. Sed scelerisque lacus ac pretium vestibulum.",
+      title: "Multikart Admin",
+      link: "http://themes.pixelstrap.com/multikart/back-end/index.html",
       owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       owner_display_name: "Gan Tu",
-      link: "",
-      tags: [],
-      image_url: "",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/04.0fee3312.jpg",
+      description: "Multikart Admin is modern designed admin theme",
       update_date: new Date(),
     },
   },
   {
     key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-05"]),
     data: {
-      title: "Google",
-      description: "The greatest search engine of all time",
-      owner_uid: "Bot",
-      owner_display_name: "Bot",
-      link: "https://www.google.com",
-      tags: ["Productivity"],
+      title: "Ecommerece theme",
+      link: "http://themes.pixelstrap.com/multikart",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
+      owner_display_name: "Gan Tu",
+      tags: ["Example"],
       image_url:
-        "https://www.dtl.coventry.domains/wp-content/uploads/2020/07/Google-Logo.png",
+        "https://react.pixelstrap.com/cuba/static/media/05.77a41af3.jpg",
+      description:
+        "Multikart HTML template is an apparently simple but highly functional tempalate designed for creating a flourisahing online business.",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-06"]),
+    data: {
+      title: "Tovo app landing page",
+      link: "http://vue.pixelstrap.com/tovo/home-one",
+      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
+      owner_display_name: "Gan Tu",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/06.1d72b207.jpg",
+      description: "Amazing Landing Page With Easy Customization",
       update_date: new Date(),
     },
   },
