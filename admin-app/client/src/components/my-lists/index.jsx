@@ -37,7 +37,7 @@ const MyLists = (props) => {
                 color="success"
                 onClick={toggleCreateListForm}
               >
-                Create New List
+                Create New GoList
               </Button>
             </ButtonGroup>
             <CreateListModal

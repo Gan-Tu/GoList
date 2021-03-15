@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Container, Row, Col, Card, CardHeader } from "reactstrap";
+import { Container, Row, Col, Card, CardHeader, CardBody } from "reactstrap";
 import MyLists from "../my-lists";
 
 const HomePage = () => {
@@ -12,10 +12,20 @@ const HomePage = () => {
               <CardHeader>
                 <h5>Welcome to GoList!</h5>
                 <span>
-                  Here, you can quickly edit and browse a list of links and
-                  files with one simple URL
+                  Quickly setup a list of links and files with one simple URL.
                 </span>
               </CardHeader>
+              <CardBody>
+                <Row style={{ marginBottom: "10px" }}>
+                  <Col>
+                    <p>
+                      To get started, create a new GoList for grouping a set of
+                      related links. <br/>Give it a descriptive title and a short URL
+                      of your chosen!
+                    </p>
+                  </Col>
+                </Row>
+              </CardBody>
             </Card>
             <MyLists />
           </Col>
