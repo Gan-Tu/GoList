@@ -28,7 +28,12 @@ const ListItem = (props) => {
           className="img-fluid"
           src={props.image || defaultImg}
           alt={`logo for "${props.title}"`}
-          style={{ maxWidth: "200px" }}
+          style={{
+            maxWidth: "200px",
+            maxHeight: "150px",
+            width: "auto",
+            height: "auto",
+          }}
         />
         <div className="desciption-data">
           <div className="title-bookmark">
