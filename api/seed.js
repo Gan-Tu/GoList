@@ -31,7 +31,7 @@ const SEED_DATA = [
       description: "A repo of my software developments",
       owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       owner_display_name: "Gan Tu",
-      link: "https://github.com/Michael-Tu",
+      link: "https://github.com/Gan-Tu",
       tags: ["Coding", "Social Media"],
       image_url:
         "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
