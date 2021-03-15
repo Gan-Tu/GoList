@@ -1,34 +1,25 @@
 import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { toast } from "react-toastify";
+import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
+import GoListDetails from "./my-list-items";
 
 const EditListModal = (props) => {
-  // TODO(tugan): change this for actual edit modal
-  const onEdit = () => {
-    toast.error("Edit is not supported yet. Stay tuned.");
-    props.toggleEditListForm();
-  };
   return (
     <Modal
-      isOpen={props.showEditListForm}
-      toggle={props.toggleEditListForm}
+      isOpen={props.showForm}
+      toggle={props.toggleForm}
       centered
+      style={{ maxWidth: "1200px" }}
     >
-      <ModalHeader toggle={props.toggleEditListForm}>
-        Edit confirmation
-      </ModalHeader>
+      <ModalHeader toggle={props.toggleForm}>Edit GoList</ModalHeader>
       <ModalBody>
-        <p>
-          Are you sure you want to edit this GoList:{" "}
-          <b>goli.st/{props.listName}</b>
-        </p>
+        <GoListDetails
+          listName={props.listName}
+          listTitle={props.listTitle}
+        />
       </ModalBody>
       <ModalFooter>
-        <Button color="light" onClick={props.toggleEditListForm}>
-          Cancel
-        </Button>
-        <Button color="info" onClick={onEdit}>
-          Edit
+        <Button color="light" onClick={props.toggleForm}>
+          Close
         </Button>
       </ModalFooter>
     </Modal>

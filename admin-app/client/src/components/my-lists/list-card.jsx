@@ -26,9 +26,10 @@ const ListCard = (props) => {
           listName={props.listName}
         />
         <EditListModal
-          showEditListForm={showEditListForm}
-          toggleEditListForm={toggleEditListForm}
+          showForm={showEditListForm}
+          toggleForm={toggleEditListForm}
           listName={props.listName}
+          listTitle={props.title}
         />
       </div>
       <CardBody>

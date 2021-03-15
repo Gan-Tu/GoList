@@ -193,6 +193,9 @@
               }
             }
           }
+          a {
+            color: #898989
+          }
         }
         &:hover {
           box-shadow: 1px 4px 16px 3px rgba($black, 0.04);
@@ -262,7 +265,7 @@
               padding-right: 15px;
               &::after {
                 position: absolute;
-                content: "-";
+                content: "- ";
                 right: 0;
                 color: $dark-gray;
               }
