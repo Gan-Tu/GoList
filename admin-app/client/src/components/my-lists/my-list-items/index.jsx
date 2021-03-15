@@ -11,8 +11,8 @@ const GoListDetails = (props) => {
   const [gridView, setgridView] = useState(false);
 
   useEffect(() => {
-    dispatch({ type: FETCH_ITEMS });
-  }, [dispatch]);
+    dispatch({ type: FETCH_ITEMS, name: props.listName });
+  }, [dispatch, props.listName]);
   const items = useSelector((store) => store.ItemsReducer.items);
 
   return (
