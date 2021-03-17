@@ -25,6 +25,17 @@ const SEED_DATA = [
     },
   },
   {
+    key: datastore.key(["GoLists", "demo2"]),
+    data: {
+      listName: "demo",
+      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
+      owner_display_name: "Travis",
+      title: "Demo List",
+      description: "A curated demo by GoList team",
+      update_date: new Date(),
+    },
+  },
+  {
     key: datastore.key(["GoLists", "tugan", "GoListItems", "github"]),
     data: {
       title: "GitHub",
@@ -145,6 +156,92 @@ const SEED_DATA = [
       link: "http://vue.pixelstrap.com/tovo/home-one",
       owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       owner_display_name: "Gan Tu",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/06.1d72b207.jpg",
+      description: "Amazing Landing Page With Easy Customization",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-01"]),
+    data: {
+      title: "Admin Template",
+      link: "http://admin.pixelstrap.com/Xolo/ltr/landing-page.html",
+      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
+      owner_display_name: "Travis",
+      tags: ["Example"],
+      description:
+        "Xolo is beautifully crafted, clean and modern designed admin theme with 6 different demos and light - dark versions.",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-02"]),
+    data: {
+      title: "Universal Template",
+      link: "https://angular.pixelstrap.com/universal/landing",
+      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
+      owner_display_name: "Travis",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/02.4305442c.jpg",
+      description:
+        "Universal is beautifully crafted, clean and modern designed admin theme",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-03"]),
+    data: {
+      title: "Angular Theme",
+      link: "https://angular.pixelstrap.com/Xolo/landing",
+      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
+      owner_display_name: "Travis",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/03.db84143c.jpg",
+      description:
+        "Xolo is beautifully crafted, clean and modern designed admin theme",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-04"]),
+    data: {
+      title: "Multikart Admin",
+      link: "http://themes.pixelstrap.com/multikart/back-end/index.html",
+      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
+      owner_display_name: "Travis",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/04.0fee3312.jpg",
+      description: "Multikart Admin is modern designed admin theme",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-05"]),
+    data: {
+      title: "Ecommerece theme",
+      link: "http://themes.pixelstrap.com/multikart",
+      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
+      owner_display_name: "Travis",
+      tags: ["Example"],
+      image_url:
+        "https://react.pixelstrap.com/cuba/static/media/05.77a41af3.jpg",
+      description:
+        "Multikart HTML template is an apparently simple but highly functional tempalate designed for creating a flourisahing online business.",
+      update_date: new Date(),
+    },
+  },
+  {
+    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-06"]),
+    data: {
+      title: "Tovo app landing page",
+      link: "http://vue.pixelstrap.com/tovo/home-one",
+      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
+      owner_display_name: "Travis",
       tags: ["Example"],
       image_url:
         "https://react.pixelstrap.com/cuba/static/media/06.1d72b207.jpg",
