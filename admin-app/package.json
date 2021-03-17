@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Michael-Tu/GoList.git"
+    "url": "git+https://github.com/Gan-Tu/GoList.git"
   },
   "author": "Gan Tu",
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/Michael-Tu/GoList/issues"
+    "url": "https://github.com/Gan-Tu/GoList/issues"
   },
-  "homepage": "https://github.com/Michael-Tu/GoList#readme",
+  "homepage": "https://github.com/Gan-Tu/GoList#readme",
   "dependencies": {
     "@google-cloud/datastore": "^6.3.1",
     "body-parser": "^1.19.0",
