@@ -16,8 +16,11 @@ const Loader = (props) => {
   return (
     <Fragment>
       <div className={`loader-wrapper ${show ? "" : "loderhide"}`}>
-        <div className="loader-index">
+        {/* <div className="loader-index">
           <span></span>
+        </div> */}
+        <div className="loader-box">
+          <div className="loader-19"></div>
         </div>
         <svg>
           <defs></defs>
