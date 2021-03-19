@@ -1,10 +1,19 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Card, CardBody, CardHeader } from "reactstrap";
-import { Grid, List } from "react-feather";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardBody,
+  CardHeader,
+  Button,
+} from "reactstrap";
+import { Grid, List, PlusSquare } from "react-feather";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { FETCH_ITEMS } from "../../../redux/actionTypes";
 import GoListItemsList from "./items-list";
+import CreateListItemModal from "./create-list-item-modal";
 
 const GoListDetails = (props) => {
   const dispatch = useDispatch();
@@ -14,6 +23,10 @@ const GoListDetails = (props) => {
     dispatch({ type: FETCH_ITEMS, name: props.listName });
   }, [dispatch, props.listName]);
   const items = useSelector((store) => store.ItemsReducer.items);
+
+  const [showCreateListItemForm, setShowCreateListItemForm] = useState(false);
+  const toggleCreateListItemForm = () =>
+    setShowCreateListItemForm(!showCreateListItemForm);
 
   return (
     // TODO(tugan): add ability to edit list metadata itself
@@ -30,20 +43,41 @@ const GoListDetails = (props) => {
                     <h6 className="f-w-600">{props.listTitle}</h6>
                     <ul>
                       <li>
-                        <a className="list-layout-view" href="#javascript">
-                          <List onClick={() => setgridView(false)} />
-                        </a>
-                      </li>
-                      <li>
-                        <a className="grid-bookmark-view" href="#javascript">
-                          <Grid onClick={() => setgridView(true)} />
-                        </a>
+                        <Button
+                          color="primary"
+                          className="ml-3 add-new-task-btn"
+                          id="add-new"
+                          onClick={toggleCreateListItemForm}
+                        >
+                          <PlusSquare /> Add New
+                        </Button>
+                        <CreateListItemModal
+                          showForm={showCreateListItemForm}
+                          toggleForm={toggleCreateListItemForm}
+                        />
                       </li>
                     </ul>
                   </CardHeader>
 
                   {/* Items Details */}
                   <CardBody className="pb-0">
+                    <div className="d-flex" style={{ marginBottom: "40px" }}>
+                      <span></span>
+                      <span></span>
+                      <ul>
+                        <li>
+                          <a className="list-layout-view" href="#javascript">
+                            <List onClick={() => setgridView(false)} />
+                          </a>
+                        </li>
+                        <li>
+                          <a className="grid-bookmark-view" href="#javascript">
+                            <Grid onClick={() => setgridView(true)} />
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
                     <GoListItemsList gridView={gridView} items={items} />
                   </CardBody>
                 </Card>

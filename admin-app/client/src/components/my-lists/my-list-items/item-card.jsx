@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "reactstrap";
 import { Link, Share2, Trash2, Tag, Edit2 } from "react-feather";
 import defaultImg from "../../../assets/images/other-images/lightgallry-defaut.jpg";
 import { toast } from "react-toastify";
+import EditListItemModal from "./edit-list-item-modal";
 
 const ListItem = (props) => {
-  const editItem = () => {
-    toast.error("Edit is not implemented yet");
-  };
-
   const shareItem = () => {
     toast.error("Share is not implemented yet");
   };
@@ -20,6 +17,10 @@ const ListItem = (props) => {
   const tagItem = () => {
     toast.error("Tag is not implemented yet");
   };
+
+  const [showEditListItemForm, setShowEditListItemForm] = useState(false);
+  const toggleEditListItemForm = () =>
+    setShowEditListItemForm(!showEditListItemForm);
 
   return (
     <Card className="card-with-border bookmark-card o-hidden">
@@ -47,9 +48,13 @@ const ListItem = (props) => {
             <div className="hover-block">
               <ul>
                 <li>
-                  <a href="#javascript" onClick={editItem}>
+                  <a href="#javascript" onClick={toggleEditListItemForm}>
                     <Edit2 />
                   </a>
+                  <EditListItemModal
+                    showForm={showEditListItemForm}
+                    toggleForm={toggleEditListItemForm}
+                  />
                 </li>
                 <li>
                   <a href={props.website_url} target="_blank" rel="noreferrer">
