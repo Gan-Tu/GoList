@@ -7,7 +7,7 @@ const EditListItemModal = (props) => {
       isOpen={props.showForm}
       toggle={props.toggleForm}
       centered
-      style={{ maxWidth: "1200px" }}
+      style={{ maxWidth: "600px" }}
     >
       <ModalHeader toggle={props.toggleForm}>Edit GoList Item</ModalHeader>
       <ModalBody>

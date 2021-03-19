@@ -7,7 +7,7 @@ const CreateListItemModal = (props) => {
       isOpen={props.showForm}
       toggle={props.toggleForm}
       centered
-      style={{ maxWidth: "1200px" }}
+      style={{ maxWidth: "600px" }}
     >
       <ModalHeader toggle={props.toggleForm}>Create GoList Item</ModalHeader>
       <ModalBody>
