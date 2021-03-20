@@ -54,7 +54,10 @@ function updateEntityByKey(paths, getUpdatedDataFn, callback) {
         return callback(createError(500, getError.message));
       } else if (!entity) {
         return callback(
-          createError(404, `Cannot update update. No item exists with: ${key}`)
+          createError(
+            404,
+            `Cannot update update. No item exists with: [${key.path}]`
+          )
         );
       }
 
