@@ -43,6 +43,7 @@ function addItem(req, res, next) {
       db_utils.saveEntityByKey(
         key,
         {
+          itemId: key.id,
           owner_uid: req.body.owner_uid,
           owner_display_name: req.body.owner_display_name,
           title: req.body.title,
@@ -75,6 +76,7 @@ function updateItem(req, res, next) {
         link: req.body.link || oldEntity.link,
         tags: req.body.tags || oldEntity.tags,
         // immutable or auto-updated fields
+        itemId: oldEntity.itemId,
         update_date: new Date(),
         owner_uid: oldEntity.owner_uid,
       };
