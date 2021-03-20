@@ -10,7 +10,7 @@ const ITEM_KEY_KIND = "GoListItems";
 /* -------------------------------------------------------------------------- */
 
 /** Get a list entity by its name */
-function handleGetListByName(req, res, next) {
+function getListByName(req, res, next) {
   db_utils.getEntityByKey([LIST_KEY_KIND, req.params.name], (err, data) => {
     if (err) return next(err);
     return res.json(data);
@@ -18,7 +18,7 @@ function handleGetListByName(req, res, next) {
 }
 
 /** Save a list entity by its name, or update it if it already exists. */
-function handleSaveList(req, res, next) {
+function saveList(req, res, next) {
   db_utils.saveEntityByKey(
     /*paths=*/
     [LIST_KEY_KIND, req.params.name],
@@ -40,7 +40,7 @@ function handleSaveList(req, res, next) {
 }
 
 /** Update a list entity by its name, or error if it doesn't exit. */
-function handleUpdateList(req, res, next) {
+function updateList(req, res, next) {
   db_utils.updateEntityByKey(
     /*paths=*/
     [LIST_KEY_KIND, req.params.name],
@@ -65,7 +65,7 @@ function handleUpdateList(req, res, next) {
 }
 
 /** Delete a list entity by its name */
-function handleDeleteListByName(req, res, next) {
+function deleteListByName(req, res, next) {
   db_utils.deleteEntityByQuery(
     /*query=*/ datastore
       .createQuery(ITEM_KEY_KIND)
@@ -86,7 +86,7 @@ function handleDeleteListByName(req, res, next) {
 /* -------------------------------------------------------------------------- */
 
 /** Get all items under a list entity by its list name */
-function handleGetListItemsByName(req, res, next) {
+function getListItemsByName(req, res, next) {
   db_utils.getEntityByQuery(
     /*query=*/
     datastore
@@ -101,9 +101,9 @@ function handleGetListItemsByName(req, res, next) {
 }
 
 module.exports = {
-  handleGetListByName,
-  handleSaveList,
-  handleUpdateList,
-  handleDeleteListByName,
-  handleGetListItemsByName,
+  getListByName,
+  saveList,
+  updateList,
+  deleteListByName,
+  getListItemsByName,
 };

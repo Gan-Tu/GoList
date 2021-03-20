@@ -3,11 +3,11 @@ var express = require("express");
 var router = express.Router();
 
 const {
-  handleGetListByName,
-  handleSaveList,
-  handleUpdateList,
-  handleDeleteListByName,
-  handleGetListItemsByName,
+  getListByName,
+  saveList,
+  updateList,
+  deleteListByName,
+  getListItemsByName,
 } = require("./db");
 
 router.param("name", function (req, res, next, name) {
@@ -27,9 +27,9 @@ router.param("name", function (req, res, next, name) {
 
 router
   .route("/:name")
-  .get(handleGetListByName)
-  .delete(handleDeleteListByName)
-  .put(handleUpdateList)
+  .get(getListByName)
+  .delete(deleteListByName)
+  .put(updateList)
   .post(
     // vaildates essential fields exist
     function validateBody(req, res, next) {
@@ -41,10 +41,10 @@ router
         next();
       }
     },
-    handleSaveList
+    saveList
   );
 
-router.route("/:name/items").get(handleGetListItemsByName);
+router.route("/:name/items").get(getListItemsByName);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
