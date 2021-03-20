@@ -9,7 +9,8 @@ var rateLimit = require("express-rate-limit");
 var helmet = require("helmet");
 
 var indexRouter = require("./routes/index");
-var goListsRouter = require("./routes/golists");
+var listRouter = require("./routes/lists");
+var itemsRouter = require("./routes/items");
 var usersRouter = require("./routes/users");
 
 var app = express();
@@ -60,7 +61,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(cors()); // allow all origins
 }
 
-app.use("/golists", goListsRouter);
+app.use("/lists", listRouter);
+app.use("/items", itemsRouter);
 app.use("/users", usersRouter);
 app.use("/*", indexRouter); // catch all
 

@@ -17,7 +17,7 @@ function* fetchListsAsync({ uid }) {
 
 function* createNewListAsync(action) {
   const { name, title, description, uid, userDisplayName } = action;
-  const resp = yield call(fetch, `https://api.goli.st/golists/${name}`, {
+  const resp = yield call(fetch, `https://api.goli.st/lists/${name}`, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -38,7 +38,7 @@ function* createNewListAsync(action) {
 }
 
 function* deleteListAsync({ name, uid }) {
-  const resp = yield call(fetch, `https://api.goli.st/golists/${name}`, {
+  const resp = yield call(fetch, `https://api.goli.st/lists/${name}`, {
     method: "delete",
   });
   const { err, ok } = yield resp.json();

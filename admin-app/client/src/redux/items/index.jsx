@@ -3,7 +3,10 @@ import { toast } from "react-toastify";
 import { FETCH_ITEMS, SET_ITEMS } from "../actionTypes";
 
 function* fetchItemsAsync({ name }) {
-  const resp = yield call(fetch, `https://api.goli.st/golists/${name}/items`);
+  const resp = yield call(
+    fetch,
+    `https://api.goli.st/golists/lists/${name}/items`
+  );
   const { err, ok, entities } = yield resp.json();
   if (ok) {
     yield put({ type: SET_ITEMS, items: entities });

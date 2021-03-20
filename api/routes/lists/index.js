@@ -10,7 +10,7 @@ const {
   getListItemsByListName,
 } = require("./db");
 
-router.param("listName", function (req, res, next, name) {
+router.param("name", function (req, res, next, name) {
   if (!name || name.length <= 0) {
     next(createError(400, "GoList name cannot be empty"));
   } else if (!name.match(/^[a-zA-Z0-9]+[a-zA-Z0-9-]*$/)) {
@@ -26,7 +26,7 @@ router.param("listName", function (req, res, next, name) {
 });
 
 router
-  .route("/:listName")
+  .route("/:name")
   .get(getListByName)
   .delete(deleteListByName)
   .put(updateList)
@@ -44,7 +44,7 @@ router
     saveList
   );
 
-router.route("/:listName/items").get(getListItemsByListName);
+router.route("/:name/items").get(getListItemsByListName);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
