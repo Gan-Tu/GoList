@@ -1,6 +1,7 @@
 const { Datastore } = require("@google-cloud/datastore");
 const datastore = new Datastore();
 const db_utils = require("../../utils/datastore_utils");
+const createError = require("http-errors");
 
 const LIST_KEY_KIND = "GoLists";
 const ITEM_KEY_KIND = "GoListItems";
@@ -10,9 +11,13 @@ const ITEM_KEY_KIND = "GoListItems";
 /* -------------------------------------------------------------------------- */
 
 /** Get a list entity by its name */
-function getListByName(req, res, next) {
+function getList(req, res, next) {
   db_utils.getEntityByKey([LIST_KEY_KIND, req.params.name], (err, data) => {
-    if (err) return next(err);
+    if (err) {
+      return next(
+        createError(err.statusCode, `GoLists not found: ${err.message}`)
+      );
+    }
     return res.json(data);
   });
 }
@@ -81,11 +86,12 @@ function updateList(req, res, next) {
 }
 
 /** Delete a list entity by its name */
-function deleteListByName(req, res, next) {
+function deleteList(req, res, next) {
   db_utils.deleteEntityByQuery(
     /*query=*/ datastore
       .createQuery(ITEM_KEY_KIND)
-      .hasAncestor(datastore.key([LIST_KEY_KIND, req.params.name])),
+      .hasAncestor(datastore.key([LIST_KEY_KIND, req.params.name]))
+      .select("__key__"),
     /*callback=*/
     (err) => {
       if (err) return next(err);
@@ -98,9 +104,9 @@ function deleteListByName(req, res, next) {
 }
 
 module.exports = {
-  getListByName,
+  getList,
   saveList,
   updateList,
-  deleteListByName,
+  deleteList,
   getListItemsByListName,
 };

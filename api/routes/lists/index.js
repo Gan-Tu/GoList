@@ -3,10 +3,10 @@ var express = require("express");
 var router = express.Router();
 
 const {
-  getListByName,
+  getList,
   saveList,
   updateList,
-  deleteListByName,
+  deleteList,
   getListItemsByListName,
 } = require("./db");
 
@@ -27,8 +27,8 @@ router.param("name", function (req, res, next, name) {
 
 router
   .route("/:name")
-  .get(getListByName)
-  .delete(deleteListByName)
+  .get(getList)
+  .delete(deleteList)
   .put(updateList)
   .post(
     // vaildates essential fields exist
