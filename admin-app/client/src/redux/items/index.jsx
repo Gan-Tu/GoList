@@ -5,7 +5,7 @@ import { FETCH_ITEMS, SET_ITEMS } from "../actionTypes";
 function* fetchItemsAsync({ name }) {
   const resp = yield call(
     fetch,
-    `https://api.goli.st/golists/lists/${name}/items`
+    `https://api.goli.st/lists/${name}/items`
   );
   const { err, ok, entities } = yield resp.json();
   if (ok) {
