@@ -47,14 +47,15 @@ const List = (props) => {
       </Head>
       <section className="card-list">
         {data.entities.map((item, idx) => (
-          <GoListCard key={`GoListCard-${idx}`}
+          <GoListCard
+            key={`GoListCard-${idx}`}
             date={item.last_modified_date}
             title={item.title}
             author={item.owner_display_name}
             description={item.description}
             image_url={item.image_url}
             link={item.link}
-            tags={[...item.tags, `goli.st/${props.listName}`].slice(0, 1)}
+            tags={item.tags}
           />
         ))}
       </section>
