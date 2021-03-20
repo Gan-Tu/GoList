@@ -93,10 +93,30 @@ function deleteEntityByKey(paths, callback) {
   });
 }
 
+function deleteEntityByQuery(query, callback) {
+  datastore.runQuery(query, (err, entities) => {
+    if (err) {
+      callback(createError(500, err.message));
+    } else {
+      datastore.delete(
+        entities.map((entity) => entity[datastore.KEY]),
+        (err2, apiResponse) => {
+          if (err2) {
+            callback(createError(500, err2.message));
+          } else {
+            callback(null, apiResponse);
+          }
+        }
+      );
+    }
+  });
+}
+
 module.exports = {
   getEntityByKey,
   getEntityByQuery,
   saveEntityByKey,
   updateEntityByKey,
   deleteEntityByKey,
+  deleteEntityByQuery,
 };

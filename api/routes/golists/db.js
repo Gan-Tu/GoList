@@ -66,10 +66,19 @@ function handleUpdateList(req, res, next) {
 
 /** Delete a list entity by its name */
 function handleDeleteListByName(req, res, next) {
-  db_utils.deleteEntityByKey([LIST_KEY_KIND, req.params.name], (err) => {
-    if (err) return next(err);
-    return res.json({ err: null, ok: true });
-  });
+  db_utils.deleteEntityByQuery(
+    /*query=*/ datastore
+      .createQuery(ITEM_KEY_KIND)
+      .hasAncestor(datastore.key([LIST_KEY_KIND, req.params.name])),
+    /*callback=*/
+    (err) => {
+      if (err) return next(err);
+      db_utils.deleteEntityByKey([LIST_KEY_KIND, req.params.name], (err2) => {
+        if (err2) return next(err2);
+        return res.status(202).json({ err: null, ok: true });
+      });
+    }
+  );
 }
 
 /* -------------------------------------------------------------------------- */
