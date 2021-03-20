@@ -7,14 +7,7 @@ function getEntityByKey(paths, callback) {
     if (err) {
       callback(createError(500, err.message));
     } else if (!entity) {
-      callback(
-        createError(
-          404,
-          `No GoLists found with name: ${
-            paths && paths.length > 1 ? paths[paths.length - 1] : paths
-          }`
-        )
-      );
+      callback(createError(404, `No entity found with key: [${paths}]`));
     } else {
       callback(null, entity);
     }
@@ -83,8 +76,8 @@ function updateEntityByKey(paths, getUpdatedDataFn, callback) {
   });
 }
 
-function deleteEntityByKey(paths, callback) {
-  datastore.delete(datastore.key(paths), (err, apiResponse) => {
+function _deleteEntityHelper(keys, callback) {
+  datastore.delete(keys, (err, apiResponse) => {
     if (err) {
       callback(createError(500, err.message));
     } else {
@@ -93,22 +86,17 @@ function deleteEntityByKey(paths, callback) {
   });
 }
 
+function deleteEntityByKey(paths, callback) {
+  _deleteEntityHelper(datastore.key(paths), callback);
+}
+
 function deleteEntityByQuery(query, callback) {
-  datastore.runQuery(query, (err, entities) => {
-    if (err) {
-      callback(createError(500, err.message));
-    } else {
-      datastore.delete(
-        entities.map((entity) => entity[datastore.KEY]),
-        (err2, apiResponse) => {
-          if (err2) {
-            callback(createError(500, err2.message));
-          } else {
-            callback(null, apiResponse);
-          }
-        }
-      );
-    }
+  getEntityByQuery(query, (err, entities) => {
+    if (err) return callback(createError(500, err.message));
+    _deleteEntityHelper(
+      entities.map((entity) => entity[datastore.KEY]),
+      callback
+    );
   });
 }
 
