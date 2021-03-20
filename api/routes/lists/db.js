@@ -64,11 +64,12 @@ function updateList(req, res, next) {
       return {
         listName: req.params.name,
         title: req.body.title || oldEntity.title,
-        update_date: new Date() || oldEntity.update_date,
-        owner_uid: req.body.owner_uid, // owner uid should be immutable for now
         owner_display_name:
           req.body.owner_display_name || oldEntity.owner_display_name,
         description: req.body.description || oldEntity.description,
+        // immutable or auto-updated fields
+        update_date: new Date(),
+        owner_uid: oldEntity.owner_uid,
       };
     },
     /*callback=*/
