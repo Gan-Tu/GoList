@@ -6,7 +6,7 @@ const options = { errorRetryCount: 10 };
 
 export function useGoList(name) {
   const { data, error } = useSWR(
-    `${GOLIST_API_ROOT}/golists/${name}`,
+    `${GOLIST_API_ROOT}/lists/${name}`,
     fetcher,
     options
   );
@@ -19,7 +19,7 @@ export function useGoList(name) {
 
 export function useGoListItems(name) {
   const { data, error } = useSWR(
-    `${GOLIST_API_ROOT}/golists/${name}/items`,
+    `${GOLIST_API_ROOT}/lists/${name}/items`,
     fetcher,
     options
   );
