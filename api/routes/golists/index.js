@@ -33,9 +33,9 @@ router
   .post(
     // vaildates essential fields exist
     function validateBody(req, res, next) {
-      if (!req.body.title || req.body.title.length <= 0) {
+      if (!req.body.title) {
         next(createError(400, "Missing title in request body"));
-      } else if (!req.body.owner_uid || req.body.owner_uid.length <= 0) {
+      } else if (!req.body.owner_uid) {
         next(createError(400, "Missing owner_uid in request body"));
       } else {
         next();
