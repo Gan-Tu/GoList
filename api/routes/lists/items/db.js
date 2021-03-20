@@ -21,7 +21,6 @@ function getAllItems(req, res, next) {
 
 /** Get an item entity by its ID */
 function getSingleItem(req, res, next) {
-  console.log([LIST_KEY_KIND, req.listName, ITEM_KEY_KIND, req.params.itemId]);
   db_utils.getEntityByKey(
     [LIST_KEY_KIND, req.listName, ITEM_KEY_KIND, req.params.itemId],
     (err, data) => {
@@ -37,21 +36,27 @@ function getSingleItem(req, res, next) {
 
 /** Add a new item entity with randomly assigned ID. */
 function addItem(req, res, next) {
-  db_utils.saveEntityByKey(
+  db_utils.allocateOneKey(
     [LIST_KEY_KIND, req.listName, ITEM_KEY_KIND],
-    {
-      owner_uid: req.body.owner_uid,
-      owner_display_name: req.body.owner_display_name,
-      title: req.body.title,
-      description: req.body.description,
-      image_url: req.body.image_url,
-      link: req.body.link,
-      tags: req.body.tags || [],
-      update_date: new Date(),
-    },
-    (err, apiResponse) => {
+    (err, key) => {
       if (err) return next(err);
-      res.status(201).json({ err: null, ok: true, apiResponse });
+      db_utils.saveEntityByKey(
+        key,
+        {
+          owner_uid: req.body.owner_uid,
+          owner_display_name: req.body.owner_display_name,
+          title: req.body.title,
+          description: req.body.description,
+          image_url: req.body.image_url,
+          link: req.body.link,
+          tags: req.body.tags || [],
+          update_date: new Date(),
+        },
+        (err) => {
+          if (err) return next(err);
+          res.status(201).json({ err: null, ok: true, itemId: key.id });
+        }
+      );
     }
   );
 }

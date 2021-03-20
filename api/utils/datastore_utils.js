@@ -2,8 +2,24 @@ const createError = require("http-errors");
 const { Datastore } = require("@google-cloud/datastore");
 const datastore = new Datastore();
 
+function resolveKey(value) {
+  if (datastore.isKey(value)) {
+    return value;
+  } else {
+    return datastore.key(value);
+  }
+}
+
+function allocateOneKey(incomplete_paths, callback) {
+  datastore.allocateIds(resolveKey(incomplete_paths), 1, (err, keys) => {
+    if (err) return callback(err);
+    if (!keys) return callback(createError(500, "Failed to allocate any keys"));
+    return callback(null, keys[0]);
+  });
+}
+
 function getEntityByKey(paths, callback) {
-  datastore.get(datastore.key(paths), (err, entity) => {
+  datastore.get(resolveKey(paths), (err, entity) => {
     if (err) {
       callback(createError(500, err.message));
     } else if (!entity) {
@@ -27,7 +43,7 @@ function getEntityByQuery(query, callback) {
 function saveEntityByKey(paths, data, callback) {
   datastore.save(
     {
-      key: datastore.key(paths),
+      key: resolveKey(paths),
       data: data,
     },
     function (err, apiResponse) {
@@ -41,7 +57,7 @@ function saveEntityByKey(paths, data, callback) {
 }
 
 function updateEntityByKey(paths, getUpdatedDataFn, callback) {
-  const key = datastore.key(paths);
+  const key = resolveKey(paths);
 
   // Start a transaction remotely
   const transaction = datastore.transaction();
@@ -90,7 +106,7 @@ function _deleteEntityHelper(keys, callback) {
 }
 
 function deleteEntityByKey(paths, callback) {
-  _deleteEntityHelper(datastore.key(paths), callback);
+  _deleteEntityHelper(resolveKey(paths), callback);
 }
 
 function deleteEntityByQuery(query, callback) {
@@ -104,6 +120,7 @@ function deleteEntityByQuery(query, callback) {
 }
 
 module.exports = {
+  allocateOneKey,
   getEntityByKey,
   getEntityByQuery,
   saveEntityByKey,
