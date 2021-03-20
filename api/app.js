@@ -10,7 +10,6 @@ var helmet = require("helmet");
 
 var indexRouter = require("./routes/index");
 var listRouter = require("./routes/lists");
-var itemsRouter = require("./routes/items");
 var usersRouter = require("./routes/users");
 
 var app = express();
@@ -62,7 +61,6 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.use("/lists", listRouter);
-app.use("/items", itemsRouter);
 app.use("/users", usersRouter);
 app.use("/*", indexRouter); // catch all
 

@@ -1,19 +1,19 @@
 const createError = require("http-errors");
 var express = require("express");
 var router = express.Router();
+var itemsRouter = require("./items");
 
 const {
   getList,
   saveList,
   updateList,
   deleteList,
-  getListItemsByListName,
 } = require("./db");
 
-router.param("name", function (req, res, next, name) {
-  if (!name || name.length <= 0) {
+router.param("listName", function (req, res, next, listName) {
+  if (!listName) {
     next(createError(400, "GoList name cannot be empty"));
-  } else if (!name.match(/^[a-zA-Z0-9]+[a-zA-Z0-9-]*$/)) {
+  } else if (!listName.match(/^[a-zA-Z0-9]+[a-zA-Z0-9-]*$/)) {
     next(
       createError(
         400,
@@ -21,12 +21,13 @@ router.param("name", function (req, res, next, name) {
       )
     );
   } else {
+    req.listName = listName;  // so other child routers can access it
     next();
   }
 });
 
 router
-  .route("/:name")
+  .route("/:listName")
   .get(getList)
   .delete(deleteList)
   .put(updateList)
@@ -44,7 +45,8 @@ router
     saveList
   );
 
-router.route("/:name/items").get(getListItemsByListName);
+
+router.use("/:listName/items", itemsRouter);
 
 /* GET home page. */
 router.get("/", function (req, res, next) {

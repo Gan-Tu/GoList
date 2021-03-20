@@ -6,13 +6,9 @@ const createError = require("http-errors");
 const LIST_KEY_KIND = "GoLists";
 const ITEM_KEY_KIND = "GoListItems";
 
-/* -------------------------------------------------------------------------- */
-/*                                   LISTS                                    */
-/* -------------------------------------------------------------------------- */
-
 /** Get a list entity by its name */
 function getList(req, res, next) {
-  db_utils.getEntityByKey([LIST_KEY_KIND, req.params.name], (err, data) => {
+  db_utils.getEntityByKey([LIST_KEY_KIND, req.params.listName], (err, data) => {
     if (err) {
       return next(
         createError(err.statusCode, `GoLists not found: ${err.message}`)
@@ -22,29 +18,14 @@ function getList(req, res, next) {
   });
 }
 
-/** Get all items under a list entity by its list name */
-function getListItemsByListName(req, res, next) {
-  db_utils.getEntityByQuery(
-    /*query=*/
-    datastore
-      .createQuery(ITEM_KEY_KIND)
-      .hasAncestor(datastore.key([LIST_KEY_KIND, req.params.name])),
-    /*callback=*/
-    (err, entities) => {
-      if (err) return next(err);
-      return res.status(202).json({ err: null, ok: true, entities });
-    }
-  );
-}
-
 /** Save a list entity by its name, or update it if it already exists. */
 function saveList(req, res, next) {
   db_utils.saveEntityByKey(
     /*paths=*/
-    [LIST_KEY_KIND, req.params.name],
+    [LIST_KEY_KIND, req.params.listName],
     /*data=*/
     {
-      listName: req.params.name,
+      listName: req.params.listName,
       owner_uid: req.body.owner_uid,
       owner_display_name: req.body.owner_display_name,
       title: req.body.title,
@@ -63,11 +44,11 @@ function saveList(req, res, next) {
 function updateList(req, res, next) {
   db_utils.updateEntityByKey(
     /*paths=*/
-    [LIST_KEY_KIND, req.params.name],
+    [LIST_KEY_KIND, req.params.listName],
     /*getUpdatedDataFn=*/
     (oldEntity) => {
       return {
-        listName: req.params.name,
+        listName: req.params.listName,
         title: req.body.title || oldEntity.title,
         owner_display_name:
           req.body.owner_display_name || oldEntity.owner_display_name,
@@ -90,15 +71,18 @@ function deleteList(req, res, next) {
   db_utils.deleteEntityByQuery(
     /*query=*/ datastore
       .createQuery(ITEM_KEY_KIND)
-      .hasAncestor(datastore.key([LIST_KEY_KIND, req.params.name]))
+      .hasAncestor(datastore.key([LIST_KEY_KIND, req.params.listName]))
       .select("__key__"),
     /*callback=*/
     (err) => {
       if (err) return next(err);
-      db_utils.deleteEntityByKey([LIST_KEY_KIND, req.params.name], (err2) => {
-        if (err2) return next(err2);
-        return res.status(202).json({ err: null, ok: true });
-      });
+      db_utils.deleteEntityByKey(
+        [LIST_KEY_KIND, req.params.listName],
+        (err2) => {
+          if (err2) return next(err2);
+          return res.status(202).json({ err: null, ok: true });
+        }
+      );
     }
   );
 }
@@ -108,5 +92,4 @@ module.exports = {
   saveList,
   updateList,
   deleteList,
-  getListItemsByListName,
 };
