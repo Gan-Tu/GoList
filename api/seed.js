@@ -1,7 +1,61 @@
 const { Datastore } = require("@google-cloud/datastore");
 const datastore = new Datastore();
 
-const SEED_DATA = [
+const SEED_ITEMS = [
+  {
+    title: "Admin Template",
+    link: "http://admin.pixelstrap.com/Xolo/ltr/landing-page.html",
+    tags: ["Example"],
+    description:
+      "Xolo is beautifully crafted, clean and modern designed admin theme with 6 different demos and light - dark versions.",
+    update_date: new Date(),
+  },
+  {
+    title: "Universal Template",
+    link: "https://angular.pixelstrap.com/universal/landing",
+    tags: ["Example"],
+    image_url: "https://react.pixelstrap.com/cuba/static/media/02.4305442c.jpg",
+    description:
+      "Universal is beautifully crafted, clean and modern designed admin theme",
+    update_date: new Date(),
+  },
+  {
+    title: "Angular Theme",
+    link: "https://angular.pixelstrap.com/Xolo/landing",
+    tags: ["Example"],
+    image_url: "https://react.pixelstrap.com/cuba/static/media/03.db84143c.jpg",
+    description:
+      "Xolo is beautifully crafted, clean and modern designed admin theme",
+    update_date: new Date(),
+  },
+  {
+    title: "Multikart Admin",
+    link: "http://themes.pixelstrap.com/multikart/back-end/index.html",
+    tags: ["Example"],
+    image_url: "https://react.pixelstrap.com/cuba/static/media/04.0fee3312.jpg",
+    description: "Multikart Admin is modern designed admin theme",
+    update_date: new Date(),
+  },
+  {
+    title: "Ecommerece theme",
+    link: "http://themes.pixelstrap.com/multikart",
+    tags: ["Example"],
+    image_url: "https://react.pixelstrap.com/cuba/static/media/05.77a41af3.jpg",
+    description:
+      "Multikart HTML template is an apparently simple but highly functional tempalate designed for creating a flourisahing online business.",
+    update_date: new Date(),
+  },
+  {
+    title: "Tovo app landing page",
+    link: "http://vue.pixelstrap.com/tovo/home-one",
+    tags: ["Example"],
+    image_url: "https://react.pixelstrap.com/cuba/static/media/06.1d72b207.jpg",
+    description: "Amazing Landing Page With Easy Customization",
+    update_date: new Date(),
+  },
+];
+
+var SEED_DATA = [
   {
     key: datastore.key(["GoLists", "tugan"]),
     data: {
@@ -36,7 +90,7 @@ const SEED_DATA = [
     },
   },
   {
-    key: datastore.key(["GoLists", "tugan", "GoListItems", "github"]),
+    key: datastore.key(["GoLists", "tugan", "GoListItems"]),
     data: {
       title: "GitHub",
       description: "A repo of my software developments",
@@ -50,7 +104,7 @@ const SEED_DATA = [
     },
   },
   {
-    key: datastore.key(["GoLists", "tugan", "GoListItems", "linkedin"]),
+    key: datastore.key(["GoLists", "tugan", "GoListItems"]),
     data: {
       title: "LinkedIn",
       description: "My Professional Journey",
@@ -64,7 +118,7 @@ const SEED_DATA = [
     },
   },
   {
-    key: datastore.key(["GoLists", "tugan", "GoListItems", "youtube"]),
+    key: datastore.key(["GoLists", "tugan", "GoListItems"]),
     data: {
       title: "YouTube",
       description: "Don't forget to subscribe!",
@@ -77,178 +131,30 @@ const SEED_DATA = [
       update_date: new Date(),
     },
   },
-  {
-    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-01"]),
+];
+
+SEED_DATA = [
+  ...SEED_DATA,
+  ...SEED_ITEMS.map((itemData) => ({
+    key: datastore.key(["GoLists", "demo", "GoListItems"]),
     data: {
-      title: "Admin Template",
-      link: "http://admin.pixelstrap.com/Xolo/ltr/landing-page.html",
+      ...itemData,
       owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
       owner_display_name: "Gan Tu",
-      tags: ["Example"],
-      description:
-        "Xolo is beautifully crafted, clean and modern designed admin theme with 6 different demos and light - dark versions.",
-      update_date: new Date(),
     },
-  },
-  {
-    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-02"]),
+  })),
+];
+
+SEED_DATA = [
+  ...SEED_DATA,
+  ...SEED_ITEMS.map((itemData) => ({
+    key: datastore.key(["GoLists", "demo2", "GoListItems"]),
     data: {
-      title: "Universal Template",
-      link: "https://angular.pixelstrap.com/universal/landing",
-      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
-      owner_display_name: "Gan Tu",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/02.4305442c.jpg",
-      description:
-        "Universal is beautifully crafted, clean and modern designed admin theme",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-03"]),
-    data: {
-      title: "Angular Theme",
-      link: "https://angular.pixelstrap.com/Xolo/landing",
-      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
-      owner_display_name: "Gan Tu",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/03.db84143c.jpg",
-      description:
-        "Xolo is beautifully crafted, clean and modern designed admin theme",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-04"]),
-    data: {
-      title: "Multikart Admin",
-      link: "http://themes.pixelstrap.com/multikart/back-end/index.html",
-      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
-      owner_display_name: "Gan Tu",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/04.0fee3312.jpg",
-      description: "Multikart Admin is modern designed admin theme",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-05"]),
-    data: {
-      title: "Ecommerece theme",
-      link: "http://themes.pixelstrap.com/multikart",
-      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
-      owner_display_name: "Gan Tu",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/05.77a41af3.jpg",
-      description:
-        "Multikart HTML template is an apparently simple but highly functional tempalate designed for creating a flourisahing online business.",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo", "GoListItems", "demo-item-06"]),
-    data: {
-      title: "Tovo app landing page",
-      link: "http://vue.pixelstrap.com/tovo/home-one",
-      owner_uid: "69dlMd8Ze2RPw5ANlmLhZoivaxJ2",
-      owner_display_name: "Gan Tu",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/06.1d72b207.jpg",
-      description: "Amazing Landing Page With Easy Customization",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-01"]),
-    data: {
-      title: "Admin Template",
-      link: "http://admin.pixelstrap.com/Xolo/ltr/landing-page.html",
+      ...itemData,
       owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
       owner_display_name: "Travis",
-      tags: ["Example"],
-      description:
-        "Xolo is beautifully crafted, clean and modern designed admin theme with 6 different demos and light - dark versions.",
-      update_date: new Date(),
     },
-  },
-  {
-    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-02"]),
-    data: {
-      title: "Universal Template",
-      link: "https://angular.pixelstrap.com/universal/landing",
-      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
-      owner_display_name: "Travis",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/02.4305442c.jpg",
-      description:
-        "Universal is beautifully crafted, clean and modern designed admin theme",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-03"]),
-    data: {
-      title: "Angular Theme",
-      link: "https://angular.pixelstrap.com/Xolo/landing",
-      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
-      owner_display_name: "Travis",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/03.db84143c.jpg",
-      description:
-        "Xolo is beautifully crafted, clean and modern designed admin theme",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-04"]),
-    data: {
-      title: "Multikart Admin",
-      link: "http://themes.pixelstrap.com/multikart/back-end/index.html",
-      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
-      owner_display_name: "Travis",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/04.0fee3312.jpg",
-      description: "Multikart Admin is modern designed admin theme",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-05"]),
-    data: {
-      title: "Ecommerece theme",
-      link: "http://themes.pixelstrap.com/multikart",
-      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
-      owner_display_name: "Travis",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/05.77a41af3.jpg",
-      description:
-        "Multikart HTML template is an apparently simple but highly functional tempalate designed for creating a flourisahing online business.",
-      update_date: new Date(),
-    },
-  },
-  {
-    key: datastore.key(["GoLists", "demo2", "GoListItems", "demo-item-06"]),
-    data: {
-      title: "Tovo app landing page",
-      link: "http://vue.pixelstrap.com/tovo/home-one",
-      owner_uid: "tkWUUkPeSnQAbrc7Qrn17eJV7Et2",
-      owner_display_name: "Travis",
-      tags: ["Example"],
-      image_url:
-        "https://react.pixelstrap.com/cuba/static/media/06.1d72b207.jpg",
-      description: "Amazing Landing Page With Easy Customization",
-      update_date: new Date(),
-    },
-  },
+  })),
 ];
 
 async function getData(kind, parent_key) {
@@ -261,18 +167,6 @@ async function getData(kind, parent_key) {
     console.error(err);
   }
 }
-
-datastore.save(SEED_DATA, function (err, apiResponse) {
-  if (err && err.code === /* ALREADY_EXISTS */ 6) {
-    console.log("already exists");
-  } else if (err) {
-    console.log(`error: ${err.message}`);
-  } else {
-    console.log(SEED_DATA);
-    console.log(apiResponse);
-  }
-  // getData("Urls", datastore.key(["GoLists", "tugan"]));
-});
 
 async function purgeAllDate(kind) {
   let query = datastore.createQuery(kind);
@@ -291,5 +185,17 @@ async function purgeAllDate(kind) {
   }
 }
 
-// purgeAllDate("GoListItems");
+purgeAllDate("GoListItems");
 // purgeAllDate("GoLists");
+
+datastore.save(SEED_DATA, function (err, apiResponse) {
+  if (err && err.code === /* ALREADY_EXISTS */ 6) {
+    console.log("already exists");
+  } else if (err) {
+    console.log(`error: ${err.message}`);
+  } else {
+    console.log(SEED_DATA);
+    console.log(apiResponse);
+  }
+  // getData("Urls", datastore.key(["GoLists", "tugan"]));
+});
