@@ -168,6 +168,7 @@ const CreateListItemModal = (props) => {
         className="form-control"
         type="url"
         name="itemImageUrl"
+        value={imageUrl}
         placeholder="Alternatively, enter an image URL here"
         onChange={(e) => setImageUrl(e.target.value)}
         innerRef={register(imageUrlValidation)}
@@ -227,6 +228,7 @@ const CreateListItemModal = (props) => {
                   className="form-control"
                   type="text"
                   name="itemTitle"
+                  value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   innerRef={register(titleValidations)}
                 />
@@ -245,6 +247,7 @@ const CreateListItemModal = (props) => {
                   className="form-control"
                   type="url"
                   name="itemUrl"
+                  value={url}
                   onChange={(e) => setURL(e.target.value)}
                   innerRef={register(urlValidations)}
                 />
@@ -261,6 +264,7 @@ const CreateListItemModal = (props) => {
                   className="form-control"
                   type="textarea"
                   name="itemDesc"
+                  value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   innerRef={register(descriptionValidations)}
                 />
