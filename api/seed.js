@@ -63,7 +63,7 @@ function seedListItem(listName, data) {
     });
 }
 
-purgeAllDate("GoLists").then(() => {
+function seedAllLists() {
   seedLists("tugan", {
     owner_uid: GAN_UID,
     owner_display_name: GAN_DISPLAY_NAME,
@@ -84,9 +84,15 @@ purgeAllDate("GoLists").then(() => {
     title: "Demo List",
     description: "A curated demo by GoList team",
   });
-});
+}
 
-purgeAllDate("GoListItems").then(() => {
+// purgeAllDate("GoLists").then(() => {
+//   seedAllLists();
+// });
+
+seedAllLists();
+
+function seedAllListItems() {
   seedListItem("tugan", {
     owner_uid: GAN_UID,
     owner_display_name: GAN_DISPLAY_NAME,
@@ -194,4 +200,9 @@ purgeAllDate("GoListItems").then(() => {
       owner_display_name: TRAVIS_DISPLAY_NAME,
     })
   );
-});
+}
+
+// purgeAllDate("GoListItems").then(() => {
+//   seedAllListItems();
+// });
+seedAllListItems();
