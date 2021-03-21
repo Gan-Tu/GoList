@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import man from "../../../assets/images/dashboard/profile.jpg";
 import { LogIn } from "react-feather";
-import { Admin, LogOut } from "../../../constant";
+import { LogOut } from "../../../constant";
 import { translate } from "react-switch-lang";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";

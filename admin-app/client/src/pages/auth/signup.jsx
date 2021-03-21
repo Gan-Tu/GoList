@@ -167,7 +167,6 @@ const SignUp = (props) => {
                     <Input
                       className="form-control"
                       type={togglePassword ? "text" : "password"}
-                      name="login[password]"
                       value={password}
                       name="password"
                       onChange={(e) => setPassword(e.target.value)}
