@@ -63,12 +63,4 @@ const List = (props) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
-  return {
-    props: {
-      name: params.name,
-    },
-  };
-}
-
 export default List;
