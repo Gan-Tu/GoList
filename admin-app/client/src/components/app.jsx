@@ -8,8 +8,7 @@ import AuthGatedWrapper from "./auth_wrapper";
 import { routes } from "../route";
 
 import LogIn from "../pages/auth/login";
-import Show from "../pages/show";
-
+import SignUp from "../pages/auth/signup";
 import { LOG_IN } from "../redux/actionTypes";
 import { firebase_app } from "../data/config";
 
@@ -41,7 +40,11 @@ const App = () => {
           path={`${process.env.PUBLIC_URL}/login`}
           component={LogIn}
         ></Route>
-        <Route path={`${process.env.PUBLIC_URL}/demo`} component={Show}></Route>
+
+        <Route
+          path={`${process.env.PUBLIC_URL}/signup`}
+          component={SignUp}
+        ></Route>
 
         {/* Routing to Pages requiring users to be logged in */}
         <AuthGatedWrapper>

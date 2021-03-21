@@ -46,14 +46,18 @@ const LogIn = (props) => {
     }
   }, [history, authenticated]);
 
-  const hideShowPassword = (tPassword) => {
-    setTogglePassword(!tPassword);
+  const toggleHideShowPassword = () => {
+    setTogglePassword(!togglePassword);
   };
 
   const redirectToHome = () => {
     setTimeout(() => {
-      props.history.push(`${process.env.PUBLIC_URL}/home`);
+      history.push(`${process.env.PUBLIC_URL}/home`);
     }, 200);
+  };
+
+  const redirectToSignUpPage = () => {
+    history.push(`${process.env.PUBLIC_URL}/signup`);
   };
 
   const showLoginError = (error) => {
@@ -90,16 +94,8 @@ const LogIn = (props) => {
             <div>
               <div>
                 <a className="logo" href="#javascript">
-                  <img
-                    className="img-fluid for-light"
-                    src={LOGO}
-                    alt=""
-                  />
-                  <img
-                    className="img-fluid for-dark"
-                    src={LOGO_DARK}
-                    alt=""
-                  />
+                  <img className="img-fluid for-light" src={LOGO} alt="" />
+                  <img className="img-fluid for-dark" src={LOGO_DARK} alt="" />
                 </a>
               </div>
               <div className="login-main login-tab">
@@ -107,7 +103,7 @@ const LogIn = (props) => {
                   className="theme-form"
                   onSubmit={(e) => emailPasswordAuth(e)}
                 >
-                  <h4>Sign In</h4>
+                  <h4>Log In</h4>
                   <p>{"Enter your email & password to login"}</p>
                   <FormGroup>
                     <Label className="col-form-label">{EmailAddress}</Label>
@@ -115,7 +111,7 @@ const LogIn = (props) => {
                       className="form-control"
                       type="email"
                       required
-                      placeholder="test@gmail.com"
+                      placeholder="test@example.com"
                       onChange={(e) => setEmail(e.target.value)}
                     />
                   </FormGroup>
@@ -132,7 +128,7 @@ const LogIn = (props) => {
                     />
                     <div
                       className="show-hide"
-                      onClick={() => hideShowPassword(togglePassword)}
+                      onClick={toggleHideShowPassword}
                     >
                       <span className={togglePassword ? "" : "show"}></span>
                     </div>
@@ -146,7 +142,9 @@ const LogIn = (props) => {
                       {loading ? "LOADING..." : SignIn}
                     </Button>
                   </div>
-                  <h6 className="text-muted mt-4 or">{"Or Sign in with"}</h6>
+
+                  {/* Third Party Provider */}
+                  <h6 className="text-muted mt-4 or">{"Or Log in with"}</h6>
                   <div className="social mt-4">
                     <div className="btn-showcase">
                       <Button
@@ -171,6 +169,16 @@ const LogIn = (props) => {
                       </Button>
                     </div>
                   </div>
+                  <p className="mt-4 mb-0">
+                    {"Don't have account?"}
+                    <a
+                      className="ml-2"
+                      href="#javascript"
+                      onClick={redirectToSignUpPage}
+                    >
+                      Create Account
+                    </a>
+                  </p>
                 </Form>
               </div>
             </div>
