@@ -17,8 +17,8 @@ export const descriptionValidations = {
 export const imageUrlValidation = {
   required: "Please either provide a valid Image URL, or upload an image",
   pattern: {
-    value: /.*\.(gif|jpe?g|bmp|png|svg)$/gim,
-    message: "Image URL must ends with gif, jpg, jpeg, bmp, png, or svg.",
+    value: /.*\.(gif|jpe?g|bmp|png|svg|webp)$/gim,
+    message: "Image URL must ends with gif, jpg, jpeg, bmp, png, svg, or webp.",
   },
 };
 
