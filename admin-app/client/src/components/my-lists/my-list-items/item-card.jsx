@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card } from "reactstrap";
-import { Link, Share2, Trash2, Tag, Edit2 } from "react-feather";
+import { Link, Share2, Trash2, Edit2 } from "react-feather";
 import defaultImg from "../../../assets/images/other-images/lightgallry-defaut.jpg";
 import { toast } from "react-toastify";
 import EditListItemModal from "./edit-list-item-modal";
@@ -9,10 +9,6 @@ import DeleteListItemModal from "./delete-list-item-modal";
 const ListItem = (props) => {
   const shareItem = () => {
     toast.error("Share is not implemented yet");
-  };
-
-  const tagItem = () => {
-    toast.error("Tag is not implemented yet");
   };
 
   const [showEditListItemForm, setShowEditListItemForm] = useState(false);
@@ -78,11 +74,6 @@ const ListItem = (props) => {
                     showForm={showDeleteListItemForm}
                     toggleForm={toggleDeleteListItemForm}
                   />
-                </li>
-                <li className="pull-right text-right">
-                  <a href="#javascript" onClick={tagItem}>
-                    <Tag />
-                  </a>
                 </li>
               </ul>
             </div>
