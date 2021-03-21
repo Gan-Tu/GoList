@@ -3,12 +3,17 @@ import { Card } from "reactstrap";
 import { Link, Share2, Trash2, Edit2 } from "react-feather";
 import defaultImg from "../../../assets/images/other-images/lightgallry-defaut.jpg";
 import { toast } from "react-toastify";
+import copy from "copy-to-clipboard";
 import EditListItemModal from "./edit-list-item-modal";
 import DeleteListItemModal from "./delete-list-item-modal";
 
 const ListItem = (props) => {
   const shareItem = () => {
-    toast.error("Share is not implemented yet");
+    const sharableItemURL = `http://goli.st/r/${props.listName}/items/${props.itemId}`;
+    copy(sharableItemURL);
+    toast.info(
+      `Sharable URL is copied to your pasteboard!\n${sharableItemURL}`
+    );
   };
 
   const [showEditListItemForm, setShowEditListItemForm] = useState(false);
