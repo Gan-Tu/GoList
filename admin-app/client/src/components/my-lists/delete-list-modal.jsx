@@ -21,8 +21,8 @@ const DeleteListModal = (props) => {
       </ModalHeader>
       <ModalBody>
         <p>
-          Are you sure you want to delete this GoList:{" "}
-          <b>goli.st/{props.listName}</b>
+          Are you sure you want to delete this GoList, and all links grouped in
+          them: <b>goli.st/{props.listName}</b>
         </p>
       </ModalBody>
       <ModalFooter>
