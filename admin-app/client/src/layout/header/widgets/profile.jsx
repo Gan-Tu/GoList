@@ -28,7 +28,7 @@ const ProfileWidget = (props) => {
         <div className="media-body">
           <span>{props.t(displayName || "Unknown")}</span>
           <p className="mb-0 font-roboto">
-            {props.t(Admin)} <i className="middle fa fa-angle-down"></i>
+            Beta User <i className="middle fa fa-angle-down"></i>
           </p>
         </div>
       </div>
