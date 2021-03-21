@@ -39,7 +39,15 @@ const GoListDetails = (props) => {
                 <Card className="mb-0">
                   {/* List Details */}
                   <CardHeader className="d-flex">
-                    <p>goli.st/{props.listName}</p>
+                    <p>
+                      <a
+                        href={`https://goli.st/${props.listName}`}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        goli.st/{props.listName}
+                      </a>
+                    </p>
                     <h6 className="f-w-600">{props.listTitle}</h6>
                     <ul>
                       <li>

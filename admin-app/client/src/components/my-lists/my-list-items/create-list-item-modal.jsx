@@ -1,32 +1,5 @@
-// import React from "react";
-// import { Modal, ModalHeader, ModalBody, ModalFooter, Button } from "reactstrap";
-
-// const CreateListItemModal = (props) => {
-//   return (
-//     <Modal
-//       isOpen={props.showForm}
-//       toggle={props.toggleForm}
-//       centered
-//       style={{ maxWidth: "600px" }}
-//     >
-//       <ModalHeader toggle={props.toggleForm}>Create GoList Item</ModalHeader>
-//       <ModalBody>
-//         <p>This is not implemented, but it's where you create an list item.</p>
-//       </ModalBody>
-//       <ModalFooter>
-//         <Button color="light" onClick={props.toggleForm}>
-//           Close
-//         </Button>
-//       </ModalFooter>
-//     </Modal>
-//   );
-// };
-
-// export default CreateListItemModal;
-
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
-// import Dropzone from "react-dropzone-uploader";
 import {
   Button,
   Modal,
@@ -38,6 +11,7 @@ import {
   FormGroup,
   Input,
   Label,
+  Media,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
 import {
@@ -47,6 +21,27 @@ import {
   urlValidations,
 } from "./validations";
 import { CREATE_ITEM } from "../../../redux/actionTypes";
+import { firebase_storage } from "../../../data/config";
+import { useDropzone } from "react-dropzone";
+import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
+
+const dropZoneBaseStyle = {
+  flex: 1,
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  textAlign: "center",
+  padding: "20px",
+  borderWidth: 2,
+  borderRadius: 2,
+  borderColor: "#eeeeee",
+  borderStyle: "dashed",
+  backgroundColor: "#fafafa",
+  color: "#bdbdbd",
+  outline: "none",
+  transition: "border .24s ease-in-out",
+};
 
 const CreateListItemModal = (props) => {
   const dispatch = useDispatch();
@@ -61,24 +56,35 @@ const CreateListItemModal = (props) => {
   const [url, setURL] = useState("");
   const [imageUrl, setImageUrl] = useState("");
 
-  // // specify upload params and url for your files
-  // const getUploadParams = ({ meta }) => {
-  //   return {
-  //     url: "https://httpbin.org/post",
-  //   };
-  // };
+  const [file, setFile] = useState();
+  const [objectURL, setObjectURL] = useState("");
+  const onDrop = useCallback((acceptedFiles) => {
+    if (acceptedFiles.length > 0) {
+      setFile(acceptedFiles[0]);
+      setObjectURL(URL.createObjectURL(acceptedFiles[0]));
+    }
+  }, []);
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: "image/*",
+    maxFiles: 1,
+  });
 
-  // // called every time a file's `status` changes
-  // const handleFileUploadChangeStatus = ({ meta, file }, status) => {};
+  const clearImage = () => {
+    setFile(null);
+    setObjectURL("");
+    setImageUrl("");
+  };
 
-  // // receives array of files that are done uploading when submit button is clicked
-  // const handleUpload = (files, allFiles) => {
-  //   // allFiles.forEach(f => f.remove())
-  //   //toast.success("Dropzone successfully submitted !");
-  // };
+  const resetForm = () => {
+    clearImage();
+    setTitle("");
+    setURL("");
+    setDescription("");
+  };
 
   const onSubmit = () => {
-    dispatch({
+    var create_action = {
       type: CREATE_ITEM,
       listName: props.listName,
       uid,
@@ -87,9 +93,107 @@ const CreateListItemModal = (props) => {
       description,
       imageUrl,
       url,
-    });
+    };
+
+    if (imageUrl) {
+      dispatch(create_action);
+      resetForm();
+    } else if (file) {
+      var parts = file.name.split(".");
+      var filename = `${uuidv4()}.${parts[parts.length - 1]}`;
+      var fileRef = firebase_storage
+        .ref()
+        .child(`users/${uid}/lists/${props.listName}/items/photos/${filename}`);
+      fileRef
+        .put(file)
+        .then((snapshot) => {
+          console.log("Uploaded item image!");
+          snapshot.ref
+            .getDownloadURL()
+            .then((downloadURL) => {
+              console.log(`[info] uploaded image as: ${downloadURL}`);
+              create_action.imageUrl = downloadURL;
+              dispatch(create_action);
+              resetForm();
+            })
+            .catch((err) => {
+              console.error(err);
+              toast.error("Failed to fetch uploaded image URL.");
+              dispatch(create_action);
+              resetForm();
+            });
+        })
+        .catch((err) => {
+          console.error(err);
+          toast.error("Thumbnail image failed to upload.");
+        });
+    } else {
+      return toast.error("Something went wrong.");
+    }
     props.toggleForm();
   };
+
+  var imagePreview = (
+    <div className="avatar">
+      <Media style={{ position: "relative" }}>
+        <img
+          src={imageUrl || objectURL}
+          alt="thumbnail preview"
+          className="b-r-10 rounded-circle"
+          style={{
+            maxWidth: "200px",
+            maxHeight: "150px",
+            width: "auto",
+            height: "auto",
+            marginLeft: "auto",
+            marginRight: "auto",
+          }}
+        />
+        <Button
+          className="btn-pill"
+          color="dark"
+          size="sm"
+          onClick={clearImage}
+          style={{ position: "absolute", right: 0, bottom: 0 }}
+        >
+          <i className="icofont icofont-ui-delete" /> Clear
+        </Button>
+      </Media>
+    </div>
+  );
+
+  var imageUrlBox = (
+    <div style={{ paddingTop: 10 }}>
+      <Input
+        className="form-control"
+        type="url"
+        name="itemImageUrl"
+        placeholder="Alternatively, enter an image URL here"
+        onChange={(e) => setImageUrl(e.target.value)}
+        innerRef={register(imageUrlValidation)}
+        style={{ fontSize: 14 }}
+      />
+      <span>{errors.itemImageUrl ? errors.itemImageUrl.message : null}</span>
+    </div>
+  );
+
+  var imageDragAndDrop = (
+    <div
+      {...getRootProps({
+        className: "dropzone",
+        style: dropZoneBaseStyle,
+      })}
+    >
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p style={{ marginBottom: 0 }}>Drop the files here ...</p>
+      ) : (
+        <p style={{ marginBottom: 0 }}>
+          Drag &amp; drop images here, or click to select files
+        </p>
+      )}
+    </div>
+  );
 
   return (
     <Modal isOpen={props.showForm} toggle={props.toggleForm} centered>
@@ -104,6 +208,18 @@ const CreateListItemModal = (props) => {
             {/* TODO(tugan): add CSRF tokens */}
             <Col md="12">
               <FormGroup>
+                <Label className="col-form-label" for="itemImageUrl">
+                  {imageUrl || objectURL ? "Thumbnail Preview" : "Thumbnail"}
+                </Label>
+                <div className="user-image">
+                  {imageUrl || objectURL ? imagePreview : imageDragAndDrop}
+                </div>
+                {imageUrl || !objectURL ? imageUrlBox : null}
+              </FormGroup>
+            </Col>
+
+            <Col md="12">
+              <FormGroup>
                 <Label className="col-form-label" for="itemTitle">
                   Title
                 </Label>
@@ -111,7 +227,6 @@ const CreateListItemModal = (props) => {
                   className="form-control"
                   type="text"
                   name="itemTitle"
-                  // placeholder="Enter short title here for your link"
                   onChange={(e) => setTitle(e.target.value)}
                   innerRef={register(titleValidations)}
                 />
@@ -130,54 +245,12 @@ const CreateListItemModal = (props) => {
                   className="form-control"
                   type="url"
                   name="itemUrl"
-                  // placeholder="https://www.example.com"
                   onChange={(e) => setURL(e.target.value)}
                   innerRef={register(urlValidations)}
                 />
                 <span>{errors.itemUrl ? errors.itemUrl.message : null}</span>
               </FormGroup>
             </Col>
-
-            <Col md="12">
-              <FormGroup>
-                <Label className="col-form-label" for="itemImageUrl">
-                  Image URL (jpg, png, etc.)
-                </Label>
-                <Input
-                  className="form-control"
-                  type="url"
-                  name="itemImageUrl"
-                  placeholder=""
-                  onChange={(e) => setImageUrl(e.target.value)}
-                  innerRef={register(imageUrlValidation)}
-                />
-                <span>
-                  {errors.itemImageUrl ? errors.itemImageUrl.message : null}
-                </span>
-              </FormGroup>
-            </Col>
-
-            {/* <Col md="12">
-              <FormGroup>
-                <Label>Upload Item Image</Label>
-                <div className="dz-message needsclick">
-                  <Dropzone
-                    getUploadParams={getUploadParams}
-                    onChangeStatus={handleFileUploadChangeStatus}
-                    maxFiles={1}
-                    multiple={false}
-                    canCancel={false}
-                    accept="image/*"
-                    inputContent="Drop or Click to Upload An Image"
-                    onSubmit={handleUpload}
-                    styles={{
-                      dropzone: { width: "100%", height: 50 },
-                      dropzoneActive: { borderColor: "green" },
-                    }}
-                  />
-                </div>
-              </FormGroup>
-            </Col> */}
 
             <Col md="12">
               <FormGroup>
@@ -188,7 +261,6 @@ const CreateListItemModal = (props) => {
                   className="form-control"
                   type="textarea"
                   name="itemDesc"
-                  // placeholder="Enter short description here for your link"
                   onChange={(e) => setDescription(e.target.value)}
                   innerRef={register(descriptionValidations)}
                 />
