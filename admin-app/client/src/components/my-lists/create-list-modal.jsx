@@ -86,34 +86,34 @@ const CreateListModal = (props) => {
 
             <Col md="12">
               <FormGroup>
-                <Label className="col-form-label" for="title">
+                <Label className="col-form-label" for="listTitle">
                   Title
                 </Label>
                 <Input
                   className="form-control"
                   type="text"
-                  name="title"
+                  name="listTitle"
                   onChange={(e) => setGoListTitle(e.target.value)}
                   innerRef={register(titleValidations)}
                 />
-                <span>{errors.title ? errors.title.message : null}</span>
+                <span>{errors.listTitle ? errors.listTitle.message : null}</span>
               </FormGroup>
             </Col>
 
             <Col md="12">
               <FormGroup>
-                <Label className="col-form-label" for="description">
+                <Label className="col-form-label" for="listDesc">
                   Description
                 </Label>
                 <Input
                   className="form-control"
                   type="textarea"
-                  name="description"
+                  name="listDesc"
                   onChange={(e) => setGoListDescription(e.target.value)}
                   innerRef={register(descriptionValidations)}
                 />
                 <span>
-                  {errors.description ? errors.description.message : null}
+                  {errors.listDesc ? errors.listDesc.message : null}
                 </span>
               </FormGroup>
             </Col>

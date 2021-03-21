@@ -22,17 +22,21 @@ const ListItem = (props) => {
   return (
     <Card className="card-with-border bookmark-card o-hidden">
       <div className="details-website">
-        <img
-          className="img-fluid"
-          src={props.image || defaultImg}
-          alt={`logo for "${props.title}"`}
-          style={{
-            maxWidth: "200px",
-            maxHeight: "150px",
-            width: "auto",
-            height: "auto",
-          }}
-        />
+        <div style={{ width: "200px", verticalAlign: "middle" }}>
+          <img
+            className="img-fluid media"
+            src={props.image || defaultImg}
+            alt={`logo for "${props.title}"`}
+            style={{
+              maxWidth: "200px",
+              maxHeight: "150px",
+              width: "auto",
+              height: "auto",
+              marginLeft: "auto",
+              marginRight: "auto",
+            }}
+          />
+        </div>
         <div className="desciption-data">
           <div className="title-bookmark">
             <h6 className="title_0">{props.title}</h6>

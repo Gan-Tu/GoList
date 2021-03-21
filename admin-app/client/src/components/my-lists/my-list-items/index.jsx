@@ -54,6 +54,7 @@ const GoListDetails = (props) => {
                         <CreateListItemModal
                           showForm={showCreateListItemForm}
                           toggleForm={toggleCreateListItemForm}
+                          listName={props.listName}
                         />
                       </li>
                     </ul>

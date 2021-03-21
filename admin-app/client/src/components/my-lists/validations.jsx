@@ -20,7 +20,7 @@ export const titleValidations = {
   required: "Please provide a valid golist title",
   maxLength: {
     value: 30,
-    message: "golist title must be at most 50 characters long",
+    message: "golist title must be at most 30 characters long",
   },
 };
 
@@ -28,6 +28,6 @@ export const descriptionValidations = {
   required: "Please provide a valid golist description",
   minLength: {
     value: 2,
-    message: "golist description must be at least 20 characters long",
+    message: "golist description must be at least 2 characters long",
   },
 };
