@@ -6,6 +6,7 @@ export const DELETE_LIST = "DELETE_LIST";
 /* LIST ITEMS */
 export const FETCH_ITEMS = "FETCH_ITEMS";
 export const SET_ITEMS = "SET_ITEMS";
+export const DELETE_ITEM = "DELETE_ITEM";
 /* SESSION */
 export const LOG_IN = "LOG_IN";
 export const LOG_OUT = "LOG_OUT";

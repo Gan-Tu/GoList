@@ -19,6 +19,8 @@ const GoListItemsList = (props) => {
                   title={data.title}
                   website_url={data.link}
                   desc={data.description}
+                  itemId={data.itemId}
+                  listName={props.listName}
                 />
               </Col>
             );

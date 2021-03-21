@@ -20,7 +20,7 @@ const GoListDetails = (props) => {
   const [gridView, setgridView] = useState(false);
 
   useEffect(() => {
-    dispatch({ type: FETCH_ITEMS, name: props.listName });
+    dispatch({ type: FETCH_ITEMS, listName: props.listName });
   }, [dispatch, props.listName]);
   const items = useSelector((store) => store.ItemsReducer.items);
 
@@ -78,7 +78,11 @@ const GoListDetails = (props) => {
                       </ul>
                     </div>
 
-                    <GoListItemsList gridView={gridView} items={items} />
+                    <GoListItemsList
+                      gridView={gridView}
+                      items={items}
+                      listName={props.listName}
+                    />
                   </CardBody>
                 </Card>
               </div>

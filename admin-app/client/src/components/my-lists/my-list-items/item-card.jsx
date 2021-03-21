@@ -4,14 +4,11 @@ import { Link, Share2, Trash2, Tag, Edit2 } from "react-feather";
 import defaultImg from "../../../assets/images/other-images/lightgallry-defaut.jpg";
 import { toast } from "react-toastify";
 import EditListItemModal from "./edit-list-item-modal";
+import DeleteListItemModal from "./delete-list-item-modal";
 
 const ListItem = (props) => {
   const shareItem = () => {
     toast.error("Share is not implemented yet");
-  };
-
-  const removeItem = () => {
-    toast.error("Remove is not implemented yet");
   };
 
   const tagItem = () => {
@@ -21,6 +18,10 @@ const ListItem = (props) => {
   const [showEditListItemForm, setShowEditListItemForm] = useState(false);
   const toggleEditListItemForm = () =>
     setShowEditListItemForm(!showEditListItemForm);
+
+  const [showDeleteListItemForm, setShowDeleteListItemForm] = useState(false);
+  const toggleDeleteListItemForm = () =>
+    setShowDeleteListItemForm(!showDeleteListItemForm);
 
   return (
     <Card className="card-with-border bookmark-card o-hidden">
@@ -67,9 +68,16 @@ const ListItem = (props) => {
                   </a>
                 </li>
                 <li>
-                  <a href="#javascript" onClick={removeItem}>
+                  <a href="#javascript" onClick={toggleDeleteListItemForm}>
                     <Trash2 />
                   </a>
+                  <DeleteListItemModal
+                    itemId={props.itemId}
+                    title={props.title}
+                    listName={props.listName}
+                    showForm={showDeleteListItemForm}
+                    toggleForm={toggleDeleteListItemForm}
+                  />
                 </li>
                 <li className="pull-right text-right">
                   <a href="#javascript" onClick={tagItem}>
