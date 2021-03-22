@@ -32,13 +32,14 @@ export default function Home() {
 }
 
 
-## Disable redirect to start development on landing page
+/* Disable redirect to start development on landing page
 
-#export const getServerSideProps = async (context) => {
-#  return {
-#    redirect: {
-#      destination: 'https://app.goli.st',
-#      permanent: false,
-#    },
-#  }
-#}
+export const getServerSideProps = async (context) => {
+  return {
+    redirect: {
+      destination: 'https://app.goli.st',
+      permanent: false,
+    },
+  }
+}
+*/
