@@ -31,11 +31,14 @@ export default function Home() {
   );
 }
 
-export const getServerSideProps = async (context) => {
-  return {
-    redirect: {
-      destination: 'https://app.goli.st',
-      permanent: false,
-    },
-  }
-}
+
+## Disable redirect to start development on landing page
+
+#export const getServerSideProps = async (context) => {
+#  return {
+#    redirect: {
+#      destination: 'https://app.goli.st',
+#      permanent: false,
+#    },
+#  }
+#}
