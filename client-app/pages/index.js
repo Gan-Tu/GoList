@@ -5,7 +5,7 @@ export default function Home() {
     <div>
       <Head>
         <title>GoList</title>
-        <link rel="icon" href="/favicon.ico?v=2" />
+        <link rel="icon" type="image/png"  href="/favicon.png" />
       </Head>
 
       <main>
