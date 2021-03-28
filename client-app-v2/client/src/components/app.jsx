@@ -14,6 +14,16 @@ const App = () => {
         {/* Routing to Main Admin App */}
         <CoreLayoutWrapper>
           <TransitionGroup>
+            <Route exact path={`${process.env.PUBLIC_URL}/`}>
+              <div style={{ textAlign: "center", padding: "500px" }}>
+                <h5>Welcome to GoList</h5>
+                <p>
+                  Visit our admin app at{" "}
+                  <a href="https://app.goli.st">app.goli.st</a>
+                </p>
+              </div>
+            </Route>
+
             <Route path={`${process.env.PUBLIC_URL}/:listName`}>
               {({ match }) => (
                 <CSSTransition
@@ -23,7 +33,9 @@ const App = () => {
                   unmountOnExit
                 >
                   <div>
-                    <GoListPanel listName={match.params.listName} />
+                    {match ? (
+                      <GoListPanel listName={match.params.listName} />
+                    ) : null}
                   </div>
                 </CSSTransition>
               )}
