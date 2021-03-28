@@ -1,4 +1,4 @@
-service: default
+service: default-old
 env: standard
 runtime: nodejs12
 handlers:

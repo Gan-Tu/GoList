@@ -1,13 +1,13 @@
-import { SET_LISTS } from "../actionTypes";
+import { SET_LIST_METADATA } from "../actionTypes";
 
 const initial_state = {
-  lists: [],
+  metadata: null,
 };
 
 export default function reducer(state = initial_state, action) {
   switch (action.type) {
-    case SET_LISTS:
-      return { lists: action.lists };
+    case SET_LIST_METADATA:
+      return { metadata: action.metadata };
     default:
       return { ...state };
   }

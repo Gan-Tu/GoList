@@ -3,7 +3,8 @@
 ==========================**/
 
 .box-layout {
-  background-image: url(../../images/other-images/boxbg.jpg);
+  background-image: url(../../images/other-images/boxbg2.png);
+  background-repeat: round;
   background-blend-mode: overlay;
   background-color: rgba($white, 0.5);
 
@@ -85,7 +86,8 @@
             overflow: scroll;
             max-height: calc(100vh - 220px);
             padding-bottom: 80px;
-            margin-left: 230px;
+            margin-left: 80px;
+            margin-right: 80px;
 
             &::-webkit-scrollbar-track {
               -webkit-box-shadow: inset 0 0 6px $light-gray;
