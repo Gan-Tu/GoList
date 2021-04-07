@@ -18,7 +18,7 @@ const App = () => {
               <div style={{ textAlign: "center", padding: "500px" }}>
                 <h5>Welcome to GoList</h5>
                 <p>
-                  Visit our admin app at{" "}
+                  Visit our admin app to start creating your list of links at{" "}
                   <a href="https://app.goli.st">app.goli.st</a>
                 </p>
               </div>
