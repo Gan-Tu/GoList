@@ -4,9 +4,13 @@
 
 .box-layout {
   background-image: url(../../images/other-images/cool-background.png);
-  background-repeat: round;
   background-blend-mode: overlay;
   background-color: rgba($white, 0.5);
+
+  background-position: center;
+  background-repeat: no-repeat round;
+  background-size: cover;
+  height: 100%;
 
   .left-header {
     .mega-menu-container {
