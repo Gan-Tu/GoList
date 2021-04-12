@@ -15,7 +15,14 @@ const App = () => {
         <CoreLayoutWrapper>
           <TransitionGroup>
             <Route exact path={`${process.env.PUBLIC_URL}/`}>
-              <div style={{ textAlign: "center", padding: "500px" }}>
+              <div
+                style={{
+                  textAlign: "center",
+                  paddingTop: "40vh",
+                  height: "100vh",
+                  width: "100wh",
+                }}
+              >
                 <h5>Welcome to GoList</h5>
                 <p>
                   Visit our admin app to start creating your list of links at{" "}
