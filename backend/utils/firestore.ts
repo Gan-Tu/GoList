@@ -1,6 +1,6 @@
-var Firestore = require("@google-cloud/firestore");
+import { Firestore } from "@google-cloud/firestore";
 
-let firestore;
+let firestore: Firestore;
 if (process.env.NODE_ENV === "production") {
   firestore = new Firestore();
 } else {
@@ -10,4 +10,8 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-module.exports = firestore;
+firestore.settings({
+  ignoreUndefinedProperties: true,
+});
+
+export default firestore;

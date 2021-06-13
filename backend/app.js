@@ -3,12 +3,13 @@ var express = require("express");
 var cors = require("cors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
-var bodyParser = require("body-parser");
 var logger = require("morgan");
 var rateLimit = require("express-rate-limit");
 var helmet = require("helmet");
 
 var indexRouter = require("./routes/index");
+var usersRouter = require("./routes/users");
+var listsRouter = require("./routes/lists");
 
 var app = express();
 
@@ -29,8 +30,6 @@ app.use(
 );
 
 app.use(logger("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -58,6 +57,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(cors()); // allow all origins
 }
 
+app.use("/users", usersRouter);
+app.use("/lists", listsRouter);
 app.use("/*", indexRouter); // catch all
 
 // catch 404 and forward to error handler
