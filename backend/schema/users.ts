@@ -1,5 +1,7 @@
-export interface UserItem {
-  id?: number;
-  name: string;
-  avatar: string | null;
+export interface UserMetadata {
+  uid: string;
+  displayName: string;
+  photoURL?: string;
+  email?: string;
+  emailVerified?: boolean;
 }
