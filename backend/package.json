@@ -7,7 +7,7 @@
     "build": "NODE_ENV=development tsc && cp -r ./views ./dist/views && cp -r ./public ./dist/public",
     "start": "PORT=8080 node ./dist/server.js",
     "dev": "NODE_ENV=development nodemon server.ts",
-    "test": "echo 'build successful'"
+    "test": "npm run build && echo 'build successful'"
   },
   "repository": {
     "type": "git",
