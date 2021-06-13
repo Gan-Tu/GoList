@@ -2,6 +2,7 @@
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Build Status](https://travis-ci.com/Gan-Tu/GoList.svg?branch=main)](https://travis-ci.com/Gan-Tu/GoList)
+[![Continuous Integration](https://github.com/Gan-Tu/GoList/actions/workflows/ci.yml/badge.svg)](https://github.com/Gan-Tu/GoList/actions/workflows/ci.yml)
 ![Docker Image CI](https://github.com/Gan-Tu/GoList/workflows/Docker%20Image%20CI/badge.svg?branch=main)
 
 Quickly browse a list of links and files with one simple URL!
