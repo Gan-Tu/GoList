@@ -35,3 +35,13 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         image-name: golist-api
         dockerfile-location: api
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      uses: mattdavis0351/actions/docker-gpr@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        image-name: golist-backend
+        dockerfile-location: backend
