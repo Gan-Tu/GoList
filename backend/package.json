@@ -4,9 +4,9 @@
   "description": "Quickly browse a list of links and files with one simple URL",
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build": "tsc && cp -r ./views ./dist/views && cp -r ./public ./dist/public",
+    "build": "NODE_ENV=development tsc && cp -r ./views ./dist/views && cp -r ./public ./dist/public",
     "start": "PORT=8080 node ./dist/server.js",
-    "dev": "nodemon server.ts",
+    "dev": "NODE_ENV=development nodemon server.ts",
     "test": "echo 'build successful'"
   },
   "repository": {
@@ -36,7 +36,6 @@
   "devDependencies": {
     "@types/express": "^4.17.12",
     "@types/node": "^15.12.2",
-    "i": "^0.3.6",
     "npm": "^7.17.0",
     "ts-node": "^10.0.0"
   }
