@@ -23,8 +23,8 @@ jobs:
       uses: mattdavis0351/actions/docker-gpr@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        image-name: golist-client-app-v2
-        dockerfile-location: client-app-v2
+        image-name: golist-client-app
+        dockerfile-location: client-app
   build-api:
     runs-on: ubuntu-latest
     steps:

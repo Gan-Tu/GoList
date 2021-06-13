@@ -15,9 +15,3 @@
 
 # Node.js dependencies:
 node_modules/
-
-# Next.js source code
-/pages/
-/public/
-/components/
-/actions/
