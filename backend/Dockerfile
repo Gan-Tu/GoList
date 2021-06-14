@@ -12,8 +12,8 @@ COPY views ./views
 COPY routes ./routes
 COPY schema ./schema
 COPY utils ./utils
-COPY *.js .
-COPY *.ts .
+COPY *.js ./
+COPY *.ts ./
 COPY tsconfig.json tsconfig.json
 RUN npm run build
 
