@@ -6,10 +6,10 @@ steps:
   - deploy
   - create-user-document
   - --region=us-central1
-  - --runtime nodejs14
-  - --source=./create-user-document
-  - --trigger-event providers/firebase.auth/eventTypes/user.create
-  - --trigger-resource golist-backend
+  - --runtime=nodejs14
+  - --source=cloud-functions/create-user-document
+  - --trigger-event=providers/firebase.auth/eventTypes/user.create
+  - --trigger-resource=golist-backend
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   args:
   - gcloud
@@ -17,7 +17,7 @@ steps:
   - deploy
   - delete-user-artifacts
   - --region=us-central1
-  - --runtime nodejs14
-  - --source=./delete-user-artifacts
-  - --trigger-event providers/firebase.auth/eventTypes/user.delete
-  - --trigger-resource golist-backend
+  - --runtime=nodejs14
+  - --source=cloud-functions/delete-user-artifacts
+  - --trigger-event=providers/firebase.auth/eventTypes/user.delete
+  - --trigger-resource=golist-backend
