@@ -1,0 +1,9 @@
+{
+  "name": "golist-delete-user-artifacts-cloud-function",
+  "version": "0.0.1",
+  "license": "Apache-2.0",
+  "author": "Gan Tu",
+  "dependencies": {
+    "@google-cloud/firestore": "^4.12.2"
+  }
+}
