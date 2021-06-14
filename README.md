@@ -19,6 +19,8 @@ To run the client app, run `npm run client-app`.
 
 To run the API app, run `npm run api`. Note this will only work if you have a valid Google Cloud Platform Application Credential. For more, read the Authentication section below.
 
+To run the new backend app, run `npm run backend`. Note this will only work if you have a valid Google Cloud Platform Application Credential. For more, read the Authentication section below.
+
 To run any of the app in development mode, with live reload, `cd` into the app directory, and run `npm run dev`.
 
 Alternatively, you can run the code in docker. Either `cd` into any of the app pdirectory, and run
