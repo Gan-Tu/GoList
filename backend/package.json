@@ -7,7 +7,7 @@
     "build": "NODE_ENV=development tsc && cp -r ./views ./dist/views && cp -r ./public ./dist/public",
     "start": "PORT=8080 node ./dist/server.js",
     "dev": "NODE_ENV=development nodemon server.ts",
-    "test": "npm run build && echo 'build successful'"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Gan-Tu/GoList#readme",
   "dependencies": {
     "@google-cloud/firestore": "^4.12.2",
+    "@types/jest": "^26.0.23",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
     "debug": "^2.6.9",
@@ -28,9 +29,11 @@
     "express-rate-limit": "^5.2.3",
     "helmet": "^4.4.1",
     "http-errors": "^1.6.3",
+    "jest": "^27.0.4",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.7",
     "pug": "^3.0.1",
+    "ts-jest": "^27.0.3",
     "typescript": "^4.3.2"
   },
   "devDependencies": {
