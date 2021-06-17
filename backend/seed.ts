@@ -1,6 +1,6 @@
-import { UserMetadata } from "./schema/users";
-import { ListItem } from "schema/lists";
-import firestore from "./utils/firestore";
+import { UserMetadata } from "./interfaces/users";
+import { ListItem } from "./interfaces/lists";
+import firestore from "./configs/firestore";
 
 let tugan: UserMetadata = {
   uid: "KNhZ0Zhct8PVPVvYMTuD7ZLpRug2",

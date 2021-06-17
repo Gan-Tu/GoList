@@ -10,8 +10,8 @@ WORKDIR /app
 COPY public ./public
 COPY views ./views
 COPY routes ./routes
-COPY schema ./schema
-COPY utils ./utils
+COPY interfaces ./interfaces
+COPY configs ./configs
 COPY *.js ./
 COPY *.ts ./
 COPY tsconfig.json tsconfig.json

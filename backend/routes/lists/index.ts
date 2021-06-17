@@ -4,7 +4,7 @@ import {
   QuerySnapshot,
   DocumentReference,
 } from "@google-cloud/firestore";
-import firestore from "../../utils/firestore";
+import firestore from "../../configs/firestore";
 
 var express = require("express");
 var router = express.Router();
