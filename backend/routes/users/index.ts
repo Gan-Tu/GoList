@@ -1,12 +1,24 @@
 import { Request, RequestHandler, Response } from "express";
-import { DocumentSnapshot, QuerySnapshot } from "@google-cloud/firestore";
+import {
+  DocumentSnapshot,
+  QuerySnapshot,
+  DocumentReference,
+} from "@google-cloud/firestore";
 import firestore from "../../utils/firestore";
 
 var express = require("express");
 var router = express.Router();
 
-router.get("/", function (_req: Request, res: Response, _next: RequestHandler) {
-  res.render("index", { title: "Golist Users API" });
+router.get("/", function (req: Request, res: Response, _next: RequestHandler) {
+  firestore
+    .collection("users")
+    .listDocuments()
+    .then((refs: DocumentReference[]) => {
+      res.json({ uids: refs.map((x) => x.id) });
+    })
+    .catch((err) => {
+      res.status(500).json({ err });
+    });
 });
 
 router.get(
