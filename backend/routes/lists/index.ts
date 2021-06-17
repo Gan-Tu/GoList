@@ -1,4 +1,4 @@
-import { Request, RequestHandler, Response } from "express";
+import { Request, Response, NextFunction } from "express";
 import {
   DocumentSnapshot,
   QuerySnapshot,
@@ -8,8 +8,9 @@ import firestore from "../../configs/firestore";
 
 var express = require("express");
 var router = express.Router();
+var createError = require("http-errors");
 
-router.get("/", function (req: Request, res: Response, _next: RequestHandler) {
+router.get("/", function (req: Request, res: Response, next: NextFunction) {
   let { name } = req.query;
   if (name) {
     firestore
@@ -20,9 +21,7 @@ router.get("/", function (req: Request, res: Response, _next: RequestHandler) {
       .then((querySnapshot: QuerySnapshot) => {
         return res.json({ uids: querySnapshot.docs.map((x) => x.id) });
       })
-      .catch((err) => {
-        res.status(500).json({ err });
-      });
+      .catch(next);
   } else {
     firestore
       .collection("lists")
@@ -30,30 +29,23 @@ router.get("/", function (req: Request, res: Response, _next: RequestHandler) {
       .then((refs: DocumentReference[]) => {
         res.json({ uids: refs.map((x) => x.id) });
       })
-      .catch((err) => {
-        res.status(500).json({ err });
-      });
+      .catch(next);
   }
 });
 
-router.get(
-  "/:uid",
-  function (req: Request, res: Response, _next: RequestHandler) {
-    firestore
-      .collection("lists")
-      .doc(req.params.uid)
-      .get()
-      .then((snapshot: DocumentSnapshot) => {
-        if (snapshot.exists) {
-          res.json(snapshot.data());
-        } else {
-          res.status(404).json({ err: `List ${req.params.uid} not found` });
-        }
-      })
-      .catch((err) => {
-        res.status(500).json({ err });
-      });
-  }
-);
+router.get("/:uid", function (req: Request, res: Response, next: NextFunction) {
+  firestore
+    .collection("lists")
+    .doc(req.params.uid)
+    .get()
+    .then((snapshot: DocumentSnapshot) => {
+      if (snapshot.exists) {
+        res.json(snapshot.data());
+      } else {
+        next(createError(404, `List ${req.params.uid} not found`));
+      }
+    })
+    .catch(next);
+});
 
 module.exports = router;
