@@ -27,9 +27,8 @@ export default class ListService {
   }
 
   async getList(uid: string) {
-    let snapshot;
     try {
-      snapshot = await firestore.doc(`/lists/${uid}`).get();
+      var snapshot = await firestore.doc(`/lists/${uid}`).get();
     } catch (error) {
       console.error(error);
       throw createError(500, `Failed to getList due to ${error}`);
