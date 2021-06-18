@@ -11,6 +11,7 @@ COPY public ./public
 COPY views ./views
 COPY routes ./routes
 COPY interfaces ./interfaces
+COPY services ./services
 COPY configs ./configs
 COPY *.js ./
 COPY *.ts ./
