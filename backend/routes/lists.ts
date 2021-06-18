@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from "express";
-import ListService from "../../services/lists";
+import ListService from "../services/lists";
 
 var express = require("express");
 var router = express.Router();
