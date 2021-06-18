@@ -19,7 +19,7 @@
    - '--platform'
    - 'managed'
    - '--revision-suffix'
-   - '${TAG_NAME:-$SHORT_SHA}'
+   - '$SHORT_SHA'
    - '--allow-unauthenticated'
  images:
  - 'gcr.io/$PROJECT_ID/golist-backend:$COMMIT_SHA'
