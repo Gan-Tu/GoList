@@ -27,7 +27,7 @@ router.get(
       .getUserLists(req.params.uid)
       .then((lists) => {
         let statusCode = lists.length > 0 ? 200 : 404;
-        return res.status(statusCode).json({ lists });
+        res.status(statusCode).json({ lists });
       })
       .catch(next);
   }

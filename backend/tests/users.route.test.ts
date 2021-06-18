@@ -40,7 +40,7 @@ jest.mock("../services/users.ts", () => {
 });
 
 describe("test the users route: /users", () => {
-  test("it should be OK to list all users with /", () => {
+  test("it should be OK to list all users with /users", () => {
     return request(app)
       .get("/users")
       .expect("Content-Type", /json/)
