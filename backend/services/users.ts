@@ -14,15 +14,15 @@ export default class UserService {
 
   async getUser(uid: string) {
     try {
-      const snapshot = await firestore.doc(`/users/${uid}`).get();
-      if (snapshot.exists) {
-        return snapshot.data();
-      } else {
-        throw createError(404, `User ${uid} not found`);
-      }
+      var snapshot = await firestore.doc(`/users/${uid}`).get();
     } catch (error) {
       console.error(error);
       throw createError(500, `Failed to getUser due to ${error}`);
+    }
+    if (snapshot.exists) {
+      return snapshot.data();
+    } else {
+      throw createError(404, `User ${uid} not found`);
     }
   }
 
