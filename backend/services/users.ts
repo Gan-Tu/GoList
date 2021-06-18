@@ -7,6 +7,7 @@ export default class UserService {
       const refs = await firestore.collection("users").listDocuments();
       return refs.map((x) => x.id);
     } catch (error) {
+      console.error(error);
       throw createError(500, `Failed to listUsers due to ${error}`);
     }
   }
@@ -20,6 +21,7 @@ export default class UserService {
         throw createError(404, `User ${uid} not found`);
       }
     } catch (error) {
+      console.error(error);
       throw createError(500, `Failed to getUser due to ${error}`);
     }
   }
@@ -35,6 +37,7 @@ export default class UserService {
         ...x.data(),
       }));
     } catch (error) {
+      console.error(error);
       throw createError(500, `Failed to getUserLists due to ${error}`);
     }
   }
