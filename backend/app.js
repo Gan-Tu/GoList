@@ -59,7 +59,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.use("/users", usersRouter);
 app.use("/lists", listsRouter);
-app.use("/*", indexRouter); // catch all
+app.use("/", indexRouter); // catch all
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
