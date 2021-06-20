@@ -18,5 +18,8 @@
    - 'us-central1'
    - '--platform'
    - 'managed'
+   - '--revision-suffix'
+   - '$SHORT_SHA'
+   - '--no-allow-unauthenticated'
  images:
  - 'gcr.io/$PROJECT_ID/golist-backend:$COMMIT_SHA'
