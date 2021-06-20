@@ -6,10 +6,13 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var rateLimit = require("express-rate-limit");
 var helmet = require("helmet");
+var bearerToken = require("express-bearer-token");
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var listsRouter = require("./routes/lists");
+
+var { decodeIDToken } = require("./configs/auth");
 
 var app = express();
 
@@ -34,9 +37,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
+// Extract bearer token from one of the following places:
+// - The key access_token in the request body.
+// - The key access_token in the request params.
+// - The value from the header Authorization: Bearer <token>.
+// The result token is saved at req.token
+app.use(bearerToken());
 
-// Allow CORS from our own domain
 if (process.env.NODE_ENV === "production") {
+  // Allow CORS from our own domain
   const CORS_WHITELIST = [
     "https://goli.st",
     "https://www.goli.st",
@@ -53,6 +62,9 @@ if (process.env.NODE_ENV === "production") {
       optionsSuccessStatus: 200,
     })
   );
+
+  // Only performs authorizations and decode Bearer token in production
+  app.use(decodeIDToken);
 } else {
   app.use(cors()); // allow all origins
 }

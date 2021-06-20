@@ -1,5 +1,6 @@
 import { Request, NextFunction, Response } from "express";
 import UserService from "../services/users";
+import { verifyUserIsAuthenticated } from "../configs/auth";
 
 var express = require("express");
 var router = express.Router();
@@ -13,15 +14,20 @@ router.get("/", function (req: Request, res: Response, next: NextFunction) {
     .catch(next);
 });
 
-router.get("/:uid", function (req: Request, res: Response, next: NextFunction) {
-  userService
-    .getUser(req.params.uid)
-    .then((data) => res.json(data))
-    .catch(next);
-});
+router.get(
+  "/:uid",
+  verifyUserIsAuthenticated,
+  function (req: Request, res: Response, next: NextFunction) {
+    userService
+      .getUser(req.params.uid)
+      .then((data) => res.json(data))
+      .catch(next);
+  }
+);
 
 router.get(
   "/:uid/lists",
+  verifyUserIsAuthenticated,
   function (req: Request, res: Response, next: NextFunction) {
     userService
       .getUserLists(req.params.uid)
