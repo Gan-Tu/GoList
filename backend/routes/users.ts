@@ -1,6 +1,6 @@
 import { Request, NextFunction, Response } from "express";
 import UserService from "../services/users";
-import { verifyUserIsAuthenticated } from "../configs/auth";
+import { verifyUserIsAuthenticated } from "../utils/auth";
 
 var express = require("express");
 var router = express.Router();

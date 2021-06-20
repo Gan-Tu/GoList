@@ -1,4 +1,4 @@
-import admin from "./firebase";
+import admin from "../configs/firebase";
 import { Request, Response, NextFunction } from "express";
 var createError = require("http-errors");
 

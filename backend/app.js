@@ -12,7 +12,7 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var listsRouter = require("./routes/lists");
 
-var { decodeIDToken } = require("./configs/auth");
+var { decodeIDToken } = require("./utils/auth");
 
 var app = express();
 

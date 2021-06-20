@@ -13,6 +13,8 @@ COPY routes ./routes
 COPY interfaces ./interfaces
 COPY services ./services
 COPY configs ./configs
+COPY @types ./@types
+COPY utils ./utils
 COPY *.js ./
 COPY *.ts ./
 COPY tsconfig.json tsconfig.json
