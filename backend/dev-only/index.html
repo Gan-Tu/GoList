@@ -36,7 +36,7 @@
     <script type="text/javascript">
       // FirebaseUI config.
       var uiConfig = {
-        signInSuccessUrl: "<url-to-redirect-to-on-success>",
+        signInSuccessUrl: "/",
         signInOptions: [
           // Leave the lines as is for the providers you want to offer your users.
           firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -47,10 +47,10 @@
         // tosUrl and privacyPolicyUrl accept either url string or a callback
         // function.
         // Terms of service url/callback.
-        tosUrl: "<your-tos-url>",
+        tosUrl: "/",
         // Privacy policy url/callback.
         privacyPolicyUrl: function () {
-          window.location.assign("<your-privacy-policy-url>");
+          window.location.assign("/");
         },
       };
 
@@ -59,11 +59,62 @@
       // The start method will wait until the DOM is loaded.
       ui.start("#firebaseui-auth-container", uiConfig);
     </script>
+    <script>
+      initApp = function () {
+        firebase.auth().onAuthStateChanged(
+          function (user) {
+            if (user) {
+              // User is signed in.
+              var displayName = user.displayName;
+              var email = user.email;
+              var emailVerified = user.emailVerified;
+              var photoURL = user.photoURL;
+              var uid = user.uid;
+              var phoneNumber = user.phoneNumber;
+              var providerData = user.providerData;
+              user.getIdToken().then(function (accessToken) {
+                document.getElementById("sign-in-status").textContent =
+                  "Signed in";
+                document.getElementById("account-details").textContent =
+                  JSON.stringify(
+                    {
+                      displayName: displayName,
+                      email: email,
+                      emailVerified: emailVerified,
+                      phoneNumber: phoneNumber,
+                      photoURL: photoURL,
+                      uid: uid,
+                      accessToken: accessToken,
+                      providerData: providerData,
+                    },
+                    null,
+                    "  "
+                  );
+              });
+            } else {
+              // User is signed out.
+              document.getElementById("sign-in-status").textContent =
+                "Signed out";
+              document.getElementById("account-details").textContent = "null";
+            }
+          },
+          function (error) {
+            console.log(error);
+          }
+        );
+      };
+
+      window.addEventListener("load", function () {
+        initApp();
+      });
+    </script>
   </head>
   <body>
     <!-- The surrounding HTML is left untouched by FirebaseUI.
      Your app may use that space for branding, controls and other customizations.-->
     <h1>Welcome to GoList Dev App</h1>
+    <div id="sign-in-status"></div>
+    <pre id="account-details"></pre>
     <div id="firebaseui-auth-container"></div>
   </body>
 </html.!DOCTYPE>
