@@ -5,6 +5,7 @@ interface CurrentUserRequestObject {
 
 declare namespace Express {
   export interface Request {
+    token?: string;
     currentUser?: CurrentUserRequestObject;
   }
 }
