@@ -11,6 +11,9 @@ var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var listsRouter = require("./routes/lists");
 
+var bearerToken = require("express-bearer-token");
+var { injectCurrentUserFromBearerToken } = require("./utils/middleware");
+
 var app = express();
 
 // view engine setup
@@ -29,14 +32,18 @@ app.use(
   })
 );
 
-app.use(logger("dev"));
+if (app.get("env") === "production") {
+  app.use(logger("combined"));
+} else if (app.get("env") === "development") {
+  app.use(logger("dev"));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Allow CORS from our own domain
-if (process.env.NODE_ENV === "production") {
+if (app.get("env") === "production") {
   const CORS_WHITELIST = [
     "https://goli.st",
     "https://www.goli.st",
@@ -57,9 +64,20 @@ if (process.env.NODE_ENV === "production") {
   app.use(cors()); // allow all origins
 }
 
+// Extract bearer token from one of the following places:
+// - The key access_token in the request body.
+// - The key access_token in the request params.
+// - The value from the header Authorization: Bearer <token>.
+// The result token is saved at req.token
+//
+// Then, decode and verify any Bearer token, if any.
+// If valid, inject a `req.currentUser` for authenticated user.
+// If no Bearer token is found, this does nothing.
+app.use(bearerToken(), injectCurrentUserFromBearerToken());
+
 app.use("/users", usersRouter);
 app.use("/lists", listsRouter);
-app.use("/*", indexRouter); // catch all
+app.use("/", indexRouter); // catch all
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
