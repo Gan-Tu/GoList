@@ -7,6 +7,10 @@ var router = express.Router();
 
 var userService = new UserService();
 
+if (process.env.NODE_ENV === "production") {
+router.param("uid", verifyUserIsAuthenticated);
+}
+
 router.get("/", function (req: Request, res: Response, next: NextFunction) {
   userService
     .listUsers()
@@ -16,7 +20,6 @@ router.get("/", function (req: Request, res: Response, next: NextFunction) {
 
 router.get(
   "/:uid",
-  verifyUserIsAuthenticated,
   function (req: Request, res: Response, next: NextFunction) {
     userService
       .getUser(req.params.uid)
@@ -27,7 +30,6 @@ router.get(
 
 router.get(
   "/:uid/lists",
-  verifyUserIsAuthenticated,
   function (req: Request, res: Response, next: NextFunction) {
     userService
       .getUserLists(req.params.uid)
