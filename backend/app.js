@@ -12,7 +12,7 @@ var usersRouter = require("./routes/users");
 var listsRouter = require("./routes/lists");
 
 var bearerToken = require("express-bearer-token");
-var { decodeBearerToken } = require("./utils/auth");
+var { injectCurrentUserFromBearerToken } = require("./utils/middleware");
 
 var app = express();
 
@@ -65,12 +65,11 @@ if (process.env.NODE_ENV === "production") {
 // - The key access_token in the request params.
 // - The value from the header Authorization: Bearer <token>.
 // The result token is saved at req.token
-app.use(bearerToken());
-// Decode and verify any Bearer token
+//
+// Then, decode and verify any Bearer token, if any.
+// If valid, inject a `req.currentUser` for authenticated user.
 // If no Bearer token is found, this does nothing.
-// To prevent calling Firebase for actual verification for dev or testing,
-// you can mock `verifyIdToken` function in utils/auth.ts  
-app.use(decodeBearerToken);
+app.use(bearerToken(), injectCurrentUserFromBearerToken());
 
 app.use("/users", usersRouter);
 app.use("/lists", listsRouter);

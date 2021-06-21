@@ -6,7 +6,8 @@
     "clean": "rm -rf ./dist",
     "build": "NODE_ENV=development tsc && cp -r ./views ./dist/views && cp -r ./public ./dist/public",
     "start": "PORT=8080 node ./dist/server.js",
-    "dev": "NODE_ENV=development nodemon server.ts",
+    "dev": "GOLIST_DISABLE_AUTH=true NODE_ENV=development nodemon server.ts",
+    "dev-authenticated": "NODE_ENV=development nodemon server.ts",
     "test": "jest"
   },
   "repository": {
