@@ -32,14 +32,18 @@ app.use(
   })
 );
 
-app.use(logger("dev"));
+if (app.get("env") === "production") {
+  app.use(logger("combined"));
+} else if (app.get("env") === "development") {
+  app.use(logger("dev"));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 // Allow CORS from our own domain
-if (process.env.NODE_ENV === "production") {
+if (app.get("env") === "production") {
   const CORS_WHITELIST = [
     "https://goli.st",
     "https://www.goli.st",
