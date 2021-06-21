@@ -8,14 +8,10 @@ export async function verifyIdToken(
   idToken: string,
   checkRevoked?: boolean | undefined
 ): Promise<CurrentUserRequestObject> {
-  try {
-    const { uid, email } = await admin
-      .auth()
-      .verifyIdToken(idToken, checkRevoked);
-    return Promise.resolve({ uid, email });
-  } catch (error) {
-    return Promise.reject(error);
-  }
+  const { uid, email } = await admin
+    .auth()
+    .verifyIdToken(idToken, checkRevoked);
+  return { uid, email };
 }
 
 // If a Bearer token is provided, decode and verify it.
