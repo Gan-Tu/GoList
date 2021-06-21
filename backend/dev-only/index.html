@@ -75,6 +75,8 @@
               user.getIdToken().then(function (accessToken) {
                 document.getElementById("sign-in-status").textContent =
                   "Signed in";
+                document.getElementById("accessToken").value =
+                  accessToken;
                 document.getElementById("account-details").textContent =
                   JSON.stringify(
                     {
@@ -108,6 +110,22 @@
         initApp();
       });
     </script>
+    <script>
+      function copyAccessToken() {
+        /* Get the text field */
+        var copyText = document.getElementById("accessToken");
+
+        /* Select the text field */
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+        /* Copy the text inside the text field */
+        document.execCommand("copy");
+
+        /* Alert the copied text */
+        alert("Copied the access token to clickboard");
+      }
+    </script>
   </head>
   <body>
     <!-- The surrounding HTML is left untouched by FirebaseUI.
@@ -115,6 +133,8 @@
     <h1>Welcome to GoList Dev App</h1>
     <div id="sign-in-status"></div>
     <pre id="account-details"></pre>
+    <button onclick="copyAccessToken()">Click to copy access token</button>
+    <input id="accessToken" type="text" hidden></input>
     <div id="firebaseui-auth-container"></div>
   </body>
 </html.!DOCTYPE>
