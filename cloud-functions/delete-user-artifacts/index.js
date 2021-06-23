@@ -30,6 +30,7 @@ exports.deleteUserArtifacts = async (event, context) => {
     const querySnapshot = await firestore
       .collection("lists")
       .where("ownerUid", "==", uid)
+      .select()
       .get();
 
     if (querySnapshot.empty) {
