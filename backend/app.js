@@ -15,6 +15,7 @@ var namespaceRouter = require("./routes/namespace");
 var bearerToken = require("express-bearer-token");
 var { injectCurrentUserFromBearerToken } = require("./utils/middleware");
 
+
 var app = express();
 
 // view engine setup
