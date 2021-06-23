@@ -10,6 +10,7 @@ var helmet = require("helmet");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var listsRouter = require("./routes/lists");
+var namespaceRouter = require("./routes/namespace");
 
 var bearerToken = require("express-bearer-token");
 var { injectCurrentUserFromBearerToken } = require("./utils/middleware");
@@ -77,6 +78,7 @@ app.use(bearerToken(), injectCurrentUserFromBearerToken());
 
 app.use("/users", usersRouter);
 app.use("/lists", listsRouter);
+app.use("/namespace", namespaceRouter);
 app.use("/", indexRouter); // catch all
 
 // catch 404 and forward to error handler
