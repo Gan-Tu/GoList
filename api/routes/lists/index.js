@@ -13,7 +13,7 @@ const {
 router.param("listName", function (req, res, next, listName) {
   if (!listName) {
     next(createError(400, "GoList name cannot be empty"));
-  } else if (!listName.match(/^[a-zA-Z0-9]+[a-zA-Z0-9-]*$/)) {
+  } else if (!listName.match(/^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$/)) {
     next(
       createError(
         400,
