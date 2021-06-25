@@ -24,7 +24,11 @@ app.use(
   })
 );
 
-app.use(logger("dev"));
+if (app.get("env") === "production") {
+  app.use(logger("combined"));
+} else if (app.get("env") === "development") {
+  app.use(logger("dev"));
+}
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
