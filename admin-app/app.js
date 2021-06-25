@@ -4,13 +4,32 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
+var rateLimit = require("express-rate-limit");
+var helmet = require("helmet");
 
 var app = express();
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 
-app.use(logger("dev"));
+// Set common HTTP headers for better security
+app.use(helmet());
+
+// rate limit the API server to 60 RPS
+app.use(
+  rateLimit({
+    windowMs: 60 * 1000,
+    max: 60,
+    message: "Too many requests. Max 60 requests allowed per minute",
+  })
+);
+
+
+if (app.get("env") === "production") {
+  app.use(logger("combined"));
+} else if (app.get("env") === "development") {
+  app.use(logger("dev"));
+}
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(express.json());
